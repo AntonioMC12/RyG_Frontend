@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>tab4</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button (click)="getBoletos()" expand="block" fill="solid" shape="round" color="success">
+    GET /boletos
+  </ion-button>
+  <ion-button (click)="getBoletos(1)" expand="block" fill="solid" shape="round" color="success">
+    GET /boletos/1
+  </ion-button>
+  <ion-button (click)="getBoletosEntregados()" expand="block" fill="solid" shape="round" color="success">
+    GET /boletos/entregados
+  </ion-button>
+  <ion-button (click)="getBoletosCanjeados()" expand="block" fill="solid" shape="round" color="success">
+    GET /boletos/canjeados
+  </ion-button>
+  <ion-button (click)="getBoletosByUsuario(1)" expand="block" fill="solid" shape="round" color="success">
+    GET /boletos/usuarios/1
+  </ion-button>
+  <ion-button (click)="getBoletoSorteo(2)" expand="block" fill="solid" shape="round" color="success">
+    GET /boletos/sorteo/2
+  </ion-button>
+  <ion-button (click)="postBoleto()" expand="block" fill="solid" shape="round" color="primary">
+    POST /boletos
+  </ion-button>
+  <ion-button (click)="putBoleto()" expand="block" fill="solid" shape="round" color="secondary">
+    PUT /boletos
+  </ion-button>
+  <ion-button (click)="deleteBoleto(18)" expand="block" fill="solid" shape="round" color="danger">
+    DELETE /boletos/18
+  </ion-button>
+</ion-content>
