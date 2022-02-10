@@ -9,24 +9,60 @@ import { UsuariosService } from '../services/usuarios.service';
 })
 export class Tab2Page {
 
-  // public listado: Array<Usuario>;
+  constructor(private usuarioService: UsuariosService) { }
 
-  constructor(private api: UsuariosService) { }
+  ngOnInit() {
 
-  public async getUsuarios() {
-
-    this.api.getUsuarios();
-
-    //loading
-    // try {
-    //   this.listado = await this.api.getUsuarios(); //asincrono
-    // } catch (err) {
-    //   console.log(err);
-    //   this.listado = null; //vista
-    // }
-
-    //actualizar la vista
-    //ocultar loading
   }
 
+  public getUsuarios(id?: any) {
+    if (id != undefined && id > -1) {
+      console.log(id);
+      this.usuarioService.getUsuarios(id);
+    } else {
+      console.log(id);
+      this.usuarioService.getUsuarios();
+    }
+  }
+
+  public getUsuarioByCoordinates(latitud: Number, longitud: Number) {
+    if (latitud != undefined && longitud != undefined) {
+      console.log("Lat:" + latitud + ". Long: " + longitud);
+      this.usuarioService.getUsuarioByCoordinates(latitud, longitud);
+    }
+  }
+
+  public postUsuario() {
+    let usuario: Usuario = {
+      id: -1,
+      contrasena: "prueba contraseña",
+      direccion: "calle prueba nº3",
+      email: "prueba@hotmail.com",
+      latitud: 12,
+      longitud: 11,
+      nombre_comercio: "empresa prueba",
+      participaciones: 0,
+      telefono: "616123456"
+    }
+    this.usuarioService.postUsuario(usuario);
+  }
+
+  public putUsuario() {
+    let usuario: Usuario = {
+      id: 20,
+      contrasena: "prueba contraseña",
+      direccion: "calle prueba nº3",
+      email: "prueba@hotmail.com",
+      latitud: 12,
+      longitud: 11,
+      nombre_comercio: "empresa prueba",
+      participaciones: 0,
+      telefono: "616123456"
+    }
+    this.usuarioService.putUsuario(usuario);
+  }
+
+  public deleteUsuario(id_usuario: Number) {
+    this.usuarioService.deleteUsuario(id_usuario);
+  }
 }
