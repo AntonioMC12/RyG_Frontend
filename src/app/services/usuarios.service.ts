@@ -10,25 +10,25 @@ export class UsuariosService {
 
   constructor(private http: HttpClient) { }
 
-  // public getItem() {
-  //   let endpoint = environment.endpoint + environment.apiUsuario;
-  //   this.http.get(endpoint, {}, this.header)
-  //     .then(d => {
-  //       console.log(d);
-  //     })
-  //     .catch(err => console.log(err));
-  // }
-
-  // private get header(): any {
-  //   return {
-  //     'Access-Control-Allow-Origin': '*',
-  //     'Content-Type': 'application/json'
-  //   }
-  // }
-
-  public getAllUsuarios() {
-    const path = `${environment.endpoint}${environment.apiUsuario}`;
-    console.log(path);
-    const listado = this.http.get<Usuario[]>(path);
+  public async getUsuarios(id?: Number) {
+    if (id != undefined) {
+      let endpoint = environment.endpoint + environment.apiUsuario + id;
+      let usuario;
+      try {
+        usuario = await this.http.get(endpoint).toPromise();
+        console.log(usuario);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      let endpoint = environment.endpoint + environment.apiUsuario;
+      let usuarios;
+      try {
+        usuarios = await this.http.get(endpoint).toPromise();
+        console.log(usuarios);
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
 }
