@@ -5,7 +5,14 @@
 export const environment = {
   production: false,
   endpoint:'http://localhost:8080/',
-  apiTicket:'tickets/'
+  apiTicket:'tickets/',
+  telefono:'telefono/',
+  fecha:'fecha/',
+
+  apiPremio:'premios/',
+  descripcion:'description/',
+  entregado:'entregado/',
+  noEntregado:'no-entregado/'
 };
 
 /*
