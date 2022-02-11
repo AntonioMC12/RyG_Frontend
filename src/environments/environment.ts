@@ -8,11 +8,16 @@ export const environment = {
   apiTicket:'tickets/',
   telefono:'telefono/',
   fecha:'fecha/',
-
   apiPremio:'premios/',
   descripcion:'description/',
   entregado:'entregado/',
-  noEntregado:'no-entregado/'
+  noEntregado:'no-entregado/',
+  apiUsuario:'usuarios/',
+  apiBoletos:'boletos',
+  apiBoletosEntregados: 'entregados',
+  apiBoletoscanjeados: 'canjeados',
+  apiBoletosUsuarios: 'usuarios',
+  apiBoletosSorteo: 'sorteo'
 };
 
 /*
