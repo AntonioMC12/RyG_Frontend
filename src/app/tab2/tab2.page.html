@@ -13,5 +13,11 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-button (click)="getUsuarios()">GET /usuarios</ion-button>
+  <ion-button (click)="getUsuarios(1)">GET /usuarios/1</ion-button>
+  <ion-button (click)="getUsuarioByCoordinates(12, 443)">GET /usuarios/12/443</ion-button>
+  <ion-button (click)="postUsuario()">POST /usuarios</ion-button>
+  <ion-button (click)="putUsuario()">PUT /usuarios</ion-button>
+  <ion-button (click)="deleteUsuario(3)">DELETE /usuarios/3</ion-button>
   <app-explore-container name="Tab 2 page"></app-explore-container>
 </ion-content>

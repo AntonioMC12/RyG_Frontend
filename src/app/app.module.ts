@@ -10,19 +10,20 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { TicketService } from './services/ticket.service';
 //import { HTTP } from '@ionic-native/http/ngx';
-import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http'
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http'
+import { UsuariosService } from './services/usuarios.service';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, HttpClientModule ,IonicModule.forRoot(), AppRoutingModule, ServiceWorkerModule.register('ngsw-worker.js', {
-  enabled: environment.production,
-  // Register the ServiceWorker as soon as the app is stable
-  // or after 30 seconds (whichever comes first).
-  registrationStrategy: 'registerWhenStable:30000'
-})],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HttpClient, TicketService
-              ],
+  imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, ServiceWorkerModule.register('ngsw-worker.js', {
+    enabled: environment.production,
+    // Register the ServiceWorker as soon as the app is stable
+    // or after 30 seconds (whichever comes first).
+    registrationStrategy: 'registerWhenStable:30000'
+  })],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HttpClient, TicketService, UsuariosService
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
