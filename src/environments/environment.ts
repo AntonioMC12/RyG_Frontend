@@ -6,7 +6,12 @@ export const environment = {
   production: false,
   endpoint:'http://localhost:8080/',
   apiTicket:'tickets/',
-  apiUsuario:'usuarios/'
+  apiUsuario:'usuarios/',
+  apiBoletos:'boletos',
+  apiBoletosEntregados: 'entregados',
+  apiBoletoscanjeados: 'canjeados',
+  apiBoletosUsuarios: 'usuarios',
+  apiBoletosSorteo: 'sorteo'
 };
 
 /*
