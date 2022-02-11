@@ -12,6 +12,12 @@
       <ion-title size="large">Tab 3</ion-title>
     </ion-toolbar>
   </ion-header>
-
+  <ion-button (click)="getAllPremio()">get Premios</ion-button>
+  <ion-button (click)="createPremio()">crear premio</ion-button>
+  <ion-button (click)="updatePremio()">actualizar premio</ion-button>
+  <ion-button (click)="deletePremio()">borrar premio</ion-button>
+  <ion-button (click)="getByDescription()">get by description</ion-button>
+  <ion-button (click)="getPremiosEntregados()">get premios entregados</ion-button>
+  <ion-button (click)="getPremiosNoEntregados()">get premios no entregados</ion-button>
   <app-explore-container name="Tab 3 page"></app-explore-container>
 </ion-content>

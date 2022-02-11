@@ -1,10 +1,10 @@
 
 
 export interface Ticket{
-    id:number,
+    id:Number,
     nombreCliente:string,
-    telefono:number,
-    numeroTicket:number,
+    telefono:Number,
+    numeroTicket:Number,
     fechaTicket:Date,
     nombreComercio:string
     

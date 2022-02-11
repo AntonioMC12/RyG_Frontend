@@ -9,9 +9,10 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { TicketService } from './services/ticket.service';
-//import { HTTP } from '@ionic-native/http/ngx';
-import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http'
+import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http'
+import { PremioService } from './services/premio.service';
 import { UsuariosService } from './services/usuarios.service';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,7 @@ import { UsuariosService } from './services/usuarios.service';
     // or after 30 seconds (whichever comes first).
     registrationStrategy: 'registerWhenStable:30000'
   })],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HttpClient, TicketService, UsuariosService
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HttpClient, TicketService, UsuariosService, PremioService
   ],
   bootstrap: [AppComponent],
 })
