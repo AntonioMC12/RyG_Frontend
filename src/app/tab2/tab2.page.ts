@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Usuario } from '../model/Usuario';
+import { UiService } from '../services/ui.service';
 import { UsuariosService } from '../services/usuarios.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UsuariosService } from '../services/usuarios.service';
 })
 export class Tab2Page {
 
-  constructor(private usuarioService: UsuariosService) { }
+  constructor(private usuarioService: UsuariosService, private ui: UiService) { }
 
   ngOnInit() {
 
@@ -22,6 +23,7 @@ export class Tab2Page {
     } else {
       console.log(id);
       this.usuarioService.getUsuarios();
+      // this.ui.showToast('éxito', 'success');
     }
   }
 
@@ -64,5 +66,11 @@ export class Tab2Page {
 
   public deleteUsuario(id_usuario: Number) {
     this.usuarioService.deleteUsuario(id_usuario);
+  }
+
+  public testToast(msg: string, color: string) {
+    this.ui.showToast(msg, color);
+
+    //en un caso práctico, en el catch del método se pondría this.ui.showToast(error, 'danger');
   }
 }
