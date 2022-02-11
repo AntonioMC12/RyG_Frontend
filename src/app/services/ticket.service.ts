@@ -28,7 +28,6 @@ export class TicketService {
       }
       try {
         let result: any = await this.http.get(endpoint).toPromise();
-        console.log(result);
         resolve(result);
       } catch (error) {
         reject(error);
@@ -43,7 +42,6 @@ export class TicketService {
       const endpoint = environment.endpoint + environment.apiTicket + id;
       try {
         let result: any = await this.http.get(endpoint).toPromise();
-        console.log(result);
         resolve(result);
       } catch (error) {
         reject(error);
@@ -62,7 +60,6 @@ export class TicketService {
       const endpoint = environment.endpoint + environment.apiTicket;
       try {
         let result: any = await this.http.post(endpoint, ticket).toPromise();
-        console.log(result);
         resolve(result);
       } catch (error) {
         reject(error);
@@ -81,7 +78,6 @@ export class TicketService {
       const endpoint = environment.endpoint + environment.apiTicket;
       try {
         let result: any = await this.http.put(endpoint, ticket).toPromise();
-        console.log(result);
         resolve(result);
       } catch (error) {
         reject(error);
@@ -100,7 +96,6 @@ export class TicketService {
       const endpoint = environment.endpoint + environment.apiTicket + id;
       try {
         let result: any = this.http.delete(endpoint).toPromise();
-        console.log(result);
         resolve(result);
       } catch (error) {
         reject(error);
@@ -120,7 +115,6 @@ export class TicketService {
       const endpoint = environment.endpoint + environment.apiTicket + environment.telefono + telefono;
       try {
         let result: any = await this.http.get(endpoint).toPromise();
-        console.log(result);
         resolve(result);
       } catch (error) {
         reject(error);
@@ -139,7 +133,6 @@ export class TicketService {
       const endpoint = environment.endpoint + environment.apiTicket + environment.fecha + fechaTicket;
       try {
         let result: any = await this.http.get(endpoint).toPromise();
-        console.log(result);
         resolve(result);
       } catch (error) {
         reject(error);

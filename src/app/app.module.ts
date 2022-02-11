@@ -12,6 +12,7 @@ import { TicketService } from './services/ticket.service';
 import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http'
 import { PremioService } from './services/premio.service';
 import { UsuariosService } from './services/usuarios.service';
+import { LoadingService } from './services/loading.service';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import { UsuariosService } from './services/usuarios.service';
     // or after 30 seconds (whichever comes first).
     registrationStrategy: 'registerWhenStable:30000'
   })],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HttpClient, TicketService, UsuariosService, PremioService
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HttpClient, TicketService, UsuariosService, PremioService, LoadingService
   ],
   bootstrap: [AppComponent],
 })

@@ -55,7 +55,7 @@ export class Tab4Page implements OnInit {
 
   public putBoleto() {
     let boleto: Boleto = {
-      id: 20,
+      id: 5,
       descripcion: "Esto es una descripción actualizada desde Ionic",
       entregado: false,
       canjeado: false,
