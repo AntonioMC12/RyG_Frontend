@@ -34,7 +34,7 @@ export class UsuariosService {
 
   public async getUsuarioByCoordinates(latitud: Number, longitud: Number) {
     if (latitud != undefined && longitud != undefined) {
-      let endpoint = environment.endpoint + environment.apiUsuario + latitud + "/" + longitud;
+      let endpoint = environment.endpoint + environment.apiUsuario + environment.apiCoordenadas+ latitud + "/" + longitud;
       let usuario;
       try {
         usuario = await this.http.get(endpoint).toPromise();
@@ -61,6 +61,7 @@ export class UsuariosService {
     let response;
     try {
       response = await this.http.put(endpoint, usuario).toPromise();
+      console.log(response);
     } catch (error) {
       console.error(error);
     }

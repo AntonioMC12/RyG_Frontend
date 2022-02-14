@@ -13,6 +13,7 @@ export const environment = {
   entregado:'entregado/',
   noEntregado:'no-entregado/',
   apiUsuario:'usuarios/',
+  apiCoordenadas:'coordenadas/',
   apiBoletos:'boletos',
   apiBoletosEntregados: 'entregados',
   apiBoletoscanjeados: 'canjeados',

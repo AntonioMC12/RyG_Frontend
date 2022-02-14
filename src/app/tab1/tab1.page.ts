@@ -15,11 +15,11 @@ export class Tab1Page {
 
   public async getAllTicket() {
     try {
-      //this.listado = await this.api.getAllTickets();
+      this.listado = await this.api.getAllTickets();
       console.log(this.listado);
-      this.listado = await this.api.getAllTickets(2);
+      //this.listado = await this.api.getAllTickets(2);
       //this.ticket = await this.api.getTicket(2);
-      console.log(this.ticket);
+      //console.log(this.ticket);
     } catch (error) {
       console.log(error);
       // this.listado=null;
@@ -29,10 +29,10 @@ export class Tab1Page {
   }
   public async createTicket() {
 
-    let date: Date = new Date("2022-03-16");
+    let date: Date = new Date("2022-09-18");
     let newTicket: Ticket = {
       id: -1,
-      nombreCliente: "insertando",
+      nombreCliente: "testing",
       telefono: 1234,
       numeroTicket: 1123,
       fechaTicket: date,
@@ -51,7 +51,7 @@ export class Tab1Page {
   public async deleteTicket() {
     try {
 
-      await this.api.deleteTicket(6);
+      await this.api.deleteTicket(10);
       console.log(this.ticket);
     } catch (error) {
       console.log(error);
