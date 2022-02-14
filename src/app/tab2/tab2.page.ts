@@ -51,7 +51,7 @@ export class Tab2Page {
 
   public putUsuario() {
     let usuario: Usuario = {
-      id: 20,
+      id: 3,
       contrasena: "prueba contraseña",
       direccion: "calle prueba nº3",
       email: "prueba@hotmail.com",
