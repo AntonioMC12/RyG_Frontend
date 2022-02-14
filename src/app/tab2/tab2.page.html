@@ -19,5 +19,8 @@
   <ion-button (click)="postUsuario()">POST /usuarios</ion-button>
   <ion-button (click)="putUsuario()">PUT /usuarios</ion-button>
   <ion-button (click)="deleteUsuario(3)">DELETE /usuarios/3</ion-button>
+  <ion-button (click)="testToast('mensaje de error', 'danger')">TOAST (error)</ion-button>
+  <ion-button (click)="testToast('mensaje de warning', 'warning')">TOAST (warning)</ion-button>
+  <ion-button (click)="testToast('mensaje de success', 'success')">TOAST (success)</ion-button>
   <app-explore-container name="Tab 2 page"></app-explore-container>
 </ion-content>
