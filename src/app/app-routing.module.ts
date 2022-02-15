@@ -9,7 +9,12 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'create-premio',
+    loadChildren: () => import('./pages/create-premio/create-premio.module').then( m => m.CreatePremioPageModule)
   }
+
 
 ];
 @NgModule({

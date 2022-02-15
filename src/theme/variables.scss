@@ -4,7 +4,8 @@
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #3880ff;
+  //--ion-color-primary: #3880ff;
+  --ion-color-primary:#FFC107;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -20,7 +21,8 @@
   --ion-color-secondary-tint: #50c8ff;
 
   /** tertiary **/
-  --ion-color-tertiary: #5260ff;
+  //--ion-color-tertiary: #5260ff;
+  --ion-color-tertiary: #009688;
   --ion-color-tertiary-rgb: 82, 96, 255;
   --ion-color-tertiary-contrast: #ffffff;
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;
@@ -52,8 +54,8 @@
   --ion-color-danger-tint: #ed576b;
 
   /** dark **/
-  --ion-color-dark: #222428;
-  
+ // --ion-color-dark: #222428;
+  --ion-color-dark: #cbced3;
   --ion-color-dark-rgb: 34, 36, 40;
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
@@ -75,6 +77,11 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+
+  --ion-border-color: #ffffff;
+  --ion-background-color: #e0e0e0;
+  --ion-item-background: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -207,10 +214,10 @@
     
     --ion-background-color-rgb: 18,18,18;
 
-    --ion-text-color: #ffffff;
+    --ion-text-color: #000000;
     --ion-text-color-rgb: 255,255,255;
 
-    --ion-border-color: #222222;
+    --ion-border-color: #ffffff;
 
     --ion-color-step-50: #1e1e1e;
     --ion-color-step-100: #2a2a2a;
@@ -222,22 +229,22 @@
     --ion-color-step-400: #717171;
     --ion-color-step-450: #7d7d7d;
     --ion-color-step-500: #898989;
-    --ion-color-step-550: #949494;
+    --ion-color-step-550: #000000;
     --ion-color-step-600: #a0a0a0;
     --ion-color-step-650: #acacac;
     --ion-color-step-700: #b8b8b8;
     --ion-color-step-750: #c4c4c4;
     --ion-color-step-800: #d0d0d0;
-    --ion-color-step-850: #dbdbdb;
+    --ion-color-step-850: #000000;
     --ion-color-step-900: #e7e7e7;
     --ion-color-step-950: #f3f3f3;
 
-    --ion-item-background: #1e1e1e;
+    --ion-item-background: #ffffff;
 
     --ion-toolbar-background: #1f1f1f;
     
     --ion-tab-bar-background: #ffffff;
 
-    --ion-card-background: #fcfcfc;
+    --ion-card-background: #ffffff;
   }
 }

@@ -13,27 +13,37 @@ ion-header {
 }
 
 ion-content{
+    
     ion-list {
+        
         width: 70%;
-        margin: 0 auto;
+        margin-top: 2%;
+        margin-left: 10%;
+        margin-right: 10%;
+        border-radius: 1%;
+        
+        //margin:auto;
+        //margin: 0 auto;
         background-color: white;
         ion-card {
+            
+            background-color: white;
+            align-items: center;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
             width: auto;
             ion-card-header{
                 // width: 75%;
+                color: black;
             }
-            ion-item {
-                justify-content: flex-end;
-                display: flex;
+            
                 
                 ion-icon {
                     margin: 0 auto;
                     
                 }
-            }
+            
         }
         h6 {
             margin: 2%;
@@ -43,5 +53,9 @@ ion-content{
         margin: 2%;
         color:darkcyan
     }
+
+
+
 }
+
 
