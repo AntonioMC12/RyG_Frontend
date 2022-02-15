@@ -19,7 +19,7 @@ export class PremioService {
   public getAllPremios(id?: Number): Promise<Premio[] | null> {
 
     return new Promise(async (resolve, reject) => {
-      let endpoint = environment.endpoint + environment.apiPremio;
+      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio;
       if (id) {
         endpoint += id;
       }
@@ -41,7 +41,7 @@ export class PremioService {
   public createPremio(premio: Premio): Promise<Premio> {
 
     return new Promise(async (resolve, reject) => {
-      const endpoint = environment.endpoint + environment.apiPremio;
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio;
       try {
         let result: any = await this.http.post(endpoint, premio).toPromise();
         console.log(result);
@@ -60,7 +60,7 @@ export class PremioService {
   public updatePremio(premio: Premio): Promise<Premio> {
 
     return new Promise(async (resolve, reject) => {
-      const endpoint = environment.endpoint + environment.apiPremio;
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio;
       try {
         let result: any = await this.http.put(endpoint, premio).toPromise();
         console.log(result);
@@ -79,7 +79,7 @@ export class PremioService {
   public deletePremio(id: Number): Promise<void> {
 
     return new Promise(async (resolve, reject) => {
-      const endpoint = environment.endpoint + environment.apiPremio + id;
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio + id;
       try {
         let result: any = this.http.delete(endpoint).toPromise();
         console.log(result);
@@ -99,7 +99,7 @@ export class PremioService {
   public getPremioByDescription(descripcion: string): Promise<Premio[]> {
 
     return new Promise(async (resolve, reject) => {
-      const endpoint = environment.endpoint + environment.apiPremio + environment.descripcion + descripcion;
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio + environment.apiEnviroment.descripcion + descripcion;
       try {
         let result: any = await this.http.get(endpoint).toPromise();
         console.log(result);
@@ -117,7 +117,7 @@ export class PremioService {
   public getPremiosEntregados(): Promise<Premio[]> {
 
     return new Promise(async (resolve, reject) => {
-      const endpoint = environment.endpoint + environment.apiPremio + environment.entregado;
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio + environment.apiEnviroment.entregado;
       try {
         let premios: Premio[] = [];
         let premio: Premio;
@@ -142,7 +142,7 @@ export class PremioService {
   public getPremiosNoEntregados(): Promise<Premio[]> {
 
     return new Promise(async (resolve, reject) => {
-      const endpoint = environment.endpoint + environment.apiPremio + environment.noEntregado;
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio + environment.apiEnviroment.noEntregado;
       try {
         let premios: Premio[] = [];
         let premio: Premio;

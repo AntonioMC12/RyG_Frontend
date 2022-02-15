@@ -7,14 +7,14 @@
           <div class="sign-in-htm">
             <div class="group">
               <ion-label for="user" class="label">Correo</ion-label>
-              <ion-input id="user" type="text" class="input"></ion-input>
+              <ion-input id="user" [(ngModel)]="email" type="text" class="input"></ion-input>
             </div>
             <div class="group">
               <ion-label for="pass" class="label">Contraseña</ion-label>
-              <ion-input id="pass" type="password" class="input" data-type="password"></ion-input>
+              <ion-input id="pass" [(ngModel)]="pass" type="password" class="input" data-type="password"></ion-input>
             </div>
             <div>
-              <ion-button (click)="goToTabsPage()" type="submit" color="tertiary" shape= "round" expand="block">
+              <ion-button (click)="login()" type="submit" color="tertiary" shape= "round" expand="block">
                 <ion-icon name="log-in"></ion-icon>&nbsp;
                  Iniciar Sesion
               </ion-button>

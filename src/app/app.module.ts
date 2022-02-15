@@ -9,22 +9,28 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { TicketService } from './services/ticket.service';
-import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http'
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http'
 import { PremioService } from './services/premio.service';
 import { UsuariosService } from './services/usuarios.service';
 import { ToastService } from './services/toast.service';
 import { LoadingService } from './services/loading.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, ServiceWorkerModule.register('ngsw-worker.js', {
-    enabled: environment.production,
-    // Register the ServiceWorker as soon as the app is stable
-    // or after 30 seconds (whichever comes first).
-    registrationStrategy: 'registerWhenStable:30000'
-  })],
+  imports: [AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule, BrowserModule, ReactiveFormsModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HttpClient, TicketService, UsuariosService, PremioService, LoadingService, ToastService
   ],
   bootstrap: [AppComponent],
