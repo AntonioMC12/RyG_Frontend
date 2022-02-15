@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../model/Usuario';
+import { Premio } from '../model/Premio';
+import { PremioService } from '../services/premio.service';
 import { ToastService } from '../services/toast.service';
 import { UsuariosService } from '../services/usuarios.service';
+import { AlertController, ModalController } from '@ionic/angular';
+import { CreatePremioPage } from '../pages/create-premio/create-premio.page';
 
 @Component({
   selector: 'app-tab2',
@@ -9,13 +13,85 @@ import { UsuariosService } from '../services/usuarios.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-
-  constructor(private usuarioService: UsuariosService, private toast: ToastService) { }
+  public listado: Array<Premio>;
+  public premios: Premio[] = [];
+  public premio:Premio;
+  constructor(private usuarioService: UsuariosService,
+    public alertController: AlertController, 
+    private api:PremioService,
+    private modalController:ModalController) { }
 
   ngOnInit() {
-
+  
   }
 
+  async ionViewDidEnter() {
+    await this.getAllPremio();
+  }
+
+  public async getAllPremio() {
+    try {
+      this.premios = await this.api.getAllPremios();
+      console.log(this.listado);
+    } catch (error) {
+      console.log(error);
+      this.listado = null;
+    }
+  }
+
+  public async deletePremio(premio:Premio) {
+
+    const alert = await this.alertController.create({
+      header:'Confirmación',
+      message:'Estas seguro de que quieres eliminar',
+      buttons: [
+        {
+          text:'Cancelar',
+          handler:(blah)=>{
+            //nada
+          }
+        },
+        {
+          text:'Eliminar',
+          handler: async()=>{
+            try {
+              await this.api.deletePremio(premio.id);
+              console.log(this.premio);
+              //Para recargar la lista
+              let i = this.premios.indexOf(premio,0);
+              if(i>-1){
+                this.premios.splice(i,1);
+              }
+            } catch (error) {
+              console.log(error);
+              
+            }
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  public async crear(premio:Premio) {
+
+    const modal = await this.modalController.create({
+      component: CreatePremioPage,
+      cssClass: 'my-custom-class',
+      componentProps: {  }
+    });
+    await modal.present();
+    await modal.onDidDismiss();
+    await this.getAllPremio();
+  }
+
+
+
+
+
+
+
+   /** 
   public getUsuarios(id?: any) {
     if (id != undefined && id > -1) {
       console.log(id);
@@ -27,6 +103,9 @@ export class Tab2Page {
     }
   }
 
+
+
+ 
   public getUsuarioByCoordinates(latitud: Number, longitud: Number) {
     if (latitud != undefined && longitud != undefined) {
       console.log("Lat:" + latitud + ". Long: " + longitud);
@@ -69,8 +148,9 @@ export class Tab2Page {
   }
 
   public testToast(msg: string, color: string) {
-    this.toast.showToast(msg, color);
+    //this.toast.showToast(msg, color);
 
     //en un caso práctico, en el catch del método se pondría this.toast.showToast(error, 'danger');
   }
+  */
 }

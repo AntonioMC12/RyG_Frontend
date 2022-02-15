@@ -7,34 +7,21 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="content">
-  <ion-list>
-    <h6>Lista de usuarios</h6>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Title</ion-card-title>
-        <ion-card-subtitle>Subtitle</ion-card-subtitle>
+  <ion-list  >
+    <h6>LISTA DE PREMIOS</h6>
+  
+    <ion-card *ngFor="let premio of premios; let i=index">
+      <ion-card-header >
+        <ion-card-title>{{premio.id}}</ion-card-title>
+        <ion-card-subtitle>{{premio.description}}</ion-card-subtitle>
+        <ion-card-subtitle>{{premio.entregado}}</ion-card-subtitle>
       </ion-card-header>
 
-      <ion-item>
+      <ion-item >
         <ion-button>
           <ion-icon name="pencil"></ion-icon>
         </ion-button>
-        <ion-button>
-          <ion-icon name="trash-bin"></ion-icon>
-        </ion-button>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Title</ion-card-title>
-        <ion-card-subtitle>Subtitle</ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-item>
-        <ion-button>
-          <ion-icon name="pencil"></ion-icon>
-        </ion-button>
-        <ion-button>
+        <ion-button  color="danger" (click)="deletePremio(premio)">
           <ion-icon name="trash-bin"></ion-icon>
         </ion-button>
       </ion-item>
@@ -42,7 +29,7 @@
   </ion-list>
   
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
+    <ion-fab-button color="tertiary" (click)="crear()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
