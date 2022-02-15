@@ -14,7 +14,9 @@ export class LoadingService {
     if(this.isLoading){
       this.loading.dismiss();
     }
-    this.isLoading = await this.loading.create({}); //{} -> mensaje, spinner..
+    this.isLoading = await this.loading.create({
+      message: 'Por favor espere...'
+    }); //{} -> mensaje, spinner..
     await this.isLoading.present();
   }
 
