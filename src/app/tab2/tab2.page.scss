@@ -1,0 +1,47 @@
+ion-header {
+    ion-toolbar {
+        // background-color: gold;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: auto;
+        ion-title {
+            text-align: center;
+            // color: white;
+        }
+    }
+}
+
+ion-content{
+    ion-list {
+        width: 70%;
+        margin: 0 auto;
+        background-color: white;
+        ion-card {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: auto;
+            ion-card-header{
+                // width: 75%;
+            }
+            ion-item {
+                justify-content: flex-end;
+                display: flex;
+                
+                ion-icon {
+                    margin: 0 auto;
+                    
+                }
+            }
+        }
+        h6 {
+            margin: 2%;
+        }
+    }
+    ion-fab {
+        margin: 2%;
+        color:darkcyan
+    }
+}
+
