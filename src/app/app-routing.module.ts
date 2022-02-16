@@ -14,6 +14,7 @@ const routes: Routes = [
     path: 'create-user',
     loadChildren: () => import('./pages/create-user/create-user.module').then( m => m.CreateUserPageModule)
   },
+  {
     path: 'create-premio',
     loadChildren: () => import('./pages/create-premio/create-premio.module').then( m => m.CreatePremioPageModule)
   }

@@ -48,32 +48,34 @@ export class Tab3Page {
 
   public postUsuario() {
     let usuario: Usuario = {
-      id: -1,
-      contrasena: "prueba contraseña",
+      id: 3,
+      uid: "prueba contraseña",
       direccion: "calle prueba nº3",
       email: "prueba@hotmail.com",
       latitud: 12,
       longitud: 11,
       nombre_comercio: "empresa prueba",
       participaciones: 0,
-      telefono: "616123456"
+      telefono: "616123456",
+      admin:false
     }
-    // this.usuarioService.postUsuario(usuario);
+    this.usuarioService.postUsuario(usuario);
   }
 
   public putUsuario() {
     let usuario: Usuario = {
       id: 3,
-      contrasena: "prueba contraseña",
+      uid: "prueba contraseña",
       direccion: "calle prueba nº3",
       email: "prueba@hotmail.com",
       latitud: 12,
       longitud: 11,
       nombre_comercio: "empresa prueba",
       participaciones: 0,
-      telefono: "616123456"
+      telefono: "616123456",
+      admin:false
     }
-    // this.usuarioService.putUsuario(usuario);
+     this.usuarioService.putUsuario(usuario);
   }
 
   public async deleteUsuario(usuario: Usuario) {
