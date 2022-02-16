@@ -17,7 +17,7 @@ export class BoletoService {
       let endpoint = this.apiEndpoint;
       let boleto: Boleto[];
       if (id_boleto) {
-        endpoint += id_boleto
+        endpoint += id_boleto;
       }
       try {
         boleto = await this.http.get(endpoint).toPromise() as Boleto[];
@@ -91,10 +91,10 @@ export class BoletoService {
   public async postBoleto(boleto: Boleto): Promise<Boleto[]> {
     return new Promise(async (resolve, reject) => {
       let endpoint = this.apiEndpoint;
-      let boleto: Boleto[];
+      let boletos: Boleto[];
       try {
-        boleto = await this.http.post(endpoint, boleto).toPromise() as Boleto[];
-        resolve(boleto);
+        boletos = await this.http.post(endpoint, boleto).toPromise() as Boleto[];
+        resolve(boletos);
       } catch (error) {
         reject(error);
       }

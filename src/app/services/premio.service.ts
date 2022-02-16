@@ -25,7 +25,6 @@ export class PremioService {
       }
       try {
         let result: any = await this.http.get(endpoint).toPromise();
-        console.log(result);
         resolve(result);
       } catch (error) {
         reject(error);
@@ -44,7 +43,6 @@ export class PremioService {
       const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio;
       try {
         let result: any = await this.http.post(endpoint, premio).toPromise();
-        console.log(result);
         resolve(result);
       } catch (error) {
         reject(error);
@@ -63,7 +61,6 @@ export class PremioService {
       const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio;
       try {
         let result: any = await this.http.put(endpoint, premio).toPromise();
-        console.log(result);
         resolve(result);
       } catch (error) {
         reject(error);
@@ -82,7 +79,6 @@ export class PremioService {
       const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio + id;
       try {
         let result: any = this.http.delete(endpoint).toPromise();
-        console.log(result);
         resolve(result);
       } catch (error) {
         reject(error);
@@ -102,7 +98,6 @@ export class PremioService {
       const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio + environment.apiEnviroment.descripcion + descripcion;
       try {
         let result: any = await this.http.get(endpoint).toPromise();
-        console.log(result);
         resolve(result);
       } catch (error) {
         reject(error);
@@ -127,7 +122,6 @@ export class PremioService {
             premios.push(premio);
           }
         }
-        console.log(premios);
         resolve(premios);
       } catch (error) {
         reject(error);
@@ -152,7 +146,6 @@ export class PremioService {
             premios.push(premio);
           }
         }
-        console.log(premios);
         resolve(premios);
       } catch (error) {
         reject(error);
