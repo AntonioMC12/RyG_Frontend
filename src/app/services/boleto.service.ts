@@ -8,124 +8,128 @@ import { Boleto } from '../model/Boleto';
 })
 export class BoletoService {
 
+  apiEndpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/";
+
+
   constructor(private http: HttpClient) { }
 
-  public async getBoletos(id_boleto?: Number) {
-    if (id_boleto != undefined) {
-      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/" + id_boleto;
-      let boleto;
-      try {
-        boleto = await this.http.get(endpoint).toPromise();
-        console.log(boleto);
-
-      } catch (error) {
-        console.error(error);
+  public async getBoletos(id_boleto?: Number): Promise<Boleto[]> {
+    return new Promise(async (resolve, reject) => {
+      let endpoint = this.apiEndpoint;
+      let boleto: Boleto[];
+      if (id_boleto) {
+        endpoint += id_boleto;
       }
-    } else {
-      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos;
+      try {
+        boleto = await this.http.get(endpoint).toPromise() as Boleto[];
+        resolve(boleto);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  public async getBoletosEntregados(): Promise<Boleto[]> {
+    return new Promise(async (resolve, reject) => {
+      let endpoint = this.apiEndpoint + environment.apiEnviroment.apiBoletosEntregados;
       let boletos;
       try {
         boletos = await this.http.get(endpoint).toPromise();
-        console.log(boletos);
+        resolve(boletos);
       } catch (error) {
-        console.error(error);
+        reject(error);
       }
-    }
+    });
   }
 
-  public async getBoletosEntregados() {
-    let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/" + environment.apiEnviroment.apiBoletosEntregados;
-    let boletos;
-    try {
-      boletos = await this.http.get(endpoint).toPromise();
-      console.log(boletos);
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
-  public async getBoletosCanjeados() {
-    let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/" + environment.apiEnviroment.apiBoletoscanjeados;
-    let boletos;
-    try {
-      boletos = await this.http.get(endpoint).toPromise();
-      console.log(boletos);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  public async getBoletosByUsuario(id_usuario: Number) {
-    if(id_usuario != null && id_usuario != undefined && id_usuario > -1){
-      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/" + environment.apiEnviroment.apiBoletosUsuarios + "/" + id_usuario;
-      let boletos;
+  public async getBoletosCanjeados(): Promise<Boleto[]> {
+    return new Promise(async (resolve, reject) => {
+      let endpoint = this.apiEndpoint + environment.apiEnviroment.apiBoletoscanjeados;
+      let boletos: Boleto[];
       try {
-        boletos = await this.http.get(endpoint).toPromise();
-        console.log(boletos);
+        boletos = await this.http.get(endpoint).toPromise() as Boleto[];
+        resolve(boletos);
       } catch (error) {
-        console.error(error);
+        reject(error);
       }
-    }else{
-      console.log("id_usuario mal introducido");
-    }
+    });
   }
 
-  public async getBoletoSorteo(id_usuario: Number) {
-    if(id_usuario != null && id_usuario != undefined && id_usuario > -1){
-      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/" + environment.apiEnviroment.apiBoletosSorteo + "/" + id_usuario;
-      let boletos;
+
+  public async getBoletosByUsuario(id_usuario: Number): Promise<Boleto[]> {
+    return new Promise(async (resolve, reject) => {
+      if (id_usuario && id_usuario > -1) {
+        let endpoint = this.apiEndpoint + id_usuario;
+        let boletos: Boleto[];
+        try {
+          boletos = await this.http.get(endpoint).toPromise() as Boleto[];
+          resolve(boletos);
+        } catch (error) {
+          reject(error);
+        }
+      } else {
+        reject();
+      }
+    });
+  }
+
+  public async getBoletoSorteo(id_usuario: Number): Promise<Boleto[]> {
+    return new Promise(async (resolve, reject) => {
+      if (id_usuario && id_usuario > -1) {
+        let endpoint = this.apiEndpoint + environment.apiEnviroment.apiBoletosSorteo + "/" + id_usuario;
+        let boletos: Boleto[];
+        try {
+          boletos = await this.http.get(endpoint).toPromise() as Boleto[];
+          resolve(boletos);
+        } catch (error) {
+          reject(error);
+        }
+      } else {
+        reject("id_usuario mal introducido");
+      }
+    });
+  }
+
+  public async postBoleto(boleto: Boleto): Promise<Boleto[]> {
+    return new Promise(async (resolve, reject) => {
+      let endpoint = this.apiEndpoint;
+      let boletos: Boleto[];
       try {
-        boletos = await this.http.get(endpoint).toPromise();
-        console.log(boletos);
+        boletos = await this.http.post(endpoint, boleto).toPromise() as Boleto[];
+        resolve(boletos);
       } catch (error) {
-        console.error(error);
+        reject(error);
       }
-    }else{
-      console.log("id_usuario mal introducido");
-    }
+    });
   }
 
-  public async postBoleto(boleto:Boleto) {
-    let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos;
-    let response;
-    try {
-      response = await this.http.post(endpoint,boleto).toPromise();
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  public async putBoleto(boleto:Boleto) {
-    let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos;
-    let response;
-    try {
-      response = await this.http.put(endpoint,boleto).toPromise();
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  public async deleteBoleto(id_boleto: Number) {
-    if(id_boleto != null && id_boleto != undefined && id_boleto > -1){
-      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/" + id_boleto;
-      let boletos;
+  public async putBoleto(boleto: Boleto): Promise<Boleto[]> {
+    return new Promise(async (resolve, reject) => {
+      let endpoint = this.apiEndpoint;
+      let boleto: Boleto[];
       try {
-        boletos = await this.http.delete(endpoint).toPromise();
-        console.log(boletos);
+        boleto = await this.http.put(endpoint, boleto).toPromise() as Boleto[];
+        resolve(boleto);
       } catch (error) {
-        console.error(error);
+        reject(error);
       }
-    }else{
-      console.log("id_boleto mal introducido");
-    }
+    });
   }
 
-  private get header(): any {
-    return {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
-    }
+  public async deleteBoleto(id_boleto: Number): Promise<boolean> {
+    return new Promise(async (resolve, reject) => {
+      if (id_boleto && id_boleto > -1) {
+        let endpoint = this.apiEndpoint + id_boleto;
+        try {
+          await this.http.delete(endpoint).toPromise();
+          resolve(true);
+        } catch (error) {
+          reject(false);
+        }
+      } else {
+        reject(false);
+      }
+    });
   }
 }

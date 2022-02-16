@@ -1,19 +1,40 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header [translucent]="true" class="header">
+  <ion-toolbar color="warning">
     <ion-title>
-      Tab 2
+      PREMIOS
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="content">
+  <ion-list  >
+    <h6>LISTA DE PREMIOS</h6>
+  
+    <ion-card *ngFor="let premio of premios; let i=index">
+      <ion-card-header >
+        <ion-card-title>{{premio.id}}</ion-card-title>
+        <ion-card-subtitle>{{premio.description}}</ion-card-subtitle>
+        <ion-card-subtitle>{{premio.entregado}}</ion-card-subtitle>
+      </ion-card-header>
 
-  <ion-button (click)="getUsuarios()">GET /usuarios</ion-button>
+      <ion-item >
+        <ion-button>
+          <ion-icon name="pencil"></ion-icon>
+        </ion-button>
+        <ion-button  color="danger" (click)="deletePremio(premio)">
+          <ion-icon name="trash-bin"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" (click)="crear()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+<!--<ion-button (click)="getUsuarios()">GET /usuarios</ion-button>
   <ion-button (click)="getUsuarios(2)">GET /usuarios/1</ion-button>
   <ion-button (click)="getUsuarioByCoordinates(12, 443)">GET /usuarios/12/443</ion-button>
   <ion-button (click)="postUsuario()">POST /usuarios</ion-button>
@@ -22,5 +43,6 @@
   <ion-button (click)="testToast('mensaje de error', 'danger')">TOAST (error)</ion-button>
   <ion-button (click)="testToast('mensaje de warning', 'warning')">TOAST (warning)</ion-button>
   <ion-button (click)="testToast('mensaje de success', 'success')">TOAST (success)</ion-button>
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <app-explore-container name="Tab 2 page"></app-explore-container>-->
+  
 </ion-content>

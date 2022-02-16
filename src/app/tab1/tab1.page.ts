@@ -13,6 +13,10 @@ export class Tab1Page {
   public ticket: Ticket;
   constructor(private api: TicketService) { }
 
+
+
+  
+/*
   public async getAllTicket() {
     try {
       this.listado = await this.api.getAllTickets();
@@ -79,5 +83,6 @@ export class Tab1Page {
       console.log(error);
     }
   }
+  */
 
 }

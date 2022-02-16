@@ -1,22 +1,39 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header [translucent]="true" class="header">
+  <ion-toolbar color="warning">
     <ion-title>
-      Tab 1
+     RASCA Y GANA
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <div class="home">
+    <div class="ini">
+      <img src="../../assets/icono.png">
+    </div>
+    <ion-label>Validador de premios:</ion-label>
+    <ion-input placeholder="Introduce el código del premio..." class="input"></ion-input>
+    <ion-button type="submit" color="tertiary" shape= "round" expand="block">COMPROBAR</ion-button>
+    
+  </div>
 
-  <ion-button (click)="getAllTicket()">tickets</ion-button>
+  <div class="home">
+    <ion-button size="large" color="tertiary" class="qr" expand="block"> 
+      <ion-icon name="qr-code-outline"></ion-icon>&nbsp;&nbsp;
+      GENERAR BOLETO
+    </ion-button>
+  </div>
+  
+ 
+      
+    
+
+  <!-- <ion-button (click)="getAllTicket()">tickets</ion-button>
   <ion-button (click)="createTicket()">crear</ion-button>
   <ion-button (click)="deleteTicket()">borrar</ion-button>
   <ion-button (click)="getByTelephone()">por telefono</ion-button>
-  <ion-button (click)="getByDate()">por fecha</ion-button>
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-button (click)="getByDate()">por fecha</ion-button>-->
+ 
+  
 </ion-content>

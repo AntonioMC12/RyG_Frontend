@@ -1,12 +1,12 @@
 export interface Usuario {
     id: number,
-    contrasena: string,
+    admin: boolean,
     direccion: string,
     email: string,
     latitud: number,
     longitud: number,
     nombre_comercio: string,
     participaciones: number,
-    telefono: string
-
+    telefono: string,
+    uid: string
 }

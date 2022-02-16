@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 import { Ticket } from '../model/Ticket';
+import { TicketWrapper } from '../model/TicketWrapper';
 
 
 @Injectable({
@@ -54,13 +55,12 @@ export class TicketService {
   * @param ticket 
   * @returns el ticket creado
   */
-  public createTicket(ticket: Ticket): Promise<Ticket> {
-
+  public createTicket(formData: any): Promise<Ticket[]> {
     return new Promise(async (resolve, reject) => {
       const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiTicket;
       try {
-        let result: any = await this.http.post(endpoint, ticket).toPromise();
-        resolve(result);
+        let ticket: Ticket[] = await this.http.post(endpoint, formData,).toPromise() as Ticket[];
+        resolve(ticket);
       } catch (error) {
         reject(error);
       }
