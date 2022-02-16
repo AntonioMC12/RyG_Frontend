@@ -84,50 +84,89 @@ export class Tab4Page implements OnInit {
   public getBoletos(id?: any) {
     if (id != undefined && id > -1) {
       console.log(id);
-      this.boletosService.getBoletos(id);
+      this.boletosService.getBoletos(id).then(boletos => {
+        console.log(boletos);
+      });
     } else {
       console.log(id);
-      this.boletosService.getBoletos();
+      this.boletosService.getBoletos().then(boletos => {
+        console.log(boletos);
+      });
     }
   }
 
   public getBoletosEntregados() {
-    this.boletosService.getBoletosEntregados();
+    this.boletosService.getBoletosEntregados().then(boletos => {
+      console.log(boletos);
+    });
   }
 
   public getBoletosCanjeados() {
-    this.boletosService.getBoletosCanjeados();
+    this.boletosService.getBoletosCanjeados().then(boletos => {
+      console.log(boletos);
+    });
   }
 
   public getBoletosByUsuario(id_usuario: Number) {
-    this.boletosService.getBoletosByUsuario(id_usuario);
+    this.boletosService.getBoletosByUsuario(id_usuario).then(boletos => {
+      console.log(boletos);
+    });
   }
 
   public getBoletoSorteo(id_usuario: Number) {
-    this.boletosService.getBoletoSorteo(id_usuario);
+    this.boletosService.getBoletoSorteo(id_usuario).then(boletos => {
+      console.log(boletos);
+    });
   }
 
 
   public postBoleto() {
+    let usuario: Usuario = {
+      id: 2,
+      admin: false,
+      direccion: "c/ test 234",
+      email: "test@gmail.com",
+      latitud: 0.0,
+      longitud: 0.0,
+      nombre_comercio: "Test",
+      participaciones: 0,
+      telefono: "123456789",
+      uid: "1234test"
+    }
     let boleto: Boleto = {
       id: -1,
-      descripcion: "Esto es una descripción desde Ionic",
-      entregado: false,
-      canjeado: false,
+      descripcion: "Boleto de prueba en ionic",
+      entregado: true,
+      canjeado: true,
       premio: null,
-      usuario: null
+      usuario: usuario
     }
-    this.boletosService.postBoleto(boleto);
+
+    this.boletosService.postBoleto(boleto).then(boletos => {
+      console.log(boletos);
+    });
   }
 
   public putBoleto() {
+    let usuario: Usuario = {
+      id: 2,
+      admin: false,
+      direccion: "c/ test 234",
+      email: "test@gmail.com",
+      latitud: 0.0,
+      longitud: 0.0,
+      nombre_comercio: "Test",
+      participaciones: 0,
+      telefono: "123456789",
+      uid: "1234test"
+    }
     let boleto: Boleto = {
-      id: 5,
-      descripcion: "Esto es una descripción actualizada desde Ionic",
+      id: -1,
+      descripcion: "Boleto de prueba en ionic",
       entregado: false,
       canjeado: false,
       premio: null,
-      usuario: null
+      usuario: usuario
     }
     this.boletosService.putBoleto(boleto);
   }
