@@ -22,7 +22,7 @@ export class TicketService {
   public getAllTickets(id?: Number): Promise<Ticket[] | null> {
 
     return new Promise(async (resolve, reject) => {
-      let endpoint = environment.endpoint + environment.apiTicket;
+      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiTicket;
       if (id) {
         endpoint += id;
       }
@@ -39,7 +39,7 @@ export class TicketService {
   public getTicket(id: number): Promise<Ticket> {
 
     return new Promise(async (resolve, reject) => {
-      const endpoint = environment.endpoint + environment.apiTicket + id;
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiTicket + id;
       try {
         let result: any = await this.http.get(endpoint).toPromise();
         resolve(result);
@@ -57,7 +57,7 @@ export class TicketService {
   public createTicket(ticket: Ticket): Promise<Ticket> {
 
     return new Promise(async (resolve, reject) => {
-      const endpoint = environment.endpoint + environment.apiTicket;
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiTicket;
       try {
         let result: any = await this.http.post(endpoint, ticket).toPromise();
         resolve(result);
@@ -75,7 +75,7 @@ export class TicketService {
   public uptadeTicket(ticket: Ticket): Promise<Ticket> {
 
     return new Promise(async (resolve, reject) => {
-      const endpoint = environment.endpoint + environment.apiTicket;
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiTicket;
       try {
         let result: any = await this.http.put(endpoint, ticket).toPromise();
         resolve(result);
@@ -93,7 +93,7 @@ export class TicketService {
   public deleteTicket(id: Number): Promise<void> {
 
     return new Promise(async (resolve, reject) => {
-      const endpoint = environment.endpoint + environment.apiTicket + id;
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiTicket + id;
       try {
         let result: any = this.http.delete(endpoint).toPromise();
         resolve(result);
@@ -112,7 +112,7 @@ export class TicketService {
   public getTicketByTelephone(telefono: Number): Promise<Ticket[]> {
 
     return new Promise(async (resolve, reject) => {
-      const endpoint = environment.endpoint + environment.apiTicket + environment.telefono + telefono;
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiTicket + environment.apiEnviroment.telefono + telefono;
       try {
         let result: any = await this.http.get(endpoint).toPromise();
         resolve(result);
@@ -130,7 +130,7 @@ export class TicketService {
   public getTicketByDate(fechaTicket: string): Promise<Ticket[]> {
 
     return new Promise(async (resolve, reject) => {
-      const endpoint = environment.endpoint + environment.apiTicket + environment.fecha + fechaTicket;
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiTicket + environment.apiEnviroment.fecha + fechaTicket;
       try {
         let result: any = await this.http.get(endpoint).toPromise();
         resolve(result);

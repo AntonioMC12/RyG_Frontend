@@ -46,7 +46,7 @@ export class Tab2Page {
       participaciones: 0,
       telefono: "616123456"
     }
-    this.usuarioService.postUsuario(usuario);
+    this.usuarioService.createUsuario(usuario);
   }
 
   public putUsuario() {
@@ -61,7 +61,7 @@ export class Tab2Page {
       participaciones: 0,
       telefono: "616123456"
     }
-    this.usuarioService.putUsuario(usuario);
+    this.usuarioService.updateUsuario(usuario);
   }
 
   public deleteUsuario(id_usuario: Number) {

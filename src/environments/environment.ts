@@ -1,31 +1,31 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
   production: false,
-  endpoint:'http://localhost:8080/',
-  apiTicket:'tickets/',
-  telefono:'telefono/',
-  fecha:'fecha/',
-  apiPremio:'premios/',
-  descripcion:'description/',
-  entregado:'entregado/',
-  noEntregado:'no-entregado/',
-  apiUsuario:'usuarios/',
-  apiCoordenadas:'coordenadas/',
-  apiBoletos:'boletos',
-  apiBoletosEntregados: 'entregados',
-  apiBoletoscanjeados: 'canjeados',
-  apiBoletosUsuarios: 'usuarios',
-  apiBoletosSorteo: 'sorteo'
-};
 
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+  firebaseConfig: {
+    apiKey: "AIzaSyD5Vyr373fKoiMzxWn9hKc5i3E6K5nvq2s",
+    authDomain: "ryg-fn.firebaseapp.com",
+    projectId: "ryg-fn",
+    storageBucket: "ryg-fn.appspot.com",
+    messagingSenderId: "203518564308",
+    appId: "1:203518564308:web:668ae585165d6677b76841",
+    measurementId: "G-BQYMDRQXCZ"
+  },
+
+  apiEnviroment: {
+    endpoint: 'http://localhost:8080/',
+    apiTicket: 'tickets/',
+    telefono: 'telefono/',
+    fecha: 'fecha/',
+    apiPremio: 'premios/',
+    descripcion: 'description/',
+    entregado: 'entregado/',
+    noEntregado: 'no-entregado/',
+    apiUsuario: 'usuarios/',
+    apiCoordenadas: 'coordenadas/',
+    apiBoletos: 'boletos',
+    apiBoletosEntregados: 'entregados',
+    apiBoletoscanjeados: 'canjeados',
+    apiBoletosUsuarios: 'usuarios',
+    apiBoletosSorteo: 'sorteo'
+  }
+};

@@ -12,7 +12,7 @@ export class BoletoService {
 
   public async getBoletos(id_boleto?: Number) {
     if (id_boleto != undefined) {
-      let endpoint = environment.endpoint + environment.apiBoletos + "/" + id_boleto;
+      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/" + id_boleto;
       let boleto;
       try {
         boleto = await this.http.get(endpoint).toPromise();
@@ -22,7 +22,7 @@ export class BoletoService {
         console.error(error);
       }
     } else {
-      let endpoint = environment.endpoint + environment.apiBoletos;
+      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos;
       let boletos;
       try {
         boletos = await this.http.get(endpoint).toPromise();
@@ -34,7 +34,7 @@ export class BoletoService {
   }
 
   public async getBoletosEntregados() {
-    let endpoint = environment.endpoint + environment.apiBoletos + "/" + environment.apiBoletosEntregados;
+    let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/" + environment.apiEnviroment.apiBoletosEntregados;
     let boletos;
     try {
       boletos = await this.http.get(endpoint).toPromise();
@@ -45,7 +45,7 @@ export class BoletoService {
   }
 
   public async getBoletosCanjeados() {
-    let endpoint = environment.endpoint + environment.apiBoletos + "/" + environment.apiBoletoscanjeados;
+    let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/" + environment.apiEnviroment.apiBoletoscanjeados;
     let boletos;
     try {
       boletos = await this.http.get(endpoint).toPromise();
@@ -57,7 +57,7 @@ export class BoletoService {
 
   public async getBoletosByUsuario(id_usuario: Number) {
     if(id_usuario != null && id_usuario != undefined && id_usuario > -1){
-      let endpoint = environment.endpoint + environment.apiBoletos + "/" + environment.apiBoletosUsuarios + "/" + id_usuario;
+      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/" + environment.apiEnviroment.apiBoletosUsuarios + "/" + id_usuario;
       let boletos;
       try {
         boletos = await this.http.get(endpoint).toPromise();
@@ -72,7 +72,7 @@ export class BoletoService {
 
   public async getBoletoSorteo(id_usuario: Number) {
     if(id_usuario != null && id_usuario != undefined && id_usuario > -1){
-      let endpoint = environment.endpoint + environment.apiBoletos + "/" + environment.apiBoletosSorteo + "/" + id_usuario;
+      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/" + environment.apiEnviroment.apiBoletosSorteo + "/" + id_usuario;
       let boletos;
       try {
         boletos = await this.http.get(endpoint).toPromise();
@@ -86,7 +86,7 @@ export class BoletoService {
   }
 
   public async postBoleto(boleto:Boleto) {
-    let endpoint = environment.endpoint + environment.apiBoletos;
+    let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos;
     let response;
     try {
       response = await this.http.post(endpoint,boleto).toPromise();
@@ -97,7 +97,7 @@ export class BoletoService {
   }
 
   public async putBoleto(boleto:Boleto) {
-    let endpoint = environment.endpoint + environment.apiBoletos;
+    let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos;
     let response;
     try {
       response = await this.http.put(endpoint,boleto).toPromise();
@@ -109,7 +109,7 @@ export class BoletoService {
 
   public async deleteBoleto(id_boleto: Number) {
     if(id_boleto != null && id_boleto != undefined && id_boleto > -1){
-      let endpoint = environment.endpoint + environment.apiBoletos + "/" + id_boleto;
+      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/" + id_boleto;
       let boletos;
       try {
         boletos = await this.http.delete(endpoint).toPromise();

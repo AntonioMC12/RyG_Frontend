@@ -10,82 +10,109 @@ export class UsuariosService {
 
   constructor(private http: HttpClient) { }
 
-  public async getUsuarios(id_usuario?: Number) {
-    if (id_usuario != undefined) {
-      let endpoint = environment.endpoint + environment.apiUsuario + id_usuario;
-      let usuario;
-      try {
-        usuario = await this.http.get(endpoint).toPromise();
-        console.log(usuario);
-      } catch (error) {
-        console.error(error);
+  /**
+   * Método que obtiene todos los usuarios almacenados en la BD o
+   * un usuario en concreto si le pasas un id
+   * @param id
+   * @returns usuario por id o lista de todos los usuarios
+   */
+  public async getUsuarios(id?: Number): Promise<Usuario[] | null> {
+    return new Promise(async (resolve, reject) => {
+      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiUsuario;
+      if (id) {
+        endpoint += id;
       }
-    } else {
-      let endpoint = environment.endpoint + environment.apiUsuario;
-      let usuarios;
       try {
-        usuarios = await this.http.get(endpoint).toPromise();
-        console.log(usuarios);
+        let result: any = await this.http.get(endpoint).toPromise();
+        console.log(result);
+        resolve(result);
       } catch (error) {
-        console.error(error);
+        reject(error);
       }
-    }
+    });
   }
 
-  public async getUsuarioByCoordinates(latitud: Number, longitud: Number) {
-    if (latitud != undefined && longitud != undefined) {
-      let endpoint = environment.endpoint + environment.apiUsuario + environment.apiCoordenadas+ latitud + "/" + longitud;
-      let usuario;
+/**
+ * Método que obtiene un usuario de la BD según su latitud y longitud
+ * @param latitud 
+ * @param longitud 
+ * @returns lista de usuarios que contiene la latitud y longitud
+ */
+  public getUsuarioByCoordinates(latitud: Number, longitud: Number): Promise<Usuario[]> {
+    return new Promise(async (resolve, reject) => {
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiUsuario + environment.apiEnviroment.apiCoordenadas + latitud + "/" + longitud;
       try {
-        usuario = await this.http.get(endpoint).toPromise();
-        console.log(usuario);
+        let result: any = await this.http.get(endpoint).toPromise();
+        console.log(result);
+        resolve(result);
       } catch (error) {
-        console.log(error);
+        reject(error);
       }
-    }
+    });
+    // if (latitud != undefined && longitud != undefined) {
+    //   let endpoint = environment.endpoint + environment.apiUsuario + environment.apiCoordenadas + latitud + "/" + longitud;
+    //   let usuario;
+    //   try {
+    //     usuario = await this.http.get(endpoint).toPromise();
+    //     console.log(usuario);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
   }
 
-  public async postUsuario(usuario: Usuario) {
-    let endpoint = environment.endpoint + environment.apiUsuario;
-    let response;
-    try {
-      response = await this.http.post(endpoint, usuario).toPromise();
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  public async putUsuario(usuario: Usuario) {
-    let endpoint = environment.endpoint + environment.apiUsuario;
-    let response;
-    try {
-      response = await this.http.put(endpoint, usuario).toPromise();
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  public async deleteUsuario(id_usuario: Number) {
-    if (id_usuario != null && id_usuario != undefined && id_usuario > -1) {
-      let endpoint = environment.endpoint + environment.apiUsuario + id_usuario;
-      let usuarios;
+  /**
+   * Método que crea usuarios en la BD
+   * @param usuario 
+   * @returns el usuario creado
+   */
+  public createUsuario(usuario: Usuario): Promise<Usuario> {
+    return new Promise(async (resolve, reject) => {
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiUsuario;
       try {
-        usuarios = await this.http.delete(endpoint).toPromise();
+        let result: any = await this.http.post(endpoint, usuario).toPromise();
+        console.log(result);
+        resolve(result);
       } catch (error) {
-        console.error(error);
+        reject(error);
       }
-    } else {
-      console.log("id_usuario incorrecto");
-    }
+    })
   }
 
-  private get header(): any {
-    return {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
-    }
+  /**
+   * Método que actualiza un usuario en la BD
+   * @param usuario
+   * @returns el usuario actualizado
+   */
+  public updateUsuario(usuario: Usuario): Promise<Usuario> {
+    return new Promise(async (resolve, reject) => {
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiUsuario;
+      try {
+        let result: any = await this.http.put(endpoint, usuario).toPromise();
+        console.log(result);
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    })
   }
 
+  /**
+   * Método que borra un usuario de la BD
+   * @param id 
+   * @returns 
+   */
+  public deleteUsuario(id: Number): Promise<void> {
+
+    return new Promise(async (resolve, reject) => {
+      const endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiUsuario + id;
+      try {
+        let result: any = this.http.delete(endpoint).toPromise();
+        console.log(result);
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
 }
