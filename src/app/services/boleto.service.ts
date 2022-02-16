@@ -10,6 +10,7 @@ export class BoletoService {
 
   apiEndpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/";
 
+
   constructor(private http: HttpClient) { }
 
   public async getBoletos(id_boleto?: Number): Promise<Boleto[]> {
@@ -41,6 +42,7 @@ export class BoletoService {
     });
   }
 
+
   public async getBoletosCanjeados(): Promise<Boleto[]> {
     return new Promise(async (resolve, reject) => {
       let endpoint = this.apiEndpoint + environment.apiEnviroment.apiBoletoscanjeados;
@@ -53,6 +55,7 @@ export class BoletoService {
       }
     });
   }
+
 
   public async getBoletosByUsuario(id_usuario: Number): Promise<Boleto[]> {
     return new Promise(async (resolve, reject) => {

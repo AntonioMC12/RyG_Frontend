@@ -126,7 +126,7 @@ export class Tab2Page {
       telefono: "616123456",
       admin: false
     }
-    this.usuarioService.postUsuario(usuario);
+    this.usuarioService.createUsuario(usuario);
   }
 
   public putUsuario() {
@@ -142,7 +142,7 @@ export class Tab2Page {
       telefono: "616123456",
       admin: false
     }
-    this.usuarioService.putUsuario(usuario);
+    this.usuarioService.updateUsuario(usuario);
   }
 
   public deleteUsuario(id_usuario: Number) {
