@@ -4,8 +4,10 @@ import { Premio } from '../model/Premio';
 import { PremioService } from '../services/premio.service';
 import { ToastService } from '../services/toast.service';
 import { UsuariosService } from '../services/usuarios.service';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { CreatePremioPage } from '../pages/create-premio/create-premio.page';
+import { EditPremioPage } from '../pages/edit-premio/edit-premio.page';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-tab2',
@@ -19,7 +21,8 @@ export class Tab2Page {
   constructor(private usuarioService: UsuariosService,
     public alertController: AlertController, 
     private api:PremioService,
-    private modalController:ModalController) { }
+    private modalController:ModalController,
+    public miLoading:LoadingService) { }
 
   ngOnInit() {
   
@@ -32,7 +35,6 @@ export class Tab2Page {
   public async getAllPremio() {
     try {
       this.premios = await this.api.getAllPremios();
-      console.log(this.listado);
     } catch (error) {
       console.log(error);
       this.listado = null;
@@ -55,6 +57,7 @@ export class Tab2Page {
           text:'Eliminar',
           handler: async()=>{
             try {
+              await this.miLoading.showLoading();
               await this.api.deletePremio(premio.id);
               console.log(this.premio);
               //Para recargar la lista
@@ -62,6 +65,7 @@ export class Tab2Page {
               if(i>-1){
                 this.premios.splice(i,1);
               }
+              await this.miLoading.hideLoading();
             } catch (error) {
               console.log(error);
               
@@ -73,7 +77,7 @@ export class Tab2Page {
     await alert.present();
   }
 
-  public async crear(premio:Premio) {
+  public async crear() {
 
     const modal = await this.modalController.create({
       component: CreatePremioPage,
@@ -84,6 +88,40 @@ export class Tab2Page {
     await modal.onDidDismiss();
     await this.getAllPremio();
   }
+
+  public async editar(premio:Premio) {
+    const modal = await this.modalController.create({
+      component: EditPremioPage,
+      cssClass: 'my-custom-class',
+      componentProps: { premio }
+    });
+    await modal.present();
+    await modal.onDidDismiss();
+    await this.getAllPremio();
+  }
+
+  /**
+   * Busca filtrando descripción
+   * @param $event 
+   */
+  public async buscar($event) {
+
+    let premios: Premio[] = []
+    const filtro: string = $event.detail.value;
+    if (filtro.length > 1) {
+
+      for (let premio of this.premios) {
+        if (premio.description.includes(filtro)) {
+          premios.push(premio);
+        }
+      };
+      this.premios = premios;
+    } else if (filtro.length == 0) {
+      await this.getAllPremio();
+
+    }
+  }
+
 
 
 

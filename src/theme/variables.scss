@@ -83,6 +83,12 @@
   --ion-border-color: #ffffff;
   --ion-background-color: #e0e0e0;
   --ion-item-background: #ffffff;
+  .my-custom-class {
+    --background: rgb(255, 255, 255);
+    --spinner-color: rgb(0, 0, 0);
+  
+    color: rgb(0, 0, 0);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -245,6 +251,13 @@
     
     --ion-tab-bar-background: #ffffff;
 
-    --ion-card-background: #fcfcfc;
+    --ion-card-background: #fcfcfc00;
+
+    .my-custom-class {
+      --background: rgb(255, 255, 255);
+      --spinner-color: rgb(0, 0, 0);
+    
+      color: rgb(0, 0, 0);
+    }
   }
 }
