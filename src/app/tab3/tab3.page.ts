@@ -57,7 +57,7 @@ export class Tab3Page {
       nombre_comercio: "empresa prueba",
       participaciones: 0,
       telefono: "616123456",
-      admin:false
+      admin: false
     }
     this.usuarioService.postUsuario(usuario);
   }
@@ -73,32 +73,32 @@ export class Tab3Page {
       nombre_comercio: "empresa prueba",
       participaciones: 0,
       telefono: "616123456",
-      admin:false
+      admin: false
     }
-     this.usuarioService.putUsuario(usuario);
+    this.usuarioService.putUsuario(usuario);
   }
 
   public async deleteUsuario(usuario: Usuario) {
     const alert = await this.alertController.create({
-      header:'Confirmación',
-      message:'¿Estás seguro de que quieres eliminar?',
+      header: 'Confirmación',
+      message: '¿Estás seguro de que quieres eliminar?',
       buttons: [
         {
           text: 'Cancelar',
-          handler:(blah) => {
+          handler: (blah) => {
 
           }
         },
         {
           text: 'Eliminar',
-          handler: async()=> {
+          handler: async () => {
             try {
               await this.usuarioService.deleteUsuario(usuario.id);
               console.log(this.usuario);
               let i = this.usuarios.indexOf(usuario, 0);
               this.toast.showToast("Usuario eliminado con éxito", "success")
-              if(i>-1) {
-                this.usuarios.splice(i,1);
+              if (i > -1) {
+                this.usuarios.splice(i, 1);
               }
             } catch (error) {
               console.log(error);
@@ -117,92 +117,11 @@ export class Tab3Page {
   public async crear(usuario: Usuario) {
     const modal = await this.modalController.create({
       component: CreateUserPage,
-      cssClass: 'my-custom-class',
+      cssClass: 'my-modal',
       componentProps: {}
     });
     await modal.present();
     await modal.onDidDismiss();
     await this.getUsuarios();
   }
-
-  // public async getAllPremio() {
-  //   try {
-  //     this.listado = await this.api.getAllPremios();
-  //     console.log(this.listado);
-  //   } catch (error) {
-  //     console.log(error);
-  //     this.listado = null;
-  //   }
-
-  // }
-
-  // public async createPremio() {
-
-  //   let newPremio: Premio = {
-  //     id: -1,
-  //     description: "hola soy un premio",
-  //     entregado: false
-  //   };
-
-  //   try {
-  //     this.premio = await this.api.createPremio(newPremio);
-  //     console.log(this.premio);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // public async updatePremio() {
-
-  //   let newPremio: Premio = {
-  //     id: 8,
-  //     description: "hola soy un premio editado",
-  //     entregado: false
-  //   };
-
-  //   try {
-  //     this.premio = await this.api.updatePremio(newPremio);
-  //     console.log(this.premio);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // public async deletePremio() {
-  //   try {
-  //     await this.api.deletePremio(6);
-  //     console.log(this.premio);
-  //   } catch (error) {
-  //     console.log(error);
-  //     this.premio = null;
-  //   }
-
-  // }
-
-  // public async getByDescription() {
-  //   try {
-  //     this.listado = await this.api.getPremioByDescription("telepollo");
-  //     console.log(this.listado);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // public async getPremiosEntregados() {
-  //   try {
-  //     this.listado = await this.api.getPremiosEntregados();
-  //     console.log(this.listado);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // public async getPremiosNoEntregados() {
-  //   try {
-  //     this.listado = await this.api.getPremiosNoEntregados();
-  //     console.log(this.listado);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
 }

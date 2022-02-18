@@ -41,3 +41,8 @@ ion-content ion-fab {
   margin: 2%;
   color: darkcyan;
 }
+
+.my-modal{
+  height: 100%!important;
+  width: 70%!important;
+}
