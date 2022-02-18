@@ -7,24 +7,29 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="content">
+
+  <ion-searchbar class="searchbar" color="dark" (ionChange)="buscar($event)" placeholder="Buscar..." ></ion-searchbar>
   <ion-list  >
     <h6>LISTA DE PREMIOS</h6>
   
     <ion-card *ngFor="let premio of premios; let i=index">
-      <ion-card-header >
-        <ion-card-title>{{premio.id}}</ion-card-title>
-        <ion-card-subtitle>{{premio.description}}</ion-card-subtitle>
-        <ion-card-subtitle>{{premio.entregado}}</ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-item >
-        <ion-button>
-          <ion-icon name="pencil"></ion-icon>
-        </ion-button>
-        <ion-button  color="danger" (click)="deletePremio(premio)">
-          <ion-icon name="trash-bin"></ion-icon>
-        </ion-button>
-      </ion-item>
+      <div class="display">
+        <ion-card-header >
+          <ion-card-title>Id: {{premio.id}}</ion-card-title>
+          <ion-card-subtitle>Descripción: {{premio.description}}</ion-card-subtitle>
+          <ion-card-subtitle>Entregado: {{premio.entregado}}</ion-card-subtitle>
+        </ion-card-header>
+  
+        <ion-item >
+          <ion-button (click)="editar(premio)">
+            <ion-icon name="pencil"></ion-icon>
+          </ion-button>
+          <ion-button  color="danger" (click)="deletePremio(premio)" >
+            <ion-icon name="trash-bin"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </div>
+      
     </ion-card>
   </ion-list>
   

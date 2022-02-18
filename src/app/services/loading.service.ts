@@ -10,17 +10,18 @@ export class LoadingService {
 
   constructor(private loading:LoadingController) { }
 
-  private async showLoading() {
+  public async showLoading() {
     if(this.isLoading){
       this.loading.dismiss();
     }
     this.isLoading = await this.loading.create({
+      cssClass: 'my-custom-class',
       message: 'Por favor espere...'
     }); //{} -> mensaje, spinner..
     await this.isLoading.present();
   }
 
-  private async hideLoading() {
+  public async hideLoading() {
     await this.loading.dismiss();
     this.isLoading = null;
   }
