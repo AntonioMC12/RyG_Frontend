@@ -127,7 +127,29 @@ export class Tab3Page {
       await modal.present();
       await modal.onDidDismiss();
       await this.getUsuarios();
-      this.toast.showToast("Usuario creado con éxito", "success");
+      // this.toast.showToast("Usuario creado con éxito", "success");
 
+  }
+
+  /**
+   * Busca filtrando descripción
+   * @param $event 
+   */
+   public async buscar($event) {
+
+    let usuarios: Usuario[] = []
+    const filtro: string = $event.detail.value;
+    if (filtro.length > 1) {
+
+      for (let usuario of this.usuarios) {
+        if (usuario.nombre_comercio.includes(filtro)) {
+          usuarios.push(usuario);
+        }
+      };
+      this.usuarios = usuarios;
+    } else if (filtro.length == 0) {
+      await this.getUsuarios();
+
+    }
   }
 }
