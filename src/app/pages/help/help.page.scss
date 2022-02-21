@@ -1,0 +1,53 @@
+ion-header {
+    ion-toolbar {
+        // background-color: gold;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        ion-title {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: center;
+            color: white;
+        }
+        ion-icon {
+            font-size: 30px;
+        }
+    }
+}
+
+.searchbar{
+    width: 70%;
+    margin: 2% auto;
+    border-color: black;
+}
+
+ion-content{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    ion-list {
+        width: 70%;
+        margin: 0 auto;
+        margin-top: 2%;
+        border-radius: 1%;
+        background-color: white;
+        ion-card {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            background-color: white;
+            margin: 3%;
+        }
+        ion-item {
+            ion-icon {
+                font-size: 30px;
+            }
+        }
+        h6 {
+            margin: 2%;
+        }
+    }
+    ion-fab {
+        margin: 2%;
+        color:darkcyan
+    }
+}
