@@ -1,8 +1,5 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="warning">
-    <ion-button  (click)="retroceder()">
-      <ion-icon name="arrow-back"></ion-icon>
-    </ion-button>
     <ion-title>
       AYUDA
     </ion-title>
@@ -49,7 +46,11 @@
       </ion-card-header>
     </ion-card>
   </ion-list>
-
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="buttonHelp" (click)="retroceder()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 
 
