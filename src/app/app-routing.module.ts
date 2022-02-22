@@ -21,7 +21,11 @@ const routes: Routes = [
   {
     path: 'edit-premio',
     loadChildren: () => import('./pages/edit-premio/edit-premio.module').then( m => m.EditPremioPageModule)
+  },  {
+    path: 'help',
+    loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule)
   }
+
 
 ];
 @NgModule({
