@@ -11,6 +11,12 @@ ion-header ion-toolbar ion-title {
   color: white;
 }
 
+.searchbar {
+  width: 70%;
+  margin: 2% auto;
+  border-color: black;
+}
+
 ion-content {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -40,9 +46,4 @@ ion-content ion-list h6 {
 ion-content ion-fab {
   margin: 2%;
   color: darkcyan;
-}
-
-.my-modal{
-  height: 100%!important;
-  width: 70%!important;
 }
