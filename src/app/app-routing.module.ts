@@ -21,7 +21,18 @@ const routes: Routes = [
   {
     path: 'edit-premio',
     loadChildren: () => import('./pages/edit-premio/edit-premio.module').then( m => m.EditPremioPageModule)
+  },
+  {
+    path: 'crear-boleto',
+    loadChildren: () => import('./pages/crear-boleto/crear-boleto.module').then( m => m.CrearBoletoPageModule)
+  },
+ 
+  {
+    path: 'crear-participaciones',
+    loadChildren: () => import('./pages/crear-participaciones/crear-participaciones.module').then( m => m.CrearParticipacionesPageModule)
   }
+
+
 
 ];
 @NgModule({

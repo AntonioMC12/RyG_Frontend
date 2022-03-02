@@ -26,6 +26,21 @@ export class UsuariosService {
     });
   }
 
+  
+  public async getUsuario(id_usuario: Number): Promise<Usuario> {
+    return new Promise(async (resolve, reject) => {
+      let usuario: Usuario;
+      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiUsuario + id_usuario;
+     
+      try {
+        usuario = await this.http.get(endpoint).toPromise() as Usuario;
+        resolve(usuario);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
   public async getUsuarioByCoordinates(latitud: Number, longitud: Number): Promise<Usuario[]> {
     return new Promise(async (resolve, reject) => {
       let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiUsuario + environment.apiEnviroment.apiCoordenadas + latitud + "/" + longitud;
@@ -41,25 +56,26 @@ export class UsuariosService {
     });
   }
 
-  public async postUsuario(usuario: Usuario): Promise<Usuario[]> {
+  public async postUsuario(newUsuario: Usuario): Promise<Usuario> {
     return new Promise(async (resolve, reject) => {
       let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiUsuario;
       let usuario: Usuario[];
       try {
-        usuario = await this.http.post(endpoint, usuario).toPromise() as Usuario[];
-        resolve(usuario);
+        usuario = await this.http.post(endpoint, newUsuario).toPromise() as Usuario[];
+        resolve(newUsuario);
       } catch (error) {
         reject(error);
       }
+
     });
   }
 
-  public async putUsuario(usuario: Usuario): Promise<Usuario[]> {
+  public async putUsuario(usuario: Usuario): Promise<Usuario> {
     return new Promise(async (resolve, reject) => {
       let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiUsuario;
-      let usuario: Usuario[];
+    //  let usuario: Usuario[];
       try {
-        usuario = await this.http.put(endpoint, usuario).toPromise() as Usuario[];
+        usuario = await this.http.put(endpoint, usuario).toPromise() as Usuario;
         resolve(usuario);
       } catch (error) {
         reject(error);
