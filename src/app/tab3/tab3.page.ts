@@ -154,4 +154,11 @@ export class Tab3Page {
 
     }
   }
+
+  doRefresh(event) {
+    setTimeout(() => {
+      event.target.complete();
+      window.location.reload();
+    }, 2000);
+  }
 }

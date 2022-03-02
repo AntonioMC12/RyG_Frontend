@@ -8,6 +8,10 @@
 
 <ion-content [fullscreen]="true">
   <ion-searchbar class="searchbar" color="dark" (ionChange)="buscar($event)" placeholder="Buscar..." ></ion-searchbar>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     <h6>Lista de Usuarios</h6>
     <ion-card *ngFor="let usuario of usuarios; let i=index">
