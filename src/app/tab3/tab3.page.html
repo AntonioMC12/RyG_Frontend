@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-searchbar class="searchbar" color="dark" (ionChange)="buscar($event)" placeholder="Buscar..." ></ion-searchbar>
+  <ion-searchbar class="searchbar" color="dark" (ionChange)="buscar($event)" placeholder="Buscar..." [(ngModel)]="inputSearchName"></ion-searchbar>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content>
     </ion-refresher-content>

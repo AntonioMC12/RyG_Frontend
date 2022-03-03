@@ -18,6 +18,7 @@ export class Tab3Page {
   public listado: Array<Usuario>;
   public usuarios: Usuario[] = [];
   public usuario: Usuario;
+  private inputSearchName: String;
 
   constructor(private api: PremioService,
     private usuarioService: UsuariosService,
@@ -155,10 +156,11 @@ export class Tab3Page {
     }
   }
 
-  doRefresh(event) {
+  doRefresh($event) {
     setTimeout(() => {
-      event.target.complete();
-      window.location.reload();
-    }, 2000);
+      $event.target.complete();
+      this.inputSearchName = "";
+      // window.location.reload();
+    }, 1000);
   }
 }
