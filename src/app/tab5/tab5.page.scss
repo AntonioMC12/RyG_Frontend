@@ -1,0 +1,36 @@
+.header {
+    text-align: center;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+        sans-serif;
+}
+.home {
+    width: 38%;
+    color: black;
+    font-size: 20px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+        sans-serif;
+    align-items: center;
+    margin: 10% auto;
+    padding: 3% 3% 8% 3%;
+    background-color: rgb(247, 247, 247);
+    border-radius: 2%;
+    box-shadow: 1px 1px 10px gray;
+}
+.input {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+        sans-serif;
+    align-items: center;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.973);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.formsContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+ion-fab {
+    margin: 2%;
+    color:darkcyan
+}
