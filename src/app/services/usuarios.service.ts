@@ -63,8 +63,8 @@ export class UsuariosService {
       let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiUsuario;
       let respuesta: Usuario[];
       try {
-        respuesta = await this.http.post(endpoint, usuario).toPromise() as Usuario[];
-        resolve(respuesta);
+        respuesta = await this.http.post(endpoint, newUsuario).toPromise() as Usuario[];
+        resolve(newUsuario);
       } catch (error) {
         reject(error);
       }
