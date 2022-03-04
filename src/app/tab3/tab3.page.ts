@@ -6,6 +6,7 @@ import { ToastService } from '../services/toast.service';
 import { UsuariosService } from '../services/usuarios.service';
 import { CreateUserPage } from '../pages/create-user/create-user.page';
 import { AlertController, ModalController } from '@ionic/angular';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-tab3',
@@ -17,15 +18,19 @@ export class Tab3Page {
   public listado: Array<Usuario>;
   public usuarios: Usuario[] = [];
   public usuario: Usuario;
+  private inputSearchName: String;
 
   constructor(private api: PremioService,
     private usuarioService: UsuariosService,
     private toast: ToastService,
     public alertController: AlertController,
-    private modalController: ModalController) { }
+    private modalController: ModalController,
+    public miLoading:LoadingService) { }
 
   async ionViewDidEnter() {
+    await this.miLoading.showLoading();
     await this.getUsuarios();
+    await this.miLoading.hideLoading();
   }
 
   public async getUsuarios(id?: any) {
@@ -43,37 +48,37 @@ export class Tab3Page {
     }
   }
 
-  public postUsuario() {
-    let usuario: Usuario = {
-      id: 3,
-      uid: "prueba contraseña",
-      direccion: "calle prueba nº3",
-      email: "prueba@hotmail.com",
-      latitud: 12,
-      longitud: 11,
-      nombre_comercio: "empresa prueba",
-      participaciones: 0,
-      telefono: "616123456",
-      admin: false
-    }
-    this.usuarioService.postUsuario(usuario);
-  }
+  // public postUsuario() {
+  //   let usuario: Usuario = {
+  //     id: 3,
+  //     uid: "prueba contraseña",
+  //     direccion: "calle prueba nº3",
+  //     email: "prueba@hotmail.com",
+  //     latitud: 12,
+  //     longitud: 11,
+  //     nombre_comercio: "empresa prueba",
+  //     participaciones: 0,
+  //     telefono: "616123456",
+  //     admin: false
+  //   }
+  //   this.usuarioService.postUsuario(usuario);
+  // }
 
-  public putUsuario() {
-    let usuario: Usuario = {
-      id: 3,
-      uid: "prueba contraseña",
-      direccion: "calle prueba nº3",
-      email: "prueba@hotmail.com",
-      latitud: 12,
-      longitud: 11,
-      nombre_comercio: "empresa prueba",
-      participaciones: 0,
-      telefono: "616123456",
-      admin: false
-    }
-    this.usuarioService.putUsuario(usuario);
-  }
+  // public putUsuario() {
+  //   let usuario: Usuario = {
+  //     id: 3,
+  //     uid: "prueba contraseña",
+  //     direccion: "calle prueba nº3",
+  //     email: "prueba@hotmail.com",
+  //     latitud: 12,
+  //     longitud: 11,
+  //     nombre_comercio: "empresa prueba",
+  //     participaciones: 0,
+  //     telefono: "616123456",
+  //     admin: false
+  //   }
+  //   this.usuarioService.putUsuario(usuario);
+  // }
 
   public async deleteUsuario(usuario: Usuario) {
     const alert = await this.alertController.create({
@@ -83,13 +88,14 @@ export class Tab3Page {
         {
           text: 'Cancelar',
           handler: (blah) => {
-
+            this.toast.showToast("Operación cancelada", "warning");
           }
         },
         {
           text: 'Eliminar',
           handler: async () => {
             try {
+              await this.miLoading.showLoading();
               await this.usuarioService.deleteUsuario(usuario.id);
               console.log(this.usuario);
               let i = this.usuarios.indexOf(usuario, 0);
@@ -97,8 +103,10 @@ export class Tab3Page {
               if (i > -1) {
                 this.usuarios.splice(i, 1);
               }
+              await this.miLoading.hideLoading();
             } catch (error) {
               console.log(error);
+              this.toast.showToast("Error al eliminar el usuario", "danger");
             }
           }
         }
@@ -107,17 +115,50 @@ export class Tab3Page {
     await alert.present();
   }
 
-  public testToast(msg: string, color: string) {
-    this.toast.showToast(msg, color);
-  }
+  // public testToast(msg: string, color: string) {
+  //   this.toast.showToast(msg, color);
+  // }
 
   public async crear(usuario: Usuario) {
-    const modal = await this.modalController.create({
-      component: CreateUserPage,
-      cssClass: 'my-modal',
-      componentProps: {}
-    });
-    await modal.present();
-    await modal.onDidDismiss();
+      const modal = await this.modalController.create({
+        component: CreateUserPage,
+        cssClass: 'my-modal',
+        componentProps: {}
+      });
+      await modal.present();
+      await modal.onDidDismiss();
+      await this.getUsuarios();
+      // this.toast.showToast("Usuario creado con éxito", "success");
+
+  }
+
+  /**
+   * Busca filtrando descripción
+   * @param $event 
+   */
+   public async buscar($event) {
+
+    let usuarios: Usuario[] = []
+    const filtro: string = $event.detail.value;
+    if (filtro.length > 1) {
+
+      for (let usuario of this.usuarios) {
+        if (usuario.nombre_comercio.includes(filtro)) {
+          usuarios.push(usuario);
+        }
+      };
+      this.usuarios = usuarios;
+    } else if (filtro.length == 0) {
+      await this.getUsuarios();
+
+    }
+  }
+
+  doRefresh($event) {
+    setTimeout(() => {
+      $event.target.complete();
+      this.inputSearchName = "";
+      // window.location.reload();
+    }, 1000);
   }
 }

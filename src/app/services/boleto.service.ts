@@ -91,26 +91,26 @@ export class BoletoService {
     });
   }
 
-  public async postBoleto(boleto: Boleto): Promise<Boleto[]> {
+  public async postBoleto(newBoleto: Boleto): Promise<Boleto> {
     return new Promise(async (resolve, reject) => {
       let endpoint = this.apiEndpoint;
-      let boletos: Boleto[];
+     // let boletos: Boleto[];
       try {
-        boletos = await this.http.post(endpoint, boleto).toPromise() as Boleto[];
-        resolve(boletos);
+       let boleto:any= await this.http.post(endpoint, newBoleto).toPromise() as Boleto[];
+        resolve(boleto);
       } catch (error) {
         reject(error);
       }
     });
   }
 
-  public async putBoleto(boleto: Boleto): Promise<Boleto[]> {
+  public async putBoleto(newBoleto: Boleto): Promise<Boleto> {
     return new Promise(async (resolve, reject) => {
       let endpoint = this.apiEndpoint;
-      let boleto: Boleto[];
+      let boletos: Boleto;
       try {
-        boleto = await this.http.put(endpoint, boleto).toPromise() as Boleto[];
-        resolve(boleto);
+        boletos = await this.http.put(endpoint, newBoleto).toPromise() as Boleto;
+        resolve(boletos);
       } catch (error) {
         reject(error);
       }

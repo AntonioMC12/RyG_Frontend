@@ -6,7 +6,7 @@ export interface Boleto {
     id: Number,
     descripcion: string,
     entregado: boolean,
-    canjeado: boolean,
+    canjeado: boolean
     usuario: Usuario,
     premio: Premio
 }

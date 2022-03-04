@@ -2,7 +2,6 @@ ion-header ion-toolbar {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: auto;
 }
 
 ion-header ion-toolbar ion-title {
@@ -11,10 +10,8 @@ ion-header ion-toolbar ion-title {
   color: white;
 }
 
-.searchbar {
-  width: 70%;
-  margin: 2% auto;
-  border-color: black;
+ion-header ion-toolbar ion-icon {
+  font-size: 30px;
 }
 
 ion-content {
@@ -32,11 +29,14 @@ ion-content ion-list {
 ion-content ion-list ion-card {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-  width: auto;
   align-items: center;
   background-color: white;
+  margin: 3%;
+}
+
+ion-content ion-list ion-item ion-icon {
+  font-size: 30px;
 }
 
 ion-content ion-list h6 {

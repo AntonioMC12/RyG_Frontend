@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Usuario } from '../model/Usuario';
 import { Premio } from '../model/Premio';
 import { PremioService } from '../services/premio.service';
 import { ToastService } from '../services/toast.service';
 import { UsuariosService } from '../services/usuarios.service';
-import { AlertController, LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, LoadingController, ModalController } from '@ionic/angular';
 import { CreatePremioPage } from '../pages/create-premio/create-premio.page';
 import { EditPremioPage } from '../pages/edit-premio/edit-premio.page';
 import { LoadingService } from '../services/loading.service';
+import { CrearBoletoPage } from '../pages/crear-boleto/crear-boleto.page';
+
 
 @Component({
   selector: 'app-tab2',
@@ -15,6 +17,7 @@ import { LoadingService } from '../services/loading.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
   public listado: Array<Premio>;
   public premios: Premio[] = [];
   public premio:Premio;
@@ -22,7 +25,7 @@ export class Tab2Page {
     public alertController: AlertController, 
     private api:PremioService,
     private modalController:ModalController,
-    public miLoading:LoadingService) { }
+    public miLoading:LoadingService, public toast:ToastService) { }
 
   ngOnInit() {
   
@@ -32,9 +35,47 @@ export class Tab2Page {
     await this.getAllPremio();
   }
 
+  public async cargaPremios(event?){
+    if (this.infinite) {
+      this.infinite.disabled = false;
+    }
+    if (!event) {
+      await this.miLoading.showLoading();
+    }
+    this.premios = [];
+    try {
+      this.premios = await this.api.cargarPremios('algo');
+    } catch (err) {
+      console.error(err);
+      await this.toast.showToast("Error cargando datos", "danger");
+    } finally {
+      if (event) {
+        event.target.complete();
+      } else {
+        await this.miLoading.hideLoading();
+      }
+    }
+  }
+
+
+  /**
+   * Carga notas de manera paginada
+   * @param $event 
+   */
+   public async cargaInfinita($event) {
+    console.log("CARGAND");
+    let nuevasNotas = await this.api.cargarPremios();
+    if (nuevasNotas.length < 10) {
+      $event.target.disabled = true;
+    }
+    this.premios = this.premios.concat(nuevasNotas);
+    $event.target.complete();
+  }
+
   public async getAllPremio() {
     try {
       this.premios = await this.api.getAllPremios();
+      console.log(this.premios)
     } catch (error) {
       console.log(error);
       this.listado = null;
@@ -66,6 +107,7 @@ export class Tab2Page {
                 this.premios.splice(i,1);
               }
               await this.miLoading.hideLoading();
+              await this.toast.showToast("Premio borrado correctamente","success");
             } catch (error) {
               console.log(error);
               
@@ -76,7 +118,8 @@ export class Tab2Page {
     });
     await alert.present();
   }
-
+  
+  
   public async crear() {
 
     const modal = await this.modalController.create({
@@ -95,8 +138,9 @@ export class Tab2Page {
       cssClass: 'my-custom-class',
       componentProps: { premio }
     });
-    await modal.present();
-    await modal.onDidDismiss();
+    await modal.present(); 
+   //await this.miLoading.hideLoading();
+   // await modal.onDidDismiss();
     await this.getAllPremio();
   }
 
@@ -122,6 +166,21 @@ export class Tab2Page {
     }
   }
 
+  /**
+ * Pasar a la pag siguiente
+ * 
+ */
+
+   public async siguiente() {
+    const modal = await this.modalController.create({
+      component: CrearBoletoPage,
+      cssClass: 'my-custom-class',
+      componentProps: { }
+    });
+    await modal.present();
+    await modal.onDidDismiss();
+   // await this.getAllPremio();
+  }
 
 
 

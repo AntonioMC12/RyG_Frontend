@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CreatePremioPageRoutingModule } from './create-premio-routing.module';
+import { CrearBoletoPageRoutingModule } from './crear-boleto-routing.module';
 
-import { CreatePremioPage } from './create-premio.page';
+import { CrearBoletoPage } from './crear-boleto.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CreatePremioPageRoutingModule,
+    CrearBoletoPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [CreatePremioPage]
+  declarations: [CrearBoletoPage]
 })
-export class CreatePremioPageModule {}
+export class CrearBoletoPageModule {}
