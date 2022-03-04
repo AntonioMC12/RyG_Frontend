@@ -12,20 +12,39 @@ export const environment = {
   },
 
   apiEnviroment: {
-    endpoint: 'http://localhost:8080/',
-    apiTicket: 'tickets/',
-    telefono: 'telefono/',
-    fecha: 'fecha/',
-    apiPremio: 'premios/',
-    descripcion: 'description/',
-    entregado: 'entregado/',
-    noEntregado: 'no-entregado/',
-    apiUsuario: 'usuarios/',
-    apiCoordenadas: 'coordenadas/',
-    apiBoletos: 'boletos',
-    apiBoletosEntregados: 'entregados',
-    apiBoletoscanjeados: 'canjeados',
-    apiBoletosUsuarios: 'usuarios',
-    apiBoletosSorteo: 'sorteo'
+endpoint: 'http://localhost:8080/',
+apiTicket: 'tickets/',
+telefono: 'telefono/',
+fecha: 'fecha/',
+apiPremio: 'premios/',
+descripcion: 'description/',
+entregado: 'entregado/',
+noEntregado: 'no-entregado/',
+apiUsuario: 'usuarios/',
+apiCoordenadas: 'coordenadas/',
+apiBoletos: 'boletos',
+apiBoletosEntregados: 'entregados',
+apiBoletoscanjeados: 'canjeados',
+apiBoletosUsuarios: 'usuarios',
+apiBoletosSorteo: 'sorteo'
   }
 };
+
+// export const environment = {
+//   production: false,
+//   endpoint: 'http://localhost:8080/',
+//   apiTicket: 'tickets/',
+//   telefono: 'telefono/',
+//   fecha: 'fecha/',
+//   apiPremio: 'premios/',
+//   descripcion: 'description/',
+//   entregado: 'entregado/',
+//   noEntregado: 'no-entregado/',
+//   apiUsuario: 'usuarios/',
+//   apiCoordenadas: 'coordenadas/',
+//   apiBoletos: 'boletos',
+//   apiBoletosEntregados: 'entregados',
+//   apiBoletoscanjeados: 'canjeados',
+//   apiBoletosUsuarios: 'usuarios',
+//   apiBoletosSorteo: 'sorteo'
+// };
