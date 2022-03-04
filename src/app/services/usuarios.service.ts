@@ -8,6 +8,8 @@ import { Usuario } from '../model/Usuario';
 })
 export class UsuariosService {
 
+  public currentUser:Usuario;
+
   constructor(private http: HttpClient) { }
 
   public async getUsuarios(id_usuario?: Number): Promise<Usuario[]> {
@@ -59,10 +61,10 @@ export class UsuariosService {
   public async postUsuario(newUsuario: Usuario): Promise<Usuario> {
     return new Promise(async (resolve, reject) => {
       let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiUsuario;
-      let usuario: Usuario[];
+      let respuesta: Usuario[];
       try {
-        usuario = await this.http.post(endpoint, newUsuario).toPromise() as Usuario[];
-        resolve(newUsuario);
+        respuesta = await this.http.post(endpoint, usuario).toPromise() as Usuario[];
+        resolve(respuesta);
       } catch (error) {
         reject(error);
       }

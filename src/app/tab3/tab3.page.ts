@@ -34,11 +34,9 @@ export class Tab3Page {
   }
 
   public async getUsuarios(id?: any) {
-    if (id != undefined && id > -1) {
-      console.log(id);
-      this.usuarioService.getUsuarios(id);
+    if (id && id > -1) {
+      this.usuarios = await this.usuarioService.getUsuarios(id);
     } else {
-      console.log(id);
       this.usuarios = await this.usuarioService.getUsuarios();
     }
   }

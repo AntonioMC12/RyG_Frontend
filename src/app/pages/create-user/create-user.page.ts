@@ -1,6 +1,11 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IonInput, ModalController } from '@ionic/angular';
 import * as L from 'leaflet';
+import { Usuario } from 'src/app/model/Usuario';
+import { AuthService } from 'src/app/services/auth.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-create-user',
@@ -9,12 +14,25 @@ import * as L from 'leaflet';
 })
 export class CreateUserPage implements OnInit {
 
+  @ViewChild("password") password:IonInput;
   isOpen: boolean = false;
   map: any;
+  public formUsuario: FormGroup;
 
-  constructor(private modalController: ModalController, private renderer: Renderer2) { }
+  constructor(private modalController: ModalController, private renderer: Renderer2, private fb: FormBuilder,
+    private toast: ToastService, private usuarioService:UsuariosService, private authService:AuthService) { }
 
   ngOnInit() {
+    this.formUsuario = this.fb.group({
+      nombre_comercio: ['', [Validators.required, Validators.minLength(2)]],
+      password: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.minLength(2)]],
+      direccion: ['', [Validators.required, Validators.minLength(2)]],
+      latitud: ['', [Validators.required, Validators.minLength(2)]],
+      longitud: ['', [Validators.required, Validators.minLength(2)]],
+      telefono: ['', [Validators.required, Validators.minLength(2)]],
+      administrador: ['false', [Validators.required, Validators.minLength(2)]]
+    });
   }
 
   ionViewDidEnter() {
@@ -30,11 +48,34 @@ export class CreateUserPage implements OnInit {
     setTimeout(() => {
       this.map.invalidateSize()
     }, 200);
+    let marker = L.marker([37.66994, -4.72531], {
+      draggable: true
+    }).addTo(this.map);
+    marker.on('dragend', () => {
+      this.formUsuario.get('latitud').setValue(marker.getLatLng().lat);
+      this.formUsuario.get('longitud').setValue(marker.getLatLng().lng);
+    });
   }
 
-  /**
-   * cerrar el modal
-   */
+  public async saveUsuario() {
+    let uid = await this.authService.SignUp(this.formUsuario.get('email').value,this.formUsuario.get('password').value);
+    let usuario:Usuario = {
+      id: -1,
+      admin: false,
+      direccion: this.formUsuario.get('direccion').value,
+      email:  this.formUsuario.get('email').value,
+      latitud: this.formUsuario.get('latitud').value,
+      longitud:  this.formUsuario.get('longitud').value,
+      nombre_comercio:  this.formUsuario.get('nombre_comercio').value,
+      participaciones: 0,
+      telefono:  this.formUsuario.get('telefono').value,
+      uid: uid
+    }
+    //guardar en firebase para obtener el uid    
+    console.log(await this.usuarioService.postUsuario(usuario));
+  }
+
+  //cerrar modal
   public cerrar() {
     this.modalController.dismiss();
   }
@@ -64,4 +105,12 @@ export class CreateUserPage implements OnInit {
       this.map.invalidateSize(true)
     }, 200);
   }
+
+  public mostrarContrasena(){
+    if(this.password.type == "password"){
+      this.password.type = "text";
+    }else{
+      this.password.type = "password";
+    }
+}
 }
