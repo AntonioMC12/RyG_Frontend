@@ -11,31 +11,37 @@
 
   <div class="home">
     <form [formGroup]="formUsuario" (ngSubmit)="saveUsuario()" novalidate>
-      <ion-item lines="full">
+      <ion-item lines="full" class="input">
         <ion-label position="floating">Nombre del Comercio</ion-label>
         <ion-input formControlName="nombre_comercio" type="text" required></ion-input>
       </ion-item>
-      <ion-item lines="full">
+
+      <ion-item lines="full" class="input">
         <ion-label position="floating">Contraseña</ion-label>
-        <ion-input formControlName="password" type="text" required></ion-input>
+        <ion-input #password formControlName="password" type="password" required></ion-input>
       </ion-item>
-      <ion-item lines="full">
+      <ion-button side="end" color="tertiary" expand="block" type="button" (click)="mostrarContrasena()">Mostrar/Ocultar Contraseña</ion-button>
+
+      <ion-item lines="full" class="input">
         <ion-label position="floating">Correo Electrónico</ion-label>
         <ion-input formControlName="email" type="text" required></ion-input>
       </ion-item>
-      <ion-item lines="full">
+
+      <ion-item lines="full" class="input">
         <ion-label position="floating">Telefono</ion-label>
         <ion-input formControlName="telefono" type="number" required></ion-input>
       </ion-item>
-      <ion-item lines="full">
+
+      <ion-item lines="full" class="input">
         <ion-label position="floating">Dirección</ion-label>
         <ion-input formControlName="direccion" type="text" required></ion-input>
       </ion-item>
-      <ion-item lines="full">
+      <ion-item lines="full" class="no-click">
         <ion-label position="floating">Latitud y Longitud</ion-label>
         <ion-input formControlName="latitud" type="number" required></ion-input>
         <ion-input formControlName="longitud" type="number" required></ion-input>
       </ion-item>
+      <br>
       <ion-button type="button" (click)="clickMapButton()" color="tertiary" expand="block">ABRIR MAPA</ion-button>
       <div class="map" id="map"></div>
       <ion-row>

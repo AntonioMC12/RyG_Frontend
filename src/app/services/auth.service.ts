@@ -3,18 +3,22 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { User } from '../model/authUser';
+import { Usuario } from '../model/Usuario';
+import { UsuariosService } from './usuarios.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  public currentUser: Usuario;
   userData: any; // Save logged in user data
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private usuarioService:UsuariosService
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -30,14 +34,33 @@ export class AuthService {
     })
   }
 
+  public async setCurrentUser(usuario:firebase.default.auth.UserCredential):Promise<boolean>{
+    let setCurrentUser:boolean = false;
+    let usuarios:Usuario[] = await this.usuarioService.getUsuarios();
+    usuarios.forEach(element => {
+      if (usuario.user.uid == element.uid) {
+        setCurrentUser = true;
+        this.currentUser = element;
+      }
+    });
+    return setCurrentUser;
+  }
+
   // Sign in with email/password
   async SignIn(email, password) {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(email, password);
-      this.ngZone.run(() => {
-        this.router.navigate(['']);
-      });
-      this.SetUserData(result.user);
+      //comprobar en base de datos y guardar el current user;
+      //this.SetUserData(result.user);
+      
+      //console.log(this.currentUser);
+      if(await this.setCurrentUser(result)){
+        this.ngZone.run(() => {
+          this.router.navigate(['']);
+        });
+      }else{
+        window.alert("El Usuario no se encuentra en la base de datos.");
+      }
     } catch (error) {
       window.alert(error.message);
     }
@@ -48,8 +71,10 @@ export class AuthService {
       const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
       /* Call the SendVerificaitonMail() function when new user sign
       up and returns promise */
-      this.SendVerificationMail();
-      this.SetUserData(result.user);
+      //this.SendVerificationMail();
+      //this.SetUserData(result.user)      
+      return result.user.uid;
+
     } catch (error) {
       window.alert(error.message);
     }
@@ -92,5 +117,10 @@ export class AuthService {
     await this.afAuth.signOut();
     localStorage.removeItem('user');
     //this.router.navigate(['sign-in']);
+  }
+
+  public getCurrentUser() {
+    //devolver el usuario actual.
+    if (this.currentUser != null) return this.currentUser;
   }
 }

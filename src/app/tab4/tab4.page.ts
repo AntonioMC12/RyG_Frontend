@@ -8,6 +8,7 @@ import { Usuario } from '../model/Usuario';
 import { BoletoService } from '../services/boleto.service';
 import { PremioService } from '../services/premio.service';
 import { TicketService } from '../services/ticket.service';
+import { UsuariosService } from '../services/usuarios.service';
 
 @Component({
   selector: 'app-tab4',
@@ -19,7 +20,7 @@ export class Tab4Page implements OnInit {
   form: FormGroup;
 
   constructor(private boletosService: BoletoService, private ticketService: TicketService, public fb: FormBuilder,
-    private premioService: PremioService) {
+    private premioService: PremioService, private usuarioService:UsuariosService) {
     this.form = this.fb.group({
       multipartFile: [null]
     })
@@ -81,6 +82,24 @@ export class Tab4Page implements OnInit {
     this.ticketService.createTicket(formData).then(response => {
       console.log(response);
     })
+  }
+
+  public postUsuario(){
+    let usuario:Usuario = {
+      id: -1,
+      admin: false,
+      direccion: 'calle de prueba',
+      email: 'testingmail@gmail.com',
+      latitud: 0.0,
+      longitud: 0.0,
+      nombre_comercio: 'Comercio_Test',
+      participaciones: 0,
+      telefono: '123456789',
+      uid: '987654321'
+    }
+    this.usuarioService.postUsuario(usuario).then(usuarios =>{
+      console.log(usuarios);
+    });
   }
 
   public getBoletos(id?: any) {

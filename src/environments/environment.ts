@@ -12,7 +12,7 @@ export const environment = {
   },
 
   apiEnviroment: {
-    endpoint: 'http://localhost:8080/',
+    endpoint: 'https://evening-mountain-67364.herokuapp.com/',
     apiTicket: 'tickets/',
     telefono: 'telefono/',
     fecha: 'fecha/',

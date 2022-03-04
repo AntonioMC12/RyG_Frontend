@@ -28,3 +28,6 @@
     height: 180px;
     display: none;
 }
+.no-click {
+    pointer-events: none; //This makes it not clickable
+}
