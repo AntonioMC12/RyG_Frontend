@@ -27,7 +27,9 @@ export class Tab3Page {
     public miLoading:LoadingService) { }
 
   async ionViewDidEnter() {
+    await this.miLoading.showLoading();
     await this.getUsuarios();
+    await this.miLoading.hideLoading();
   }
 
   public async getUsuarios(id?: any) {
