@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CreatePremioPageRoutingModule } from './create-premio-routing.module';
+import { CrearParticipacionesPageRoutingModule } from './crear-participaciones-routing.module';
 
-import { CreatePremioPage } from './create-premio.page';
+import { CrearParticipacionesPage } from './crear-participaciones.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CreatePremioPageRoutingModule,
+    CrearParticipacionesPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [CreatePremioPage]
+  declarations: [CrearParticipacionesPage]
 })
-export class CreatePremioPageModule {}
+export class CrearParticipacionesPageModule {}

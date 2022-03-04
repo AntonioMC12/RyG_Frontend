@@ -1,0 +1,60 @@
+<ion-header class="header">
+  <ion-toolbar color="warning">
+    <ion-title>Crear Boletos</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="close-circle" style="zoom:2.0" (click)="cerrar()"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="home">
+    <form [formGroup]="formBoleto" (ngSubmit)="validador()">
+      <ion-label>Descripción:</ion-label>
+      <ion-item class="input">
+        <ion-input type="text" formControlName="description" placeholder="Enter descripción..."></ion-input>
+      </ion-item>
+      <ion-label>Comercio:</ion-label>
+      
+      <ion-item class="input">
+        <ion-label>Comercios</ion-label>
+        <select formControlName="comercio" (click)="getAllUsuarios()" class="select">
+
+          <option [ngValue]="usuario.id" *ngFor="let usuario of usuarios">{{usuario.nombre_comercio}}</option>
+          
+        </select>
+      </ion-item>
+      
+       <!--
+      <ion-item class="input" >
+        <ion-label (click)="getAllUsuarios()" >Comercios</ion-label>
+        <ion-select interface="popover" formControlName="comercio"  *ngFor="let usuario of usuarios" >
+          <ion-select-option value="ahora si">{{usuario.id}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  -->
+     
+
+      <ion-label>Nº Boletos:</ion-label>
+      <ion-item class="input">
+        <ion-input type="number" formControlName="nBoletos" placeholder="Enter nº de boletos..."></ion-input>
+      </ion-item>
+
+      <ion-label>Nº Boletos PREMIADOS:</ion-label>
+      <ion-item class="input">
+        <ion-input type="number" formControlName="nPremiados" placeholder="Enter nº boletos premiados..."></ion-input>
+      </ion-item>
+      <ion-button expand="full" color="tertiary" type="submit" (ngSubmit)="validador()"
+        [disabled]="this.formBoleto.invalid">Siguiente</ion-button>
+
+
+    </form>
+
+  </div>
+
+
+</ion-content>

@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { Premio } from 'src/app/model/Premio';
+import { LoadingService } from 'src/app/services/loading.service';
 import { PremioService } from 'src/app/services/premio.service';
 import { ToastService } from 'src/app/services/toast.service';
+
 
 @Component({
   selector: 'app-edit-premio',
@@ -19,7 +21,8 @@ export class EditPremioPage implements OnInit {
   constructor(private modalController:ModalController,
     private api:PremioService,
     private fb:FormBuilder,
-    private toast:ToastService) { }
+    private toast:ToastService,
+    public miLoading:LoadingService) { }
 
   ngOnInit() {
     this.formPremio = this.fb.group({
@@ -31,6 +34,7 @@ export class EditPremioPage implements OnInit {
    * Cierra el modal
    */
    public cerrar() {
+    
     this.modalController.dismiss();
   }
 
@@ -46,6 +50,7 @@ export class EditPremioPage implements OnInit {
     }
 
     try {
+     
       await this.api.updatePremio(newPremio);
       await this.formPremio.reset();
       await this.toast.showToast("Premio editado correctamente","success");
@@ -55,5 +60,10 @@ export class EditPremioPage implements OnInit {
     }
 
   }
+
+
+
+
+
 
 }
