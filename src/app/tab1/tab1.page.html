@@ -1,13 +1,18 @@
 <ion-header [translucent]="true" class="header">
   <ion-toolbar color="warning">
     <ion-title>
-     RASCA Y GANA
+      RASCA Y GANA
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-  
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed" >
+    <ion-fab-button class="buttonHelp" (click)="dirigirAAyuda()">
+      <ion-icon name="help-circle" class="iconHelp"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <div class="home">
     <div class="ini">
       <img src="../../assets/icono.png">
@@ -22,17 +27,11 @@
     </ion-button>
   </div>
 
-  
-  
- 
-      
-    
-
   <!-- <ion-button (click)="getAllTicket()">tickets</ion-button>
   <ion-button (click)="createTicket()">crear</ion-button>
   <ion-button (click)="deleteTicket()">borrar</ion-button>
   <ion-button (click)="getByTelephone()">por telefono</ion-button>
   <ion-button (click)="getByDate()">por fecha</ion-button>-->
- 
-  
+
+
 </ion-content>

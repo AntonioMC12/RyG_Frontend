@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Ticket } from '../model/Ticket';
 import { TicketService } from '../services/ticket.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -11,9 +12,11 @@ export class Tab1Page {
 
   public listado: Array<Ticket>;
   public ticket: Ticket;
-  constructor(private api: TicketService) { }
+  constructor(private api: TicketService, public navCtrl: NavController) { }
 
-
+  public dirigirAAyuda() {
+    this.navCtrl.navigateRoot("help");
+  }
 
   
 /*
