@@ -154,11 +154,16 @@ export class Tab3Page {
     }
   }
 
-  doRefresh($event) {
-    setTimeout(() => {
-      $event.target.complete();
+  public async doRefresh($event) {
+    setTimeout(async () => {
+      let usuarios: Usuario[] = []
+      for (let usuario of this.usuarios) {
+        usuarios.push(usuario);
+      }
+      this.usuarios = usuarios;
+      await this.getUsuarios();
       this.inputSearchName = "";
-      // window.location.reload();
+      $event.target.complete();
     }, 1000);
   }
 }
