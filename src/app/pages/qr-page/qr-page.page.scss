@@ -1,0 +1,30 @@
+.body {
+	align-content: center;
+	background-color: #FFC107;
+	display: flex;
+	font-family: 'Poppins', sans-serif;
+	height: 100%;
+	justify-content: center;
+}
+
+.qr-card {
+	background-color: #fcfcfc;
+	border-radius: 16px;
+	max-width: 500px;
+	padding: 16px;
+	text-align: center;
+}
+
+.card-title {
+	color: #222;
+	margin-top: 10%;
+}
+
+
+@keyframes colorChange {
+	0% { color: #1A1A40; }
+ 	25% { color: #270082; }
+ 	50% { color: #7A0BC0; }
+ 	75% { color: #FA58B6; }
+	100% { color: #1A1A40; }
+}

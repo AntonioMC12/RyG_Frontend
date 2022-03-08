@@ -38,7 +38,11 @@ const routes: Routes = [
   {
     path: 'crear-participaciones',
     loadChildren: () => import('./pages/crear-participaciones/crear-participaciones.module').then( m => m.CrearParticipacionesPageModule)
+  },  {
+    path: 'qr-page',
+    loadChildren: () => import('./pages/qr-page/qr-page.module').then( m => m.QrPagePageModule)
   }
+
 
 
 ];

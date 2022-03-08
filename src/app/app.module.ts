@@ -18,13 +18,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { QRCodeModule } from 'angular2-qrcode';
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
+    AngularFireAuthModule,QRCodeModule,
     AngularFirestoreModule, BrowserModule, ReactiveFormsModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
