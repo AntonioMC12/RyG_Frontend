@@ -33,8 +33,7 @@ const routes: Routes = [
     {
     path: 'crear-boleto',
     loadChildren: () => import('./pages/crear-boleto/crear-boleto.module').then( m => m.CrearBoletoPageModule)
-  },
- 
+  }, 
   {
     path: 'crear-participaciones',
     loadChildren: () => import('./pages/crear-participaciones/crear-participaciones.module').then( m => m.CrearParticipacionesPageModule)
@@ -47,6 +46,10 @@ const routes: Routes = [
   {
     path: 'rascaygana',
     loadChildren: () => import('./pages/rascaygana/rascaygana.module').then( m => m.RascayganaPageModule)
+  },
+  {
+    path: 'qr-page',
+    loadChildren: () => import('./pages/qr-page/qr-page.module').then( m => m.QrPagePageModule)
   }
 
 

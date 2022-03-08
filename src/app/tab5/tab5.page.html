@@ -10,8 +10,8 @@
       <ion-label>Nombre</ion-label>
       <ion-input placeholder="Introduce el nombre..." class="input" [(ngModel)]="inputName"></ion-input>
 
-      <ion-label>Correo electrónico</ion-label>
-      <ion-input placeholder="Introduce el correo electrónico..." class="input" [(ngModel)]="inputEmail" type="email"></ion-input>
+      <ion-label>Dirección</ion-label>
+      <ion-input placeholder="Introduce el correo electrónico..." class="input" [(ngModel)]="inputDireccion"></ion-input>
 
       <ion-label>Teléfono</ion-label>
       <ion-input placeholder="Introduce el teléfono..." class="input" [(ngModel)]="inputPhone"></ion-input>
@@ -21,16 +21,16 @@
     </div>
 
     <div class="home">
-      <ion-label>Contraseña</ion-label>
-      <ion-input placeholder="Introduce la contraseña..." class="input" [(ngModel)]="inputPass" type="password"></ion-input>
+      <!-- <ion-label>Contraseña</ion-label> -->
+      <!-- <ion-input placeholder="Introduce la contraseña..." class="input" [(ngModel)]="inputPass" type="password"></ion-input> -->
 
       <ion-label>Nueva Contraseña</ion-label>
-      <ion-input placeholder="Introduce una nueva contraseña..." class="input" [(ngModel)]="inputNewPass" type="password"></ion-input>
+      <ion-input placeholder="Introduce una nueva contraseña..." class="group" id="pass"  data-type="password" class="input" [(ngModel)]="inputNewPass" type="password"></ion-input>
 
       <ion-label>Confirmar Contraseña</ion-label>
-      <ion-input placeholder="Confirmación de contraseña..." class="input" [(ngModel)]="inputConfirmPass" type="password"></ion-input>
+      <ion-input placeholder="Confirmación de contraseña..." class="group" id="pass"  data-type="password" class="input" [(ngModel)]="inputConfirmPass" type="password"></ion-input>
 
-      <ion-button type="submit" color="tertiary" expand="block">ACTUALIZAR</ion-button>
+      <ion-button type="submit" (click)="updatePassword()" color="tertiary" expand="block">ACTUALIZAR</ion-button>
 
     </div>
   </div>

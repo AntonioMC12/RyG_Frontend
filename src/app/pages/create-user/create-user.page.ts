@@ -4,6 +4,7 @@ import { IonInput, ModalController } from '@ionic/angular';
 import * as L from 'leaflet';
 import { Usuario } from 'src/app/model/Usuario';
 import { AuthService } from 'src/app/services/auth.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -14,13 +15,13 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class CreateUserPage implements OnInit {
 
-  @ViewChild("password") password:IonInput;
+  @ViewChild("password") password: IonInput;
   isOpen: boolean = false;
   map: any;
   public formUsuario: FormGroup;
 
   constructor(private modalController: ModalController, private renderer: Renderer2, private fb: FormBuilder,
-    private toast: ToastService, private usuarioService:UsuariosService, private authService:AuthService) { }
+    private toast: ToastService, private usuarioService: UsuariosService, private authService: AuthService, private miLoading:LoadingService) { }
 
   ngOnInit() {
     this.formUsuario = this.fb.group({
@@ -58,21 +59,34 @@ export class CreateUserPage implements OnInit {
   }
 
   public async saveUsuario() {
-    let uid = await this.authService.SignUp(this.formUsuario.get('email').value,this.formUsuario.get('password').value);
-    let usuario:Usuario = {
-      id: -1,
-      admin: false,
-      direccion: this.formUsuario.get('direccion').value,
-      email:  this.formUsuario.get('email').value,
-      latitud: this.formUsuario.get('latitud').value,
-      longitud:  this.formUsuario.get('longitud').value,
-      nombre_comercio:  this.formUsuario.get('nombre_comercio').value,
-      participaciones: 0,
-      telefono:  this.formUsuario.get('telefono').value,
-      uid: uid
+    if(this.validateEmail(this.formUsuario.get('email').value)){
+      if(this.validatePassword(this.formUsuario.get('password').value)){
+        this.miLoading.showLoading();
+        let uid = await this.authService.SignUp(this.formUsuario.get('email').value, this.formUsuario.get('password').value);
+        let usuario: Usuario = {
+          id: -1,
+          admin: false,
+          direccion: this.formUsuario.get('direccion').value,
+          email: this.formUsuario.get('email').value,
+          latitud: this.formUsuario.get('latitud').value,
+          longitud: this.formUsuario.get('longitud').value,
+          nombre_comercio: this.formUsuario.get('nombre_comercio').value,
+          participaciones: 0,
+          telefono: this.formUsuario.get('telefono').value,
+          uid: uid
+        }
+        //guardar en firebase para obtener el uid    
+        await this.usuarioService.postUsuario(usuario);
+        this.miLoading.hideLoading();
+        this.toast.showToast("Usuario creado con éxito","success");
+      }else{
+        //mal contraseña
+        this.toast.showToast("Has introducido una contraseña demasiado corta","warning");
+      }
+    }else{
+      //mal email
+      this.toast.showToast("Has introducido un email inválido","warning");
     }
-    //guardar en firebase para obtener el uid    
-    console.log(await this.usuarioService.postUsuario(usuario));
   }
 
   //cerrar modal
@@ -106,11 +120,21 @@ export class CreateUserPage implements OnInit {
     }, 200);
   }
 
-  public mostrarContrasena(){
-    if(this.password.type == "password"){
+  public mostrarContrasena() {
+    if (this.password.type == "password") {
       this.password.type = "text";
-    }else{
+    } else {
       this.password.type = "password";
     }
-}
+  }
+
+  public validateEmail(email:string):boolean{
+    let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    return regexp.test(email);
+  }
+
+  public validatePassword(pass:string):boolean{
+    let validate:boolean = pass.length>5? true:false;
+    return validate;
+  }
 }

@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { TicketService } from '../services/ticket.service';
+import { QRCodeModule } from 'angular2-qrcode';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { TicketService } from '../services/ticket.service';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    Tab1PageRoutingModule,
+    QRCodeModule
   ],
   declarations: [Tab1Page]
 })
