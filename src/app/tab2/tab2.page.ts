@@ -17,7 +17,7 @@ import { CrearBoletoPage } from '../pages/crear-boleto/crear-boleto.page';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
+ 
   public listado: Array<Premio>;
   public premios: Premio[] = [];
   public premio:Premio;
@@ -32,19 +32,19 @@ export class Tab2Page {
   }
 
   async ionViewDidEnter() {
+    await this.miLoading.showLoading();
     await this.getAllPremio();
+    await this.miLoading.hideLoading();
   }
 
   public async cargaPremios(event?){
-    if (this.infinite) {
-      this.infinite.disabled = false;
-    }
+  
     if (!event) {
       await this.miLoading.showLoading();
     }
     this.premios = [];
     try {
-      this.premios = await this.api.cargarPremios('algo');
+      this.premios = await this.api.getAllPremios();
     } catch (err) {
       console.error(err);
       await this.toast.showToast("Error cargando datos", "danger");
@@ -58,19 +58,7 @@ export class Tab2Page {
   }
 
 
-  /**
-   * Carga notas de manera paginada
-   * @param $event 
-   */
-   public async cargaInfinita($event) {
-    console.log("CARGAND");
-    let nuevasNotas = await this.api.cargarPremios();
-    if (nuevasNotas.length < 10) {
-      $event.target.disabled = true;
-    }
-    this.premios = this.premios.concat(nuevasNotas);
-    $event.target.complete();
-  }
+
 
   public async getAllPremio() {
     try {

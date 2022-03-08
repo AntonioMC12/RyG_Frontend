@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Boleto } from 'src/app/model/Boleto';
-import { Premio } from 'src/app/model/Premio';
 import { Usuario } from 'src/app/model/Usuario';
+import { ToastService } from 'src/app/services/toast.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -18,13 +18,15 @@ export class CrearParticipacionesPage implements OnInit {
 
   public usuarios: Usuario[] = [];
   public usuario:Usuario;
+  private isDisabled: boolean=false;
 
   public boletos:Boleto[]=[]
   public formParticipaciones: FormGroup;
 
   constructor(private modalController:ModalController,
     public api:UsuariosService,
-    private fb:FormBuilder) { }
+    private fb:FormBuilder,
+    public toast:ToastService) { }
  
   ngOnInit() {
     
@@ -38,7 +40,21 @@ export class CrearParticipacionesPage implements OnInit {
     await this.getAllUsuarios();
     
   }
+  async validador(){
+    let result: boolean = false;
+    if(this.nBoletos>0){
+      result=true;
+      this.setParticipaciones();
+    }else{
+      result = false;
+      await this.toast.showToast("El nº participaciones tiene que ser MENOR que el nº de boletos", "danger");
+    }
+    return result;
+  }
 
+  /**
+   * Método para setear el número de participaciones que le corresponde a cada comercio
+   */
   public async setParticipaciones(){
 
     this.usuarios = await this.api.getUsuarios();
@@ -57,7 +73,10 @@ export class CrearParticipacionesPage implements OnInit {
   }
 
   public sumar() {
-    this.nBoletos--;
+    if(this.nBoletos>0){
+      this.nBoletos--;
+    }
+     
     
     
   }

@@ -20,7 +20,6 @@ import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { QRCodeModule } from 'angular2-qrcode';
 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
