@@ -38,7 +38,12 @@ const routes: Routes = [
   {
     path: 'crear-participaciones',
     loadChildren: () => import('./pages/crear-participaciones/crear-participaciones.module').then( m => m.CrearParticipacionesPageModule)
+  },
+    {
+    path: 'check-ticket/:boleto',
+    loadChildren: () => import('./pages/check-ticket/check-ticket.module').then( m => m.CheckTicketPageModule)
   }
+
 
 
 ];
