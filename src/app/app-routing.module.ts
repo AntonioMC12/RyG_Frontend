@@ -4,7 +4,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    //loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./pages/rascaygana/rascaygana.module').then( m => m.RascayganaPageModule)
   },
   {
     path: 'login',
@@ -38,7 +39,12 @@ const routes: Routes = [
   {
     path: 'crear-participaciones',
     loadChildren: () => import('./pages/crear-participaciones/crear-participaciones.module').then( m => m.CrearParticipacionesPageModule)
+  },
+  {
+    path: 'rascaygana',
+    loadChildren: () => import('./pages/rascaygana/rascaygana.module').then( m => m.RascayganaPageModule)
   }
+
 
 
 ];
