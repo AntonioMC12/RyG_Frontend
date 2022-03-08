@@ -27,7 +27,7 @@ export class CrearBoletoPage implements OnInit {
   public premios: Premio[] = [];
   public boletos: Boleto[] = [];
   public formBoleto: FormGroup;
-
+  public number:number;
 
 
 
@@ -91,10 +91,18 @@ export class CrearBoletoPage implements OnInit {
 
 
       for (let i = 0; i < this.premios.length; i++) {
+        
+        let numberRandom:number= Math.floor(Math.random() * (this.boletos.length - 0) + 0);
+        while(numberRandom==this.number)
+        {
+          numberRandom= Math.floor(Math.random() * (this.boletos.length - 0) + 0);
+        }
+          
+        this.number = numberRandom;
 
-        let number: number = Math.floor(Math.random() * (this.boletos.length - 0) + 0);
-        let boletoPremiado: Boleto = this.boletos[number];
-        console.log(number);
+       
+        let boletoPremiado: Boleto = this.boletos[this.number];
+        console.log(this.number);
 
         boletoPremiado = {
           id: boletoPremiado.id,

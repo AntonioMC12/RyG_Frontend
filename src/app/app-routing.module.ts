@@ -42,6 +42,11 @@ const routes: Routes = [
     {
     path: 'check-ticket/:boleto',
     loadChildren: () => import('./pages/check-ticket/check-ticket.module').then( m => m.CheckTicketPageModule)
+  },
+  ,
+  {
+    path: 'rascaygana',
+    loadChildren: () => import('./pages/rascaygana/rascaygana.module').then( m => m.RascayganaPageModule)
   }
 
 

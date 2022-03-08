@@ -29,6 +29,20 @@ export class BoletoService {
     });
   }
 
+  public async getBoleto(id_boleto: Number): Promise<Boleto> {
+    return new Promise(async (resolve, reject) => {
+      let endpoint = this.apiEndpoint + id_boleto;
+      let boleto: Boleto;
+      
+      try {
+        boleto = await this.http.get(endpoint).toPromise() as Boleto;
+        resolve(boleto);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
   public async getBoletosEntregados(): Promise<Boleto[]> {
     return new Promise(async (resolve, reject) => {
       let endpoint = this.apiEndpoint + environment.apiEnviroment.apiBoletosEntregados;
