@@ -9,9 +9,13 @@
 <ion-content [fullscreen]="true" class="content">
 
   <ion-searchbar class="searchbar" color="dark" (ionChange)="buscar($event)" placeholder="Buscar..." ></ion-searchbar>
-  <ion-list  >
+
+  <ion-refresher slot="fixed" (ionRefresh)="cargaPremios($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list >
     <h6>LISTA DE PREMIOS</h6>
-  
     <ion-card *ngFor="let premio of premios; let i=index">
       <div class="display">
         <ion-card-header >
@@ -32,6 +36,11 @@
       
     </ion-card>
   </ion-list>
+  
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="cargaInfinita($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
   
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="tertiary" (click)="crear()">

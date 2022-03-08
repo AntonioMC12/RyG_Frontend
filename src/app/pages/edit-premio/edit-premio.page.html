@@ -9,10 +9,10 @@
 
 <ion-content>
   <div class="home">
-  <form [formGroup]="formPremio" (ngSubmit)="editPremio()">
+  <form [formGroup]="formPremio">
     <ion-label>Introduce la nueva descripción del premio:</ion-label>
     <ion-item class="input">  
-      <ion-input  type="text" formControlName="description" [(ngModel)]="this.premio.description"></ion-input>
+      <ion-input  type="text" formControlName="description"></ion-input>
     </ion-item>
    
     <ion-button expand="full" color="tertiary" type="submit" [disabled]="this.formPremio.invalid" (click)="editPremio()">Actualizar premio</ion-button>

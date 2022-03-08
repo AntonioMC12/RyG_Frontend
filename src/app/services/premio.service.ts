@@ -7,9 +7,28 @@ import { Premio } from '../model/Premio';
   providedIn: 'root'
 })
 export class PremioService {
-
+  private last:any=null;
   constructor(private http: HttpClient) { }
 
+  public cargarPremios(all?):Promise<Premio[]|null>{
+
+    return new Promise(async (resolve, reject) => {
+      let endpoint = null;
+      if(this.last){
+        endpoint =(environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio,
+          ref => ref.limit(2).starAfter(this.last));
+      }else{
+        endpoint =(environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio,
+          ref => ref.limit(2));
+      }
+      try {
+        let result: any = await this.http.get(endpoint).toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
   /**
    * Método que obtiene todos los premios almacenados en la BD o
    * si le pasas un id como argumento te hace la búsqueda de ese premio
@@ -32,6 +51,19 @@ export class PremioService {
     });
   }
 
+  public getPremio(id: Number): Promise<Premio | null> {
+
+    return new Promise(async (resolve, reject) => {
+      let endpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiPremio + id;
+      
+      try {
+        let result: any = await this.http.get(endpoint).toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
   /**
    * Método que crea premios en la BD
    * @param premio 
