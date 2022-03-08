@@ -11,17 +11,24 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
- 
+
   <ion-label>Tiene {{nBoletos}} a repartir: </ion-label>
+  <form [formGroup]="formParticipaciones">
   <div class="home" *ngFor="let usuario of usuarios; let i=index">
-   
-    <form [formGroup]="formParticipaciones">
-    <ion-label *ngIf="this.allboletos[0].usuario.nombre_comercio!=usuario.nombre_comercio">{{usuario.nombre_comercio}}</ion-label>
-      <ion-item class="input" *ngIf="this.allboletos[0].usuario.nombre_comercio!=usuario.nombre_comercio">
-        <ion-input *ngIf="this.nBoletos>0" type="number" min="0" formControlName="participacion" placeholder="Enter nº de parcipaciones..." (ionChange) = sumar()></ion-input>
-      </ion-item>
-      
-    </form>
+
+
+    <ion-label *ngIf="this.allboletos[0].usuario.nombre_comercio!=usuario.nombre_comercio">{{usuario.nombre_comercio}}
+    </ion-label>
+    <ion-item class="input" *ngIf="this.allboletos[0].usuario.nombre_comercio!=usuario.nombre_comercio">
+      <ion-input type="number" min="0" formControlName="participacion" placeholder="Enter nº de parcipaciones..."
+        (ionChange)=sumar()></ion-input>
+    </ion-item>
   </div>
-  <ion-button expand="full" color="tertiary" type="submit" (click)="setParticipaciones()">Confirmar</ion-button>
+    
+    <ion-button expand="full" [disabled]="this.formParticipaciones.invalid" color="tertiary" type="submit"
+     (ngSubmit)="validador()">Confirmar</ion-button>
+
+  
+  </form>
+
 </ion-content>

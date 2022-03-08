@@ -41,19 +41,16 @@
 
       <ion-label>Nº Boletos:</ion-label>
       <ion-item class="input">
-        <ion-input type="number" formControlName="nBoletos" placeholder="Enter nº de boletos..."></ion-input>
+        <ion-input type="number" min="0" formControlName="nBoletos" placeholder="Enter nº de boletos..."></ion-input>
       </ion-item>
 
       <ion-label>Nº Boletos PREMIADOS:</ion-label>
       <ion-item class="input">
-        <ion-input type="number" formControlName="nPremiados" placeholder="Enter nº boletos premiados..."></ion-input>
+        <ion-input type="number" min="0" formControlName="nPremiados" placeholder="Enter nº boletos premiados..."></ion-input>
       </ion-item>
       <ion-button expand="full" color="tertiary" type="submit" (ngSubmit)="validador()"
         [disabled]="this.formBoleto.invalid">Siguiente</ion-button>
-
-
     </form>
-
   </div>
 
 
