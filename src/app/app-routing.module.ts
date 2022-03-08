@@ -27,9 +27,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule)
   },
   {
-    path: 'tab5',
-    loadChildren: () => import('./tab5/tab5.module').then( m => m.Tab5PageModule)
+    path: 'check-ticket/:boleto',
+    loadChildren: () => import('./pages/check-ticket/check-ticket.module').then( m => m.CheckTicketPageModule)
   }
+
+
 
 
 ];

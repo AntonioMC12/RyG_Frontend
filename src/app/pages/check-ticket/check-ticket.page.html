@@ -1,0 +1,44 @@
+<ion-header class="header">
+</ion-header>
+
+<ion-content>
+  <div class="formsContainer">
+    <div class="home">
+      <ion-title class="title">RASCA Y GANA</ion-title>
+      <div class="ini">
+        <img src="../../assets/icono.png">
+      </div>
+      <ion-label>Nombre</ion-label>
+      <ion-input placeholder="Introduce el nombre..." class="input" [(ngModel)]="inputName"></ion-input>
+
+      <ion-label>Teléfono</ion-label>
+      <ion-input placeholder="Introduce el teléfono..." class="input" [(ngModel)]="inputPhone"></ion-input>
+
+      <ion-label>Nº Ticket</ion-label>
+      <ion-input placeholder="Introduce el nº ticket..." class="input" [(ngModel)]="inputNTicket"></ion-input>
+
+      <ion-label>Comercio</ion-label>
+      <ion-select placeholder="Selecciona un comercio..." class="select">
+        <ion-select-option *ngFor="let usuario of usuarios; let i=index">{{usuario.nombre_comercio}}</ion-select-option>
+      </ion-select>
+
+      <ion-label>Fecha y Hora</ion-label>
+      <ion-datetime presentation="date" value="2022-03-08" class="datetime" [(ngModel)]="inputDate"></ion-datetime>
+
+      <ion-label>*Sube tu ticket</ion-label>
+
+      <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <div class="form-group">
+          <ion-button expand="full" (click)="takePicture()">
+            Tomar una foto <ion-icon name="camera"></ion-icon>
+          </ion-button>
+        </div>
+      </form>
+
+      <ion-button type="submit" color="tertiary" expand="block">Guardar</ion-button>
+
+      <ion-label></ion-label>
+
+    </div>
+  </div>
+</ion-content>
