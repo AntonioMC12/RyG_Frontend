@@ -79,6 +79,8 @@ export class Tab4Page implements OnInit {
       type: "application/json"
     }));
     formData.append("multipartFile", this.form.get('multipartFile').value);
+    console.log(this.form.get('multipartFile').value);
+    
     this.ticketService.createTicket(formData).then(response => {
       console.log(response);
     })

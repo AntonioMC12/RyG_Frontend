@@ -47,39 +47,6 @@ export class Tab3Page {
       this.usuarioService.getUsuarioByCoordinates(latitud, longitud);
     }
   }
-
-  // public postUsuario() {
-  //   let usuario: Usuario = {
-  //     id: 3,
-  //     uid: "prueba contraseña",
-  //     direccion: "calle prueba nº3",
-  //     email: "prueba@hotmail.com",
-  //     latitud: 12,
-  //     longitud: 11,
-  //     nombre_comercio: "empresa prueba",
-  //     participaciones: 0,
-  //     telefono: "616123456",
-  //     admin: false
-  //   }
-  //   this.usuarioService.postUsuario(usuario);
-  // }
-
-  // public putUsuario() {
-  //   let usuario: Usuario = {
-  //     id: 3,
-  //     uid: "prueba contraseña",
-  //     direccion: "calle prueba nº3",
-  //     email: "prueba@hotmail.com",
-  //     latitud: 12,
-  //     longitud: 11,
-  //     nombre_comercio: "empresa prueba",
-  //     participaciones: 0,
-  //     telefono: "616123456",
-  //     admin: false
-  //   }
-  //   this.usuarioService.putUsuario(usuario);
-  // }
-
   public async deleteUsuario(usuario: Usuario) {
     const alert = await this.alertController.create({
       header: 'Confirmación',
@@ -114,10 +81,6 @@ export class Tab3Page {
     });
     await alert.present();
   }
-
-  // public testToast(msg: string, color: string) {
-  //   this.toast.showToast(msg, color);
-  // }
 
   public async crear(usuario: Usuario) {
       const modal = await this.modalController.create({
@@ -154,11 +117,16 @@ export class Tab3Page {
     }
   }
 
-  doRefresh($event) {
-    setTimeout(() => {
-      $event.target.complete();
+  public async doRefresh($event) {
+    setTimeout(async () => {
+      let usuarios: Usuario[] = []
+      for (let usuario of this.usuarios) {
+        usuarios.push(usuario);
+      }
+      this.usuarios = usuarios;
+      await this.getUsuarios();
       this.inputSearchName = "";
-      // window.location.reload();
+      $event.target.complete();
     }, 1000);
   }
 }

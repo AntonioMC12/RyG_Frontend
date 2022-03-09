@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
+import { User } from '../model/authUser';
 import { Usuario } from '../model/Usuario';
+import { AuthService } from '../services/auth.service';
 import { LoadingService } from '../services/loading.service';
 import { ToastService } from '../services/toast.service';
 import { UsuariosService } from '../services/usuarios.service';
@@ -13,21 +15,32 @@ import { UsuariosService } from '../services/usuarios.service';
 export class Tab5Page {
 
   public usuario: Usuario;
-  private inputName: String;
-  private inputEmail: String;
-  private inputPhone: String;
-  private inputPass: String;
-  private inputNewPass: String;
-  private inputConfirmPass: String;
-  private email: String;
-  private phone: String;
+  private inputName: string;
+  private inputDireccion: string;
+  private inputPhone: string;
+  private inputPass: string;
+  private inputNewPass: string;
+  private inputConfirmPass: string;
+  private email: string;
+  private phone: string;
 
   constructor(
     private usuarioService: UsuariosService,
     private toast: ToastService,
     public alertController: AlertController,
     public miLoading: LoadingService,
-    private modalController: ModalController) { }
+    private modalController: ModalController,
+    private authService: AuthService) { }
+
+  
+  async ionViewDidEnter() {
+    this.miLoading.showLoading();
+    this.usuario = await this.authService.getCurrentUser();
+    this.inputName = this.usuario.nombre_comercio;
+    this.inputDireccion = this.usuario.direccion;
+    this.inputPhone = this.usuario.telefono;
+    this.miLoading.hideLoading();
+  }
 
   public async editDataUsuario() {
 
@@ -46,9 +59,18 @@ export class Tab5Page {
           handler: async () => {
             try {
               await this.miLoading.showLoading();
+              let usuario: Usuario = await this.authService.getCurrentUser();
+              usuario.nombre_comercio = this.inputName;
+              usuario.direccion = this.inputDireccion;
+              usuario.telefono = this.inputPhone;
+              this.usuarioService.putUsuario(usuario).then(updateUsuario => {
+                this.toast.showToast("¡Usuario actualizado correctamente!", "success");
+                this.authService.currentUser = updateUsuario;
+                console.log(updateUsuario);
 
-              // let usuario:Usuario = this.loginService.getCurrentUser();
-
+              }).catch(error => {
+                this.toast.showToast("¡Fallo al actualizar!", "danger");
+              });
               await this.miLoading.hideLoading();
 
             } catch (error) {
@@ -62,5 +84,22 @@ export class Tab5Page {
     await alert.present();
   }
 
+  public async updatePassword() {
+    if (this.inputNewPass && this.inputConfirmPass) {
+      if (this.inputNewPass == this.inputConfirmPass) {
+        this.miLoading.showLoading();
+        if (await this.authService.updatePass(this.inputNewPass)) {
+          this.toast.showToast("Contraseña cambiada con éxito", "success");
+          this.miLoading.hideLoading();
+        }else{
+          this.miLoading.hideLoading();
+        }
+      } else {
+        this.toast.showToast("Las contraseñas no coinciden", "danger");
+      }
+    } else {
+      this.toast.showToast("Tiene que rellenar todos los campos", "warning");
+    }
+  }
 
 }
