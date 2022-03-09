@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Boleto } from 'src/app/model/Boleto';
 import { Premio } from 'src/app/model/Premio';
 import { BoletoService } from 'src/app/services/boleto.service';
+import { ScratchCard, SCRATCH_TYPE } from 'scratchcard-js'
 
 @Component({
   selector: 'app-rascaygana',
@@ -9,15 +10,41 @@ import { BoletoService } from 'src/app/services/boleto.service';
   styleUrls: ['./rascaygana.page.scss'],
 })
 
-export class RascayganaPage implements OnInit {
 
+export class RascayganaPage implements OnInit {
+  
+ 
+  public context: CanvasRenderingContext2D;
+  public ctx;
   public premio:Premio;
   public listaBoletos:Boleto[]=[];
+  public brushPos;
+  public brushRadius;
 
  constructor(public api:BoletoService) { }
 
   ngOnInit() {
-    
+    this.createNewScratchCard();
+  }
+ 
+  createNewScratchCard() {
+    const scContainer = document.getElementById('js--sc--container')
+    const sc = new ScratchCard('#js--sc--container', {
+      scratchType: SCRATCH_TYPE.CIRCLE,
+      containerWidth: 300,//scContainer.offsetWidth,
+      containerHeight: 300,
+      imageForwardSrc: '../../../assets/icono.png',
+      imageBackgroundSrc: '../../../assets/icono.png',
+      htmlBackground: '<div class="cardamountcss"><div class="won-amnt">30</div><div class="won-text">Points<br>Won!</div></div>',
+      clearZoneRadius: 40,
+      nPoints: 30,
+      pointSize: 4,
+      callback: () => {
+        console.log('Now the window will reload !')
+      }
+    })
+    // Init
+    sc.init();
   }
 
   public async sacarPremio(id:number){
@@ -50,9 +77,13 @@ export class RascayganaPage implements OnInit {
     
   }
 
-  
-}
 
+  
+
+
+  
+
+}
 
 
 
