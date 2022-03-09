@@ -261,4 +261,46 @@
       color: rgb(0, 0, 0);
     }
   }
+
+
+
+
+
+  #js--sc--container{
+    max-width: 300px;
+    width:100%;
+    height: 300px;
+    margin: auto;
+    position: relative;
+    canvas{
+        position: absolute;
+        top:0px;
+        left:0px;
+        z-index: 99;
+        border-radius: 5px;
+    }
+    .cardamountcss{
+        z-index: 9;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50% , -50%);
+        position: absolute;
+
+        .won-amnt{
+            font-size:5em;
+            color: #424242;
+        }
+        .won-text{
+            font-size: 4em;
+            color: #424242;
+        }
+    }
+    .sc__inner{
+        background-color: #ffffff;
+        height: 100%;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #26005f;
+    }
+}
 }
