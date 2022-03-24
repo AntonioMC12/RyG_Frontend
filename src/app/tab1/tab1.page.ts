@@ -21,6 +21,9 @@ export class Tab1Page {
     this.navCtrl.navigateRoot("help");
   }
 
+  /**
+   * Generar qr para acceder a la pagina de los tickets
+   */
   public async generateBoletoQR(){
     const modal = await this.modalController.create({
       component: QrPagePage,
