@@ -1,5 +1,5 @@
-<ion-header class="header">
-  <ion-toolbar color="warning">
+<ion-header>
+  <ion-toolbar color="warning" class="header">
     <ion-title>CREAR USUARIO</ion-title>
     <ion-buttons slot="end">
       <ion-icon name="close-circle" style="zoom:2.0" (click)="cerrar()"></ion-icon>
@@ -12,32 +12,32 @@
   <div class="home">
     <form [formGroup]="formUsuario" (ngSubmit)="saveUsuario()" novalidate>
       <ion-item lines="full" class="input">
-        <ion-label position="floating">Nombre del Comercio</ion-label>
+        <ion-label position="floating" class="label">Nombre del Comercio</ion-label>
         <ion-input formControlName="nombre_comercio" type="text" required></ion-input>
       </ion-item>
 
       <ion-item lines="full" class="input">
-        <ion-label position="floating">Contraseña</ion-label>
+        <ion-label position="floating" class="label">Contraseña</ion-label>
         <ion-input #password formControlName="password" type="password" required></ion-input>
       </ion-item>
       <ion-button side="end" color="tertiary" expand="block" type="button" (click)="mostrarContrasena()">Mostrar/Ocultar Contraseña</ion-button>
 
       <ion-item lines="full" class="input">
-        <ion-label position="floating">Correo Electrónico</ion-label>
+        <ion-label position="floating" class="label">Correo Electrónico</ion-label>
         <ion-input formControlName="email" type="text" required></ion-input>
       </ion-item>
 
       <ion-item lines="full" class="input">
-        <ion-label position="floating">Telefono</ion-label>
+        <ion-label position="floating" class="label">Telefono</ion-label>
         <ion-input formControlName="telefono" type="number" required></ion-input>
       </ion-item>
 
       <ion-item lines="full" class="input">
-        <ion-label position="floating">Dirección</ion-label>
+        <ion-label position="floating" class="label">Dirección</ion-label>
         <ion-input formControlName="direccion" type="text" required></ion-input>
       </ion-item>
       <ion-item lines="full" class="no-click">
-        <ion-label position="floating">Latitud y Longitud</ion-label>
+        <ion-label position="floating" class="label">Latitud y Longitud</ion-label>
         <ion-input formControlName="latitud" type="number" required></ion-input>
         <ion-input formControlName="longitud" type="number" required></ion-input>
       </ion-item>

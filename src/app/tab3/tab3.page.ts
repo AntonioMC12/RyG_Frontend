@@ -51,15 +51,18 @@ export class Tab3Page {
     const alert = await this.alertController.create({
       header: 'Confirmación',
       message: '¿Estás seguro de que quieres eliminar?',
+      cssClass:'my-css',
       buttons: [
         {
           text: 'Cancelar',
+          cssClass:'my-css',
           handler: (blah) => {
             this.toast.showToast("Operación cancelada", "warning");
           }
         },
         {
           text: 'Eliminar',
+          cssClass:'my-css',
           handler: async () => {
             try {
               await this.miLoading.showLoading();

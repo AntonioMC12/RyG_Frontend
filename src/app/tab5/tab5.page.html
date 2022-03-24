@@ -1,5 +1,5 @@
-<ion-header class="header">
-  <ion-toolbar color="warning">
+<ion-header >
+  <ion-toolbar color="warning" class="header">
     <ion-title>EDITAR PERFIL</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,7 +16,7 @@
       <ion-label>Teléfono</ion-label>
       <ion-input placeholder="Introduce el teléfono..." class="input" [(ngModel)]="inputPhone"></ion-input>
 
-      <ion-button type="submit" color="tertiary" expand="block" (click)="editDataUsuario()">ACTUALIZAR</ion-button>
+      <ion-button class="boton" type="submit" shape="round" color="tertiary" expand="block" (click)="editDataUsuario()">ACTUALIZAR</ion-button>
 
     </div>
 
@@ -30,7 +30,7 @@
       <ion-label>Confirmar Contraseña</ion-label>
       <ion-input placeholder="Confirmación de contraseña..." class="group" id="pass"  data-type="password" class="input" [(ngModel)]="inputConfirmPass" type="password"></ion-input>
 
-      <ion-button type="submit" (click)="updatePassword()" color="tertiary" expand="block">ACTUALIZAR</ion-button>
+      <ion-button class="boton" type="submit" shape="round" (click)="updatePassword()" color="tertiary" expand="block">ACTUALIZAR</ion-button>
 
     </div>
   </div>
