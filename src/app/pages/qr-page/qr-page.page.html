@@ -1,7 +1,7 @@
 <div class="body">
   <div class="qr-card">
-    <ion-card>
-      <qr-code class="center" [value]="'www.google.es'" [size]="300" [level]="M"></qr-code>
+    <ion-card *ngIf="isQRReady">
+      <qr-code class="center" [value]=this.url [size]="300" [level]="M"></qr-code>
     </ion-card>
     <h3 class="card-title">Escanea el QR para obtener tu Boleto</h3>
   </div>

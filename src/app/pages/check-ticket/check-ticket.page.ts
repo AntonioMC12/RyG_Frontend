@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { Boleto } from 'src/app/model/Boleto';
 import { Premio } from 'src/app/model/Premio';
 import { Ticket } from 'src/app/model/Ticket';
 import { Usuario } from 'src/app/model/Usuario';
+import { BoletoService } from 'src/app/services/boleto.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -24,7 +25,9 @@ export class CheckTicketPage {
   form: FormGroup;
   file: Photo;
 
-  constructor(private usuarioService: UsuariosService, private activatedRoute: ActivatedRoute, public fb: FormBuilder, private ticketService: TicketService) {
+  private boleto:Boleto;
+
+  constructor(private usuarioService: UsuariosService, private activatedRoute: ActivatedRoute, public fb: FormBuilder, private ticketService: TicketService, private boletoService: BoletoService) {
     this.form = this.fb.group({
       multipartFile: [null]
     })
@@ -32,7 +35,7 @@ export class CheckTicketPage {
 
   async ionViewDidEnter() {
     await this.getUsuarios();
-    // console.log(this.getURLBoleto());
+    this.boleto = await this.boletoService.getBoleto(Number(this.activatedRoute.snapshot.paramMap.get("boleto")));
   }
 
   public async getUsuarios(id?: any) {
@@ -59,31 +62,7 @@ export class CheckTicketPage {
   }
 
   public async guardar() {
-    let usuario: Usuario = {
-      id: 1,
-      admin: false,
-      direccion: "c/ test 234",
-      email: "test@gmail.com",
-      latitud: 0.0,
-      longitud: 0.0,
-      nombre_comercio: "Test",
-      participaciones: 0,
-      telefono: "123456789",
-      uid: "1234test"
-    }
-    let premio: Premio = {
-      id: 1,
-      description: "Esto es un premio de prueba",
-      entregado: false
-    }
-    let boleto: Boleto = {
-      id: 1,
-      descripcion: "Boleto de prueba en ionic",
-      entregado: false,
-      canjeado: false,
-      premio: premio,
-      usuario: usuario
-    }
+
     let ticket: Ticket = {
       id: -1,
       nombreCliente: "test",
@@ -92,7 +71,7 @@ export class CheckTicketPage {
       fechaTicket: "2022-02-02",
       nombreComercio: "Telepollo",
       foto: "",
-      boleto: boleto
+      boleto: this.boleto
     }
 
     let multipartFile = await this.urltoFile(this.file.dataUrl, "foto", "image/png");
