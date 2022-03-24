@@ -1,6 +1,6 @@
-<ion-header [translucent]="true" class="header">
+<ion-header [translucent]="true">
   <ion-toolbar color="warning">
-    <ion-title>
+    <ion-title class="header">
       RASCA Y GANA
     </ion-title>
   </ion-toolbar>
@@ -19,8 +19,8 @@
     </div>
     <ion-label>Validador de premios:</ion-label>
     <ion-input placeholder="Introduce el código del premio..." class="input"></ion-input>
-    <ion-button type="submit" color="tertiary" shape="round" expand="block">COMPROBAR</ion-button>
-    <ion-button class="boton-boleto" (click)="generateBoletoQR()" size="large" color="tertiary" expand="block">
+    <ion-button class="boton" type="submit" color="tertiary" shape="round" expand="block">COMPROBAR</ion-button>
+    <ion-button class="boton-boleto" (click)="generateBoletoQR()" shape="round" color="tertiary" expand="block">
       <ion-icon name="qr-code-outline"></ion-icon>&nbsp;&nbsp;
       GENERAR BOLETO
     </ion-button>

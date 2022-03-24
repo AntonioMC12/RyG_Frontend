@@ -75,15 +75,18 @@ export class Tab2Page {
     const alert = await this.alertController.create({
       header:'Confirmación',
       message:'Estas seguro de que quieres eliminar',
+      cssClass:'my-css',
       buttons: [
         {
           text:'Cancelar',
+          cssClass:'my-css',
           handler:(blah)=>{
             //nada
           }
         },
         {
           text:'Eliminar',
+          cssClass:'my-css',
           handler: async()=>{
             try {
               await this.miLoading.showLoading();
@@ -95,7 +98,7 @@ export class Tab2Page {
                 this.premios.splice(i,1);
               }
               await this.miLoading.hideLoading();
-              await this.toast.showToast("Premio borrado correctamente","success");
+              await this.toast.showToast("Premio borrado correctamente","tertiary");
             } catch (error) {
               console.log(error);
               

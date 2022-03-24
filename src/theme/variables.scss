@@ -257,8 +257,14 @@
     .my-custom-class {
       --background: rgb(255, 255, 255);
       --spinner-color: rgb(0, 0, 0);
-    
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
       color: rgb(0, 0, 0);
+    }
+    .my-css {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      
+      color: var(--ion-color-tertiary);
+      
     }
   }
 

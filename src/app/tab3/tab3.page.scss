@@ -6,7 +6,7 @@ ion-header {
         justify-content: center;
         width: auto;
         ion-title {
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             text-align: center;
             color: black;
         }
@@ -17,20 +17,21 @@ ion-header {
     width: 70%;
     margin: 2% auto;
     border-color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 ion-content{
     // display: flex;
     // align-items: center;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     ion-list {
         width: 70%;
         margin: 0 auto;
         margin-top: 2%;
-        border-radius: 1%;
+        //border-radius: 1%;
         background-color: white;
         ion-card {
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;

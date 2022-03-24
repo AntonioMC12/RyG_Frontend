@@ -7,6 +7,7 @@ ion-header {
         width: auto;
         ion-title {
             text-align: center;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             // color: white;
         }
     }
@@ -16,26 +17,24 @@ ion-header {
 .searchbar{
     
     width: 70%;
-    padding: 0%;
-    margin-top: 2%;
-    margin-left: 10%;
+    margin: 2% auto;
+   // padding: 0%;
+  //  margin-top: 2%;
+   // margin-left: 10%;
     border-color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 ion-content{
-    
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     ion-list {
         
         width: 70%;
+        margin: 0 auto;
         margin-top: 2%;
-        margin-left: 10%;
-        margin-right: 10%;
-        border-radius: 1%;
-        
-        //margin:auto;
-        //margin: 0 auto;
+       
         background-color: white;
         ion-card {
-            
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             background-color: white;
             align-items: center;
             display: flex;
