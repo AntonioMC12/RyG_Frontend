@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+import { IonInput } from '@ionic/angular';
+import { stringify } from 'querystring';
 import { Boleto } from 'src/app/model/Boleto';
 import { Premio } from 'src/app/model/Premio';
 import { Ticket } from 'src/app/model/Ticket';
@@ -17,20 +19,30 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class CheckTicketPage {
 
+  // @ViewChild("nombre") password: IonInput;
   tempImg: String;
 
   public listado: Array<Usuario>;
   public usuarios: Usuario[] = [];
   public usuario: Usuario;
+  public formTicket: FormGroup;
   form: FormGroup;
   file: Photo;
 
-  private boleto:Boleto;
+  private boleto: Boleto;
 
   constructor(private usuarioService: UsuariosService, private activatedRoute: ActivatedRoute, public fb: FormBuilder, private ticketService: TicketService, private boletoService: BoletoService) {
     this.form = this.fb.group({
       multipartFile: [null]
-    })
+    });
+    this.formTicket = this.fb.group({
+      fecha: ['', [Validators.required, Validators.minLength(2)]],
+      nombre: ['', [Validators.required, Validators.minLength(2)]],
+      telefono: ['', [Validators.required, Validators.minLength(2)]],
+      nticket: ['', [Validators.required, Validators.minLength(2)]],
+      comercio: ['', [Validators.required, Validators.minLength(2)]],
+      fechayhora: ['', [Validators.required, Validators.minLength(2)]]
+    });
   }
 
   async ionViewDidEnter() {
@@ -63,13 +75,15 @@ export class CheckTicketPage {
 
   public async guardar() {
 
+    
+
     let ticket: Ticket = {
       id: -1,
-      nombreCliente: "test",
-      telefono: 675834145,
-      numeroTicket: 9999999,
-      fechaTicket: "2022-02-02",
-      nombreComercio: "Telepollo",
+      nombreCliente:  this.formTicket.get('nombre').value,
+      telefono: this.formTicket.get('telefono').value,
+      numeroTicket: Number(this.formTicket.get('nticket').value),
+      fechaTicket: this.formatterFecha(this.formTicket.get('fechayhora').value),
+      nombreComercio: this.formTicket.get('comercio').value,
       foto: "",
       boleto: this.boleto
     }
@@ -95,4 +109,11 @@ export class CheckTicketPage {
     );
   }
 
+  formatterFecha(fecha:string) {
+    return fecha.split('T') [0];
+  }
+
 }
+
+
+

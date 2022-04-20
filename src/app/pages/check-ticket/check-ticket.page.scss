@@ -1,7 +1,6 @@
 .title{
     text-align: center;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
-        sans-serif;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode";
         font-size: 25px !important;
         font-weight: bold;
 }
@@ -42,4 +41,12 @@
 ion-fab {
     margin: 2%;
     color:darkcyan
+}
+
+.host{
+    background-color: #FFC107 !important;
+}
+
+.sc-ion-label-ios-h .sc-ion-label-ios-s .ios .hydrated{
+    color: #ffc107!important;
 }
