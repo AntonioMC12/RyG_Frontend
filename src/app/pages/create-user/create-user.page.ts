@@ -75,7 +75,7 @@ export class CreateUserPage implements OnInit {
           telefono: this.formUsuario.get('telefono').value,
           uid: uid
         }
-        //guardar en firebase para obtener el uid    
+        //guardar en firebase para obtener el uid
         await this.usuarioService.postUsuario(usuario);
         this.miLoading.hideLoading();
         this.toast.showToast("Usuario creado con éxito","success");
@@ -126,6 +126,10 @@ export class CreateUserPage implements OnInit {
     } else {
       this.password.type = "password";
     }
+  }
+
+  public get isPassword(): boolean {
+    return this.password.type == "password";
   }
 
   public validateEmail(email:string):boolean{

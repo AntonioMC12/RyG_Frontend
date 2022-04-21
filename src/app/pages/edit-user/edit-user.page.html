@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="warning" class="header">
-    <ion-title>CREAR USUARIO</ion-title>
+    <ion-title>EDITAR USUARIO</ion-title>
     <ion-buttons slot="end">
       <ion-icon name="close-circle" style="zoom:2.0" (click)="cerrar()"></ion-icon>
     </ion-buttons>
@@ -10,16 +10,10 @@
 <ion-content>
 
   <div class="home">
-    <form [formGroup]="formUsuario" (ngSubmit)="saveUsuario()" novalidate>
+    <form [formGroup]="formUsuario" (ngSubmit)="updateUsuario()" novalidate>
       <ion-item lines="full" class="input">
         <ion-label position="floating" class="label">Nombre del Comercio</ion-label>
         <ion-input formControlName="nombre_comercio" type="text" required></ion-input>
-      </ion-item>
-
-      <ion-item lines="full" class="input">
-        <ion-label position="floating" class="label">Contraseña</ion-label>
-        <ion-input #password formControlName="password" type="password" required></ion-input>
-        <ion-button size="small" slot="end" color="tertiary" type="button" (click)="mostrarContrasena()"><ion-icon name="eye-off-outline"></ion-icon></ion-button>
       </ion-item>
 
       <ion-item lines="full" class="input">
@@ -46,7 +40,7 @@
       <div class="map" id="map"></div>
       <ion-row>
         <ion-col>
-          <ion-button type="submit" color="tertiary" expand="block">CREAR</ion-button>
+          <ion-button type="submit" color="tertiary" expand="block">ACTUALIZAR</ion-button>
         </ion-col>
       </ion-row>
     </form>

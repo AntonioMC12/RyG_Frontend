@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="warning" class="header">
+    <ion-title>Crear Boletos</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon
+        name="close-circle"
+        style="zoom: 2"
+        (click)="cerrar()"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home">
+    <form>
+      <ion-label>Descripción:</ion-label>
+      <ion-item class="input">
+        <ion-label>{{this.boleto.descripcion}}</ion-label>
+      </ion-item>
+
+      <ion-label>Comercio:</ion-label>
+      <ion-item class="input">
+        <ion-label>{{this.boleto.usuario.nombre_comercio}}</ion-label>
+      </ion-item>
+
+      <div *ngIf="this.boleto.premio; else notPremiado">
+        <ion-label>Canjeado:</ion-label>
+        <ion-item class="input">
+          <ion-label>{{this.boleto.premio.entregado}}</ion-label>
+        </ion-item>
+
+        <ion-label>Premio:</ion-label>
+        <ion-item class="input">
+          <ion-label>{{this.boleto.premio.description}}</ion-label>
+        </ion-item>
+      </div>
+
+      <ng-template #notPremiado>
+        <ion-label>Canjeado:</ion-label>
+        <ion-item class="input">
+          <ion-label>ESTE BOLETO NO TIENE PREMIO</ion-label>
+        </ion-item>
+
+        <ion-label>Premio:</ion-label>
+        <ion-item class="input">
+          <ion-label>ESTE BOLETO NO TIENE PREMIO</ion-label>
+        </ion-item>
+      </ng-template>
+
+      <ion-button
+        expand="full"
+        color="tertiary"
+        type="submit"
+        (click)="setCanjeadosToTrue()"
+        [disabled]="isValid"
+        >MARCAR COMO ENTREGADO</ion-button
+      >
+    </form>
+  </div>
+</ion-content>

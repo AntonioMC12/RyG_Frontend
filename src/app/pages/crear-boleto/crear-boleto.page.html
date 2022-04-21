@@ -19,25 +19,15 @@
         <ion-input type="text" formControlName="description" placeholder="Enter descripción..."></ion-input>
       </ion-item>
       <ion-label>Comercio:</ion-label>
-      
+
       <ion-item class="input">
         <ion-label>Comercios</ion-label>
         <select formControlName="comercio" (click)="getAllUsuarios()" class="select">
 
           <option [ngValue]="usuario.id" *ngFor="let usuario of usuarios">{{usuario.nombre_comercio}}</option>
-          
+
         </select>
       </ion-item>
-      
-       <!--
-      <ion-item class="input" >
-        <ion-label (click)="getAllUsuarios()" >Comercios</ion-label>
-        <ion-select interface="popover" formControlName="comercio"  *ngFor="let usuario of usuarios" >
-          <ion-select-option value="ahora si">{{usuario.id}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-  -->
-     
 
       <ion-label>Nº Boletos:</ion-label>
       <ion-item class="input">

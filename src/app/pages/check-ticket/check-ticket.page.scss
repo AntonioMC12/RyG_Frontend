@@ -1,52 +1,55 @@
-.title{
-    text-align: center;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode";
-        font-size: 25px !important;
-        font-weight: bold;
+.title {
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode";
+  font-weight: bold;
+  margin-top: 0;
+  position: unset !important;
 }
-.ini{
-    align-items: center;
-    margin-left: 40%;
-    margin-right: 40%;
+.ini {
+  align-items: center;
+  margin-left: 40%;
+  margin-right: 40%;
 }
 .home {
-    color: black;
-    font-size: 14px;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
-        sans-serif;
-    align-items: center;
-    margin: 5% auto;
-    padding: 3% 3% 8% 3%;
-    background-color: rgb(247, 247, 247);
-    border-radius: 2%;
-    box-shadow: 1px 1px 10px gray;
-    max-width: 500px;
+  color: black;
+  font-size: 14px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  align-items: center;
+  margin: 5% auto;
+  padding: 3% 3% 8% 3%;
+  background-color: rgb(247, 247, 247);
+  border-radius: 2%;
+  box-shadow: 1px 1px 10px gray;
+  max-width: 500px;
 }
-.input, .select {
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
-        sans-serif;
-    align-items: center;
-    border: 2px solid lightgray;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.973);
-    margin-top: 5px;
-    margin-bottom: 30px;
+.input,
+.select {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  align-items: center;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.973);
+  margin-top: 5px;
+  margin-bottom: 30px;
 }
 .datetime {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .formsContainer {
-    margin: 4%;
+  margin: 4%;
 }
 ion-fab {
-    margin: 2%;
-    color:darkcyan
+  margin: 2%;
+  color: darkcyan;
 }
 
-.host{
-    background-color: #FFC107 !important;
+.host {
+  background-color: #ffc107 !important;
 }
 
-.sc-ion-label-ios-h .sc-ion-label-ios-s .ios .hydrated{
-    color: #ffc107!important;
+.sc-ion-label-ios-h .sc-ion-label-ios-s .ios .hydrated {
+  color: #ffc107 !important;
 }

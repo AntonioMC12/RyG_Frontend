@@ -49,7 +49,15 @@ const routes: Routes = [
   {
     path: 'qr-page',
     loadChildren: () => import('./pages/qr-page/qr-page.module').then( m => m.QrPagePageModule)
+  },  {
+    path: 'edit-user',
+    loadChildren: () => import('./pages/edit-user/edit-user.module').then( m => m.EditUserPageModule)
+  },
+  {
+    path: 'boleto-details',
+    loadChildren: () => import('./pages/boleto-details/boleto-details.module').then( m => m.BoletoDetailsPageModule)
   }
+
 
 
 
