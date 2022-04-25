@@ -33,7 +33,7 @@
               "src/manifest.webmanifest"
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
-            "scripts": [],
+            "scripts": ["node_modules/crypto-js/crypto-js.js"],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,
@@ -101,7 +101,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "styles": [],
-            "scripts": [],
+            "scripts": ["node_modules/crypto-js/crypto-js.js"],
             "assets": [
               {
                 "glob": "favicon.ico",
@@ -126,10 +126,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         },
         "e2e": {

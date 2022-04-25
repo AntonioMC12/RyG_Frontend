@@ -4,7 +4,6 @@ import { Boleto } from '../model/Boleto';
 import { BoletoDetailsPage } from '../pages/boleto-details/boleto-details.page';
 import { QrPagePage } from '../pages/qr-page/qr-page.page';
 import { BoletoService } from '../services/boleto.service';
-import { TicketService } from '../services/ticket.service';
 import { ToastService } from '../services/toast.service';
 
 @Component({

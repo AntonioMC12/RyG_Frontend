@@ -1,34 +1,44 @@
-<ion-header >
+<ion-header>
   <ion-toolbar color="warning" class="header">
     <ion-title>Reparto de participaciones</ion-title>
     <ion-buttons slot="end">
-      <ion-icon name="close-circle" style="zoom:2.0" (click)="cerrar()"></ion-icon>
+      <ion-icon
+        name="close-circle"
+        class="close-btn"
+        (click)="cerrar()"
+      ></ion-icon>
     </ion-buttons>
-    <ion-buttons slot="start">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-buttons>
-
   </ion-toolbar>
 </ion-header>
 <ion-content>
-
   <ion-label>Tiene {{nBoletos}} a repartir: </ion-label>
-  <form [formGroup]="formParticipaciones">
-  <div class="home" *ngFor="let usuario of usuarios; let i=index">
+  <form [formGroup]="formParticipaciones" (ngSubmit)="validador()">
+    <div class="home" *ngFor="let usuario of usuarios; let i=index">
+      <ion-label
+        *ngIf="this.allboletos[0].usuario.nombre_comercio!=usuario.nombre_comercio"
+        >{{usuario.nombre_comercio}}
+      </ion-label>
+      <ion-item
+        class="input"
+        *ngIf="this.allboletos[0].usuario.nombre_comercio!=usuario.nombre_comercio"
+      >
+        <ion-input
+          type="number"
+          min="0"
+          formControlName="participacion"
+          placeholder="Enter nº de parcipaciones..."
+          (ionChange)="sumar()"
+        ></ion-input>
+      </ion-item>
+    </div>
 
-
-    <ion-label *ngIf="this.allboletos[0].usuario.nombre_comercio!=usuario.nombre_comercio">{{usuario.nombre_comercio}}
-    </ion-label>
-    <ion-item class="input" *ngIf="this.allboletos[0].usuario.nombre_comercio!=usuario.nombre_comercio">
-      <ion-input type="number" min="0" formControlName="participacion" placeholder="Enter nº de parcipaciones..."
-        (ionChange)=sumar()></ion-input>
-    </ion-item>
-  </div>
-    
-    <ion-button expand="full" [disabled]="this.formParticipaciones.invalid" color="tertiary" type="submit"
-     (ngSubmit)="validador()">Confirmar</ion-button>
-
-  
+    <ion-button
+      expand="full"
+      [disabled]="this.formParticipaciones.invalid"
+      color="tertiary"
+      type="submit"
+      (ngSubmit)="validador()"
+      >Confirmar</ion-button
+    >
   </form>
-
 </ion-content>

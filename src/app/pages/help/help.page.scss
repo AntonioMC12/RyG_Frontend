@@ -1,47 +1,47 @@
 ion-header {
-    ion-toolbar {
-        // background-color: gold;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        ion-title {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            text-align: center;
-            color: rgb(0, 0, 0);
-        }
-        ion-icon {
-            font-size: 30px;
-        }
+  ion-toolbar {
+    // background-color: gold;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    ion-title {
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      text-align: center;
+      color: rgb(0, 0, 0);
     }
+    ion-icon {
+      font-size: 30px;
+    }
+  }
 }
 
-ion-content{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    ion-list {
-        width: 70%;
-        margin: 0 auto;
-        margin-top: 2%;
-        border-radius: 1%;
-        background-color: white;
-        ion-card {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            background-color: white;
-            margin: 3%;
-        }
-        ion-item {
-            ion-icon {
-                font-size: 30px;
-            }
-        }
-        h6 {
-            margin: 2%;
-        }
+ion-content {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  ion-list {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 2%;
+    border-radius: 1%;
+    background-color: white;
+    ion-card {
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      background-color: white;
+      margin: 3%;
     }
-    ion-fab {
-        margin: 2%;
-        color:darkcyan
+    ion-item {
+      ion-icon {
+        font-size: 30px;
+      }
     }
+    h6 {
+      margin: 2%;
+    }
+  }
+  ion-fab {
+    margin: 2%;
+    color: darkcyan;
+  }
 }

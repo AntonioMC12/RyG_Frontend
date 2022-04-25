@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Boleto } from 'src/app/model/Boleto';
 import { Usuario } from 'src/app/model/Usuario';
+import { LoadingService } from 'src/app/services/loading.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -12,42 +13,52 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   styleUrls: ['./crear-participaciones.page.scss'],
 })
 export class CrearParticipacionesPage implements OnInit {
-
   @Input() nBoletos: number;
-  @Input() allboletos:Boleto[];
+  @Input() allboletos: Boleto[];
 
   public usuarios: Usuario[] = [];
-  public usuario:Usuario;
-  private isDisabled: boolean=false;
+  public usuario: Usuario;
+  private isDisabled: boolean = false;
+  private _NParticipaciones: number;
 
-  public boletos:Boleto[]=[]
+  public boletos: Boleto[] = [];
   public formParticipaciones: FormGroup;
 
-  constructor(private modalController:ModalController,
-    public api:UsuariosService,
-    private fb:FormBuilder,
-    public toast:ToastService) { }
- 
+  constructor(
+    private modalController: ModalController,
+    public api: UsuariosService,
+    private fb: FormBuilder,
+    public toast: ToastService,
+    private loading: LoadingService
+  ) {}
+
   ngOnInit() {
-    
     this.modalController.dismiss(); //Cierra el modal anterior
     this.formParticipaciones = this.fb.group({
-      participacion: [""]
+      participacion: [''],
     });
+    this._NParticipaciones = this.nBoletos;
   }
 
   async ionViewDidEnter() {
+    this.loading.showLoading();
     await this.getAllUsuarios();
-    
+    this.loading.hideLoading();
   }
-  async validador(){
+
+  async validador() {
     let result: boolean = false;
-    if(this.nBoletos>0){
-      result=true;
-      this.setParticipaciones();
-    }else{
+    if (this.nBoletos === 0) {
+      result = true;
+      await this.setParticipaciones();
+      this.toast.showToast('Participaciones actualizadas', 'success');
+      this.cerrar();
+    } else {
       result = false;
-      await this.toast.showToast("El nº participaciones tiene que ser MENOR que el nº de boletos", "danger");
+      this.toast.showToast(
+        'Asegúrese de repartir '+this._NParticipaciones+' de participaciones.',
+        'danger'
+      );
     }
     return result;
   }
@@ -55,40 +66,40 @@ export class CrearParticipacionesPage implements OnInit {
   /**
    * Método para setear el número de participaciones que le corresponde a cada comercio
    */
-  public async setParticipaciones(){
-
+  public async setParticipaciones() {
+    this.loading.showLoading();
     this.usuarios = await this.api.getUsuarios();
-
-    for(let i=0; i<this.usuarios.length; i++){
-      if(this.allboletos[0].usuario.nombre_comercio==this.usuarios[i].nombre_comercio){
-
-      }else{
-        let  participacion:number= this.formParticipaciones.get("participacion").value;
-        let updateUsuario:Usuario = this.usuarios[i];
-        updateUsuario.participaciones = updateUsuario.participaciones +participacion; 
-        this.usuario=await this.api.putUsuario(updateUsuario);
+    for (let i = 0; i < this.usuarios.length; i++) {
+      if (
+        this.allboletos[0].usuario.nombre_comercio ==
+        this.usuarios[i].nombre_comercio
+      ) {
+      } else {
+        let participacion: number =
+          this.formParticipaciones.get('participacion').value;
+        let updateUsuario: Usuario = this.usuarios[i];
+        updateUsuario.participaciones =
+          updateUsuario.participaciones + participacion;
+        this.usuario = await this.api.putUsuario(updateUsuario);
       }
-   
     }
+    this.loading.hideLoading();
   }
 
   public sumar() {
-    if(this.nBoletos>0){
+    if (this.nBoletos > 0) {
       this.nBoletos--;
     }
-     
-    
-    
   }
 
   /**
    * Cierra el modal
    */
-  public cerrar(){
+  public cerrar() {
     this.modalController.dismiss();
   }
 
-  public async getAllUsuarios():Promise<Usuario[]> {
+  public async getAllUsuarios(): Promise<Usuario[]> {
     try {
       this.usuarios = await this.api.getUsuarios();
     } catch (error) {
@@ -96,5 +107,4 @@ export class CrearParticipacionesPage implements OnInit {
     }
     return this.usuarios;
   }
-
 }

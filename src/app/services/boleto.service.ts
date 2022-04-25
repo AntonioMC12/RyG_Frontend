@@ -9,6 +9,7 @@ import { Boleto } from '../model/Boleto';
 export class BoletoService {
 
   apiEndpoint = environment.apiEnviroment.endpoint + environment.apiEnviroment.apiBoletos + "/";
+  public iv: Buffer;
 
 
   constructor(private http: HttpClient) { }
@@ -33,7 +34,7 @@ export class BoletoService {
     return new Promise(async (resolve, reject) => {
       let endpoint = this.apiEndpoint + id_boleto;
       let boleto: Boleto;
-      
+
       try {
         boleto = await this.http.get(endpoint).toPromise() as Boleto;
         resolve(boleto);

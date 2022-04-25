@@ -1,59 +1,48 @@
 <ion-header [translucent]="true" class="header">
   <ion-toolbar color="warning">
-    <ion-title>
-      PREMIOS
-    </ion-title>
+    <ion-title> PREMIOS </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="content">
-
-  <ion-searchbar class="searchbar" color="dark" (ionChange)="buscar($event)" placeholder="Buscar..." ></ion-searchbar>
+  <ion-searchbar
+    class="searchbar"
+    color="dark"
+    (ionChange)="buscar($event)"
+    placeholder="Buscar..."
+  ></ion-searchbar>
 
   <ion-refresher slot="fixed" (ionRefresh)="cargaPremios($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list >
+  <ion-list>
     <h6>LISTA DE PREMIOS</h6>
     <ion-card *ngFor="let premio of premios; let i=index">
       <div class="display">
-        <ion-card-header >
+        <ion-card-header>
           <ion-card-title>Id: {{premio.id}}</ion-card-title>
-          <ion-card-subtitle>Descripción: {{premio.description}}</ion-card-subtitle>
+          <ion-card-subtitle
+            >Descripción: {{premio.description}}</ion-card-subtitle
+          >
           <ion-card-subtitle>Entregado: {{premio.entregado}}</ion-card-subtitle>
         </ion-card-header>
-  
-        <ion-item >
+
+        <ion-item>
           <ion-button (click)="editar(premio)">
             <ion-icon name="pencil"></ion-icon>
           </ion-button>
-          <ion-button  color="danger" (click)="deletePremio(premio)" >
+          <ion-button color="danger" (click)="deletePremio(premio)">
             <ion-icon name="trash-bin"></ion-icon>
           </ion-button>
         </ion-item>
       </div>
-      
     </ion-card>
   </ion-list>
-  
-  
-  
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="tertiary" (click)="crear()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  
-<!--<ion-button (click)="getUsuarios()">GET /usuarios</ion-button>
-  <ion-button (click)="getUsuarios(2)">GET /usuarios/1</ion-button>
-  <ion-button (click)="getUsuarioByCoordinates(12, 443)">GET /usuarios/12/443</ion-button>
-  <ion-button (click)="postUsuario()">POST /usuarios</ion-button>
-  <ion-button (click)="putUsuario()">PUT /usuarios</ion-button>
-  <ion-button (click)="deleteUsuario(3)">DELETE /usuarios/3</ion-button>
-  <ion-button (click)="testToast('mensaje de error', 'danger')">TOAST (error)</ion-button>
-  <ion-button (click)="testToast('mensaje de warning', 'warning')">TOAST (warning)</ion-button>
-  <ion-button (click)="testToast('mensaje de success', 'success')">TOAST (success)</ion-button>
-  <app-explore-container name="Tab 2 page"></app-explore-container>-->
-  
 </ion-content>

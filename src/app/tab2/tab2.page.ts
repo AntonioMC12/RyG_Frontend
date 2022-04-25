@@ -124,8 +124,6 @@ export class Tab2Page {
       componentProps: { premio },
     });
     await modal.present();
-    //await this.miLoading.hideLoading();
-    // await modal.onDidDismiss();
     await this.getAllPremio();
   }
 
@@ -152,7 +150,6 @@ export class Tab2Page {
    * Pasar a la pag siguiente
    *
    */
-
   public async siguiente() {
     const modal = await this.modalController.create({
       component: CrearBoletoPage,

@@ -1,8 +1,8 @@
 .header{
-    
+
 	text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-	
+
 }
 .home{
     color: black;
@@ -12,7 +12,7 @@
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 20%;
-    
+
 }
 .input{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -22,4 +22,9 @@
 	background:rgba(255, 255, 255, 0.973);
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.close-btn {
+  zoom: 2;
+  cursor: pointer;
 }

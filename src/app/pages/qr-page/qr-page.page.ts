@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { createCipheriv, scrypt } from 'crypto';
+import { nanoid } from 'nanoid';
 import { Boleto } from 'src/app/model/Boleto';
 import { BoletoService } from 'src/app/services/boleto.service';
+import { EncryptionService } from 'src/app/services/encryption.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { promisify } from 'util';
 
 @Component({
   selector: 'app-qr-page',
@@ -9,28 +13,31 @@ import { LoadingService } from 'src/app/services/loading.service';
   styleUrls: ['./qr-page.page.scss'],
 })
 export class QrPagePage implements OnInit {
-
   private boletos: Boleto[];
   private boletosFilter: Boleto[] = new Array();
   public isQRReady = false;
-  public url = "http://localhost:8100/check-ticket/";
-  constructor(public boletoService: BoletoService, public loadingService:LoadingService) { }
+  public url = 'http://localhost:8100/check-ticket/';
+  constructor(
+    public boletoService: BoletoService,
+    public loadingService: LoadingService,
+    private encrypter: EncryptionService
+  ) {}
 
   /**
    * Cada vez que inicia la pagina, debe consultar los boletos que hay
    * elegir uno comprobando que el boleto no esté entregado ni cangeado,
-   * una vez el boleto esté elegido, debemos updatearlo como entregado y 
+   * una vez el boleto esté elegido, debemos updatearlo como entregado y
    * redirigir al usuario a la pagina del ticket asociado a dicho boleto.
    */
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
-  async ionViewDidEnter(){
+  async ionViewDidEnter() {
     this.loadingService.showLoading();
-    let selectedBoleto = await this.setBoletoAsEntregado(await this.pickRandomBoleto());
-    this.url = this.url.concat(selectedBoleto.id.toString());
+    let selectedBoleto = await this.setBoletoAsEntregado(
+      await this.pickRandomBoleto()
+    );
+    this.url = this.url.concat(this.encryptBoletoId(selectedBoleto.id));
     console.log(this.url);
     this.isQRReady = true;
     this.loadingService.hideLoading();
@@ -53,7 +60,7 @@ export class QrPagePage implements OnInit {
     for (let index = 0, subIndex = 0; index < this.boletos.length; index++) {
       if (this.isNotCanjeadoAndEntregado(this.boletos[index])) {
         this.boletosFilter[subIndex] = this.boletos[index];
-        subIndex++
+        subIndex++;
       }
     }
     return this.boletosFilter;
@@ -66,13 +73,16 @@ export class QrPagePage implements OnInit {
 
   //elegir un ticket aleatorio desde el listado filtrado
   getRandomTicketFromFilterBoletos(): Boleto {
-    let randomIndex = Math.floor((Math.random() * this.boletosFilter.length))
+    let randomIndex = Math.floor(Math.random() * this.boletosFilter.length);
     return this.boletosFilter[randomIndex];
   }
 
-  async setBoletoAsEntregado(boleto:Boleto){
+  async setBoletoAsEntregado(boleto: Boleto) {
     boleto.entregado = true;
     return await this.boletoService.putBoleto(boleto);
   }
 
+  public encryptBoletoId(idBoleto: Number) {
+    return this.encrypter.encrypt(idBoleto.toString());
+  }
 }

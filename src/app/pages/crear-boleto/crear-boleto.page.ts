@@ -1,12 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, MaxValidator, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  MaxValidator,
+  Validators,
+} from '@angular/forms';
 import { ModalController, NumericValueAccessor } from '@ionic/angular';
-
 
 import { Boleto } from 'src/app/model/Boleto';
 import { Premio } from 'src/app/model/Premio';
 import { Usuario } from 'src/app/model/Usuario';
 import { BoletoService } from 'src/app/services/boleto.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { PremioService } from 'src/app/services/premio.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -18,7 +25,6 @@ import { CrearParticipacionesPage } from '../crear-participaciones/crear-partici
   styleUrls: ['./crear-boleto.page.scss'],
 })
 export class CrearBoletoPage implements OnInit {
-
   @Input() newPremio: Premio;
 
   public usuarios: Usuario[] = [];
@@ -27,106 +33,100 @@ export class CrearBoletoPage implements OnInit {
   public premios: Premio[] = [];
   public boletos: Boleto[] = [];
   public formBoleto: FormGroup;
-  public number:number;
+  public number: number;
 
-
-
-  constructor(private modalController: ModalController,
+  constructor(
+    private modalController: ModalController,
     public api: UsuariosService,
     private fb: FormBuilder,
     public toast: ToastService,
     public apiBoleto: BoletoService,
-    public apiPremio: PremioService) { }
+    public apiPremio: PremioService,
+    private loading: LoadingService
+  ) {}
 
   ngOnInit() {
-
     this.formBoleto = this.fb.group({
-      description: ["", Validators.required],
-      comercio: ["", Validators.required],
-      nBoletos: ["", Validators.required],
-      nPremiados: ["", Validators.required]
+      description: ['', Validators.required],
+      comercio: ['', Validators.required],
+      nBoletos: ['', Validators.required],
+      nPremiados: ['', Validators.required],
     });
-
   }
 
   async validador() {
+    this.loading.showLoading();
     let result: boolean = false;
-    let nBoletos = this.formBoleto.get("nBoletos").value;
-    let nPremiados = this.formBoleto.get("nPremiados").value;
-    let usuarioBoleto: Usuario = await this.api.getUsuario(this.formBoleto.get("comercio").value);
+    let nBoletos = this.formBoleto.get('nBoletos').value;
+    let nPremiados = this.formBoleto.get('nPremiados').value;
+    let usuarioBoleto: Usuario = await this.api.getUsuario(
+      this.formBoleto.get('comercio').value
+    );
     let premio1: Premio = this.newPremio;
 
     let premioPersistido: Premio;
 
     if (nBoletos > nPremiados && nBoletos > 0 && nPremiados > 0) {
-
       result = true;
-     
 
       for (let j = 0; j < nPremiados; j++) {
         this.premio = premio1;
         premioPersistido = await this.apiPremio.createPremio(this.premio);
         let premio2 = this.convertPremio(premioPersistido);
 
-        premioPersistido = premio2
+        premioPersistido = premio2;
         this.premios.push(premio2);
-
       }
-      console.log(this.premios);
 
       for (let i = 0; i < nBoletos; i++) {
-
         let boleto: Boleto = {
           id: -1,
-          descripcion: this.formBoleto.get("description").value,
+          descripcion: this.formBoleto.get('description').value,
           entregado: false,
           canjeado: false,
           premio: null,
-          usuario: usuarioBoleto
-        }
+          usuario: usuarioBoleto,
+        };
         let boletoPersistido: Boleto = await this.apiBoleto.postBoleto(boleto);
         this.boletos.push(boletoPersistido);
-
       }
 
-
       for (let i = 0; i < this.premios.length; i++) {
-        
-        let numberRandom:number= Math.floor(Math.random() * (this.boletos.length - 0) + 0);
-        while(numberRandom==this.number)
-        {
-          numberRandom= Math.floor(Math.random() * (this.boletos.length - 0) + 0);
+        let numberRandom: number = Math.floor(
+          Math.random() * (this.boletos.length - 0) + 0
+        );
+        while (numberRandom == this.number) {
+          numberRandom = Math.floor(
+            Math.random() * (this.boletos.length - 0) + 0
+          );
         }
-          
+
         this.number = numberRandom;
 
-       
         let boletoPremiado: Boleto = this.boletos[this.number];
-        console.log(this.number);
-
         boletoPremiado = {
           id: boletoPremiado.id,
           descripcion: boletoPremiado.descripcion,
           entregado: boletoPremiado.entregado,
           canjeado: boletoPremiado.canjeado,
           premio: this.premios[i],
-          usuario: boletoPremiado.usuario
-        }
+          usuario: boletoPremiado.usuario,
+        };
         await this.apiBoleto.putBoleto(boletoPremiado);
-        
-      
       }
-      console.log(this.boletos)
+      this.loading.hideLoading();
       this.siguiente();
     } else {
       result = false;
-      await this.toast.showToast("El nº premios tiene que ser MENOR que el nº de boletos", "danger");
+      await this.toast.showToast(
+        'El nº premios tiene que ser MENOR que el nº de boletos',
+        'danger'
+      );
       await this.formBoleto.reset();
     }
+    this.loading.hideLoading();
     return result;
   }
-
-
 
   /**
    * Cierra el modal
@@ -148,19 +148,16 @@ export class CrearBoletoPage implements OnInit {
 
   /**
    * Método para pasar al siguiente modal -> reparto de participaciones
-   * 
+   *
    */
   public async siguiente() {
     this.modalController.dismiss(); // Cierra el modal anterior
-    let nBoletos:number=this.formBoleto.get("nBoletos").value
-   
-    let allboletos:Boleto[] = this.boletos;
-    console.log(allboletos);
+    let nBoletos: number = this.formBoleto.get('nBoletos').value;
+    let allboletos: Boleto[] = this.boletos;
     const modal = await this.modalController.create({
       component: CrearParticipacionesPage,
       cssClass: 'my-custom-class',
-      componentProps: { nBoletos,
-      allboletos}
+      componentProps: { nBoletos, allboletos },
     });
 
     await modal.present();
@@ -172,8 +169,8 @@ export class CrearBoletoPage implements OnInit {
     let premioConvert = {
       id: premio.id,
       description: premio.description,
-      entregado: premio.entregado
-    }
+      entregado: premio.entregado,
+    };
     return premioConvert;
   }
 }
