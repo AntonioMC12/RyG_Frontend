@@ -4,9 +4,6 @@
     <ion-buttons slot="end">
       <ion-icon name="close-circle" style="zoom:2.0" (click)="cerrar()"></ion-icon>
     </ion-buttons>
-    <ion-buttons slot="start">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -29,14 +26,7 @@
         </select>
       </ion-item>
       
-       <!--
-      <ion-item class="input" >
-        <ion-label (click)="getAllUsuarios()" >Comercios</ion-label>
-        <ion-select interface="popover" formControlName="comercio"  *ngFor="let usuario of usuarios" >
-          <ion-select-option value="ahora si">{{usuario.id}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-  -->
+    
      
 
       <ion-label>Nº Boletos:</ion-label>
@@ -48,7 +38,7 @@
       <ion-item class="input">
         <ion-input type="number" min="0" formControlName="nPremiados" placeholder="Enter nº boletos premiados..."></ion-input>
       </ion-item>
-      <ion-button expand="full" color="tertiary" type="submit" (ngSubmit)="validador()"
+      <ion-button expand="block" color="tertiary" type="submit" (ngSubmit)="validador()"
         [disabled]="this.formBoleto.invalid">Siguiente</ion-button>
     </form>
   </div>

@@ -4,15 +4,13 @@
     <ion-buttons slot="end">
       <ion-icon name="close-circle" style="zoom:2.0" (click)="cerrar()"></ion-icon>
     </ion-buttons>
-    <ion-buttons slot="start">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-buttons>
+   
 
   </ion-toolbar>
 </ion-header>
 <ion-content>
 
-  <ion-label>Tiene {{nBoletos}} a repartir: </ion-label>
+  <ion-label class="label">Tiene {{nBoletos}} boletos a repartir: </ion-label>
   <form [formGroup]="formParticipaciones">
   <div class="home" *ngFor="let usuario of usuarios; let i=index">
 
@@ -23,10 +21,11 @@
       <ion-input type="number" min="0" formControlName="participacion" placeholder="Enter nº de parcipaciones..."
         (ionChange)=sumar()></ion-input>
     </ion-item>
+    
   </div>
     
-    <ion-button expand="full" [disabled]="this.formParticipaciones.invalid" color="tertiary" type="submit"
-     (ngSubmit)="validador()">Confirmar</ion-button>
+  <ion-button class="button" expand="block" [disabled]="this.formParticipaciones.invalid" color="tertiary" type="submit"
+  (ngSubmit)="validador()">Confirmar</ion-button>
 
   
   </form>

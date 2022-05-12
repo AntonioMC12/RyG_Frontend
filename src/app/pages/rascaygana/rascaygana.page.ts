@@ -23,11 +23,17 @@ export class RascayganaPage implements OnInit {
 
  constructor(public api:BoletoService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    
+    //document.querySelector("div").innerHTML = JSON.stringify(datos);
+    //let datos:Boleto = await this.sacarPremio(110);
     this.createNewScratchCard();
+
   }
  
-  createNewScratchCard() {
+  async createNewScratchCard() {
+    
+
     const scContainer = document.getElementById('js--sc--container')
     const sc = new ScratchCard('#js--sc--container', {
       scratchType: SCRATCH_TYPE.CIRCLE,
@@ -35,7 +41,8 @@ export class RascayganaPage implements OnInit {
       containerHeight: 300,
       imageForwardSrc: '../../../assets/gris.jpg',
       imageBackgroundSrc: '../../../assets/gris.jpg',
-      htmlBackground: '<div class="cardamountcss"><div class="won-amnt">30</div><div class="won-text">Points<br>Won!</div></div>',
+     // htmlBackground: '<div class="cardamountcss"><div class="won-amnt">30</div><div class="won-text">Points<br>Won!</div></div>',
+      htmlBackground: '<div class="cardamountcss"><div id="show" class="won-amnt"></div><div class="won-text">Points<br>Won!</div></div>',
       clearZoneRadius: 40,
       nPoints: 30,
       pointSize: 4,
@@ -43,37 +50,50 @@ export class RascayganaPage implements OnInit {
         console.log('Now the window will reload !')
       }
     })
+    
+    
+  
     // Init
     sc.init();
+  
   }
 
-  public async sacarPremio(id:number){
+  public async sacarPremio(id:number):Promise<Boleto>{
 
-    let boleto:Boleto = await this.api.getBoleto(id);
-    console.log(boleto)
-    //this.listaBoletos = await this.api.getBoletos();
-
-   // let numberRandom:number= Math.floor(Math.random() * (this.listaBoletos.length - 0) + 0);
-   if(boleto.entregado==false){
-
-    if(boleto.premio==null){
-      console.log("SIN PREMIO");
-    }else{
-      console.log("PREMIOOOOOOO!") 
-    }
-
-    let boletoEntregado:Boleto = boleto;
-    boletoEntregado = {
-      id: boletoEntregado.id,
-      descripcion: boletoEntregado.descripcion,
-      entregado: boletoEntregado.entregado=true,
-      canjeado: boletoEntregado.canjeado,
-      premio: boletoEntregado.premio,
-      usuario: boletoEntregado.usuario
-    }
+    return new Promise(async(resolve,reject)=>{
+      try {
+        let boleto:Boleto = await this.api.getBoleto(id);
+        console.log(boleto)
+        //this.listaBoletos = await this.api.getBoletos();
     
-    boletoEntregado =  await this.api.putBoleto(boletoEntregado);
-   }
+       // let numberRandom:number= Math.floor(Math.random() * (this.listaBoletos.length - 0) + 0);
+       if(boleto.entregado==false){
+    
+        if(boleto.premio==null){
+          console.log("SIN PREMIO");
+        }else{
+          console.log("PREMIOOOOOOO!") 
+        }
+    
+        let boletoEntregado:Boleto = boleto;
+        boletoEntregado = {
+          id: boletoEntregado.id,
+          descripcion: boletoEntregado.descripcion,
+          entregado: boletoEntregado.entregado=true,
+          canjeado: boletoEntregado.canjeado,
+          premio: boletoEntregado.premio,
+          usuario: boletoEntregado.usuario
+        }
+        
+        boletoEntregado =  await this.api.putBoleto(boletoEntregado);
+        resolve(boleto);
+       }
+      } catch (error) {
+        reject(error);
+      }
+    })
+
+   
     
   }
 
