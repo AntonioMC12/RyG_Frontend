@@ -11,9 +11,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-label>Tiene {{nBoletos}} a repartir: </ion-label>
+  
   <form [formGroup]="formParticipaciones" (ngSubmit)="validador()">
+    <ion-label class="label">Tiene {{nBoletos}} a repartir: </ion-label>
     <div class="home" *ngFor="let usuario of usuarios; let i=index">
+   
       <ion-label
         *ngIf="this.allboletos[0].usuario.nombre_comercio!=usuario.nombre_comercio"
         >{{usuario.nombre_comercio}}
@@ -27,12 +29,14 @@
           min="0"
           formControlName="participacion"
           placeholder="Enter nº de parcipaciones..."
-          (ionChange)="sumar()"
         ></ion-input>
       </ion-item>
-    </div>
 
-    <ion-button
+  
+    </div>
+    <ion-label>*Asegúrese que el nº de participaciones no supera al nº de boletos disponibles</ion-label>
+    <ion-button 
+      class="button"
       expand="full"
       [disabled]="this.formParticipaciones.invalid"
       color="tertiary"
@@ -40,5 +44,6 @@
       (ngSubmit)="validador()"
       >Confirmar</ion-button
     >
+    
   </form>
 </ion-content>

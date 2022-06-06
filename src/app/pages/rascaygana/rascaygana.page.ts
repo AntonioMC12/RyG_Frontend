@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Boleto } from 'src/app/model/Boleto';
 import { Premio } from 'src/app/model/Premio';
 import { BoletoService } from 'src/app/services/boleto.service';
 import { ScratchCard, SCRATCH_TYPE } from 'scratchcard-js'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rascaygana',
@@ -12,30 +13,45 @@ import { ScratchCard, SCRATCH_TYPE } from 'scratchcard-js'
 
 
 export class RascayganaPage implements OnInit {
-  
+  @Input() boleto:Boleto;
  
   public context: CanvasRenderingContext2D;
   public ctx;
-  public premio:Premio;
   public listaBoletos:Boleto[]=[];
   public brushPos;
   public brushRadius;
 
- constructor(public api:BoletoService) { }
+ constructor(public api:BoletoService,
+    private router:Router) { }
 
   ngOnInit() {
     this.createNewScratchCard();
+   
+    const navigation = this.router.getCurrentNavigation();
+    let objeto= navigation.extras.state as {example: Boleto};
+    this.boleto = objeto.example as Boleto;
+    console.info(this.boleto);
   }
  
   createNewScratchCard() {
     const scContainer = document.getElementById('js--sc--container')
+    let premiado ="";
+    
+    if(this.boleto.premio == null){
+      premiado = "BOLETO NO PREMIADO"
+    }else{
+      premiado="¡ PREMIO !"
+    }
+
     const sc = new ScratchCard('#js--sc--container', {
       scratchType: SCRATCH_TYPE.CIRCLE,
       containerWidth: 300,//scContainer.offsetWidth,
       containerHeight: 300,
       imageForwardSrc: '../../../assets/gris.jpg',
       imageBackgroundSrc: '../../../assets/gris.jpg',
-      htmlBackground: '<div class="cardamountcss"><div class="won-amnt">30</div><div class="won-text">Points<br>Won!</div></div>',
+    //  htmlBackground: '<div class="cardamountcss"><div class="won-amnt">30</div><div class="won-text">Points<br>Won!</div></div>',
+      htmlBackground: '<div class="cardamountcss"><div class="won-amnt">'+premiado+'</div><div class="won-text">Points<br>Won!</div></div>',
+      
       clearZoneRadius: 40,
       nPoints: 30,
       pointSize: 4,
@@ -54,6 +70,8 @@ export class RascayganaPage implements OnInit {
     //this.listaBoletos = await this.api.getBoletos();
 
    // let numberRandom:number= Math.floor(Math.random() * (this.listaBoletos.length - 0) + 0);
+
+   
    if(boleto.entregado==false){
 
     if(boleto.premio==null){

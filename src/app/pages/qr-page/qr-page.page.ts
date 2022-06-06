@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { createCipheriv, scrypt } from 'crypto';
-import { nanoid } from 'nanoid';
 import { Boleto } from 'src/app/model/Boleto';
 import { BoletoService } from 'src/app/services/boleto.service';
 import { EncryptionService } from 'src/app/services/encryption.service';
 import { LoadingService } from 'src/app/services/loading.service';
-import { promisify } from 'util';
 
 @Component({
   selector: 'app-qr-page',

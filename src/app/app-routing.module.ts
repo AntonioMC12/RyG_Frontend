@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -39,7 +40,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/crear-participaciones/crear-participaciones.module').then( m => m.CrearParticipacionesPageModule)
   },
     {
-    path: 'check-ticket/:boleto',
+    path: 'check-ticket/:boleto', 
     loadChildren: () => import('./pages/check-ticket/check-ticket.module').then( m => m.CheckTicketPageModule)
   },
   {
@@ -49,7 +50,8 @@ const routes: Routes = [
   {
     path: 'qr-page',
     loadChildren: () => import('./pages/qr-page/qr-page.module').then( m => m.QrPagePageModule)
-  },  {
+  },
+  {
     path: 'edit-user',
     loadChildren: () => import('./pages/edit-user/edit-user.module').then( m => m.EditUserPageModule)
   },

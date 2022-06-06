@@ -44,7 +44,7 @@ export class BoletoDetailsPage implements OnInit {
     await this.boletoService
       .putBoleto(boleto)
       .then(() => {
-        this.toastService.showToast('Marcado como entregado', 'success');
+        this.toastService.showToast('Marcado como entregado', 'tertiary');
       })
       .catch(() => {
         this.toastService.showToast('Error al marcar como entregado', 'danger');

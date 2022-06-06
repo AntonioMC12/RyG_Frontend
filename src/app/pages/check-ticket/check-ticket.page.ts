@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import {
   Camera,
   CameraResultType,
   CameraSource,
   Photo,
 } from '@capacitor/camera';
-import { createDecipheriv, randomBytes, scrypt } from 'crypto';
 import { Boleto } from 'src/app/model/Boleto';
 import { Ticket } from 'src/app/model/Ticket';
 import { Usuario } from 'src/app/model/Usuario';
@@ -15,7 +14,7 @@ import { BoletoService } from 'src/app/services/boleto.service';
 import { EncryptionService } from 'src/app/services/encryption.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-import { promisify } from 'util';
+
 
 @Component({
   selector: 'app-check-ticket',
@@ -41,7 +40,8 @@ export class CheckTicketPage {
     public fb: FormBuilder,
     private ticketService: TicketService,
     private boletoService: BoletoService,
-    private encrypter: EncryptionService
+    private encrypter: EncryptionService,
+    private router: Router
   ) {
     this.form = this.fb.group({
       multipartFile: [null],
@@ -58,7 +58,11 @@ export class CheckTicketPage {
 
   async ionViewDidEnter() {
     await this.getUsuarios();
-    this.boleto = await this.boletoService.getBoleto(this.getURLBoleto());
+
+    this.boleto = await this.boletoService.getBoleto(await this.getURLBoleto());
+    console.log(await this.getURLBoleto())
+    console.log(this.boleto)
+    
   }
 
   public async getUsuarios(id?: any) {
@@ -79,9 +83,11 @@ export class CheckTicketPage {
     console.log(this.file);
   };
 
-  public getURLBoleto(): Number {
+  public async getURLBoleto(): Promise<Number> {
+    
     return Number(
-      this.decryptIdBoleto(this.activatedRoute.snapshot.paramMap.get('boleto'))
+     await this.decryptIdBoleto(this.activatedRoute.snapshot.paramMap.get('boleto'))
+
     );
   }
 
@@ -115,6 +121,10 @@ export class CheckTicketPage {
     await this.ticketService.createTicket(formData).then((response) => {
       console.log(response);
     });
+    const dato: NavigationExtras = {state: {example: this.boleto}};
+      this.router.navigate(['/movimientos-sua'], dato);
+    
+    this.router.navigate(['/rascaygana'],dato)
   }
 
   public urltoFile(url, filename, mimeType) {

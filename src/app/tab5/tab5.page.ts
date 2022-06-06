@@ -64,7 +64,7 @@ export class Tab5Page {
               usuario.direccion = this.inputDireccion;
               usuario.telefono = this.inputPhone;
               this.usuarioService.putUsuario(usuario).then(updateUsuario => {
-                this.toast.showToast("¡Usuario actualizado correctamente!", "success");
+                this.toast.showToast("¡Usuario actualizado correctamente!", "tertiary");
                 this.authService.currentUser = updateUsuario;
                 console.log(updateUsuario);
 
@@ -89,7 +89,7 @@ export class Tab5Page {
       if (this.inputNewPass == this.inputConfirmPass) {
         this.miLoading.showLoading();
         if (await this.authService.updatePass(this.inputNewPass)) {
-          this.toast.showToast("Contraseña cambiada con éxito", "success");
+          this.toast.showToast("Contraseña cambiada con éxito", "tertiary");
           this.miLoading.hideLoading();
         }else{
           this.miLoading.hideLoading();
