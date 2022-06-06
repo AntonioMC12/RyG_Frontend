@@ -69,7 +69,7 @@ export class Tab3Page {
               await this.miLoading.showLoading();
               await this.usuarioService.deleteUsuario(usuario.id);
               let i = this.usuarios.indexOf(usuario, 0);
-              this.toast.showToast('Usuario eliminado con éxito', 'success');
+              this.toast.showToast('Usuario eliminado con éxito', 'tertiary');
               if (i > -1) {
                 this.usuarios.splice(i, 1);
               }

@@ -88,7 +88,7 @@ export class CreateUserPage implements OnInit {
         //guardar en firebase para obtener el uid
         await this.usuarioService.postUsuario(usuario);
         this.miLoading.hideLoading();
-        this.toast.showToast('Usuario creado con éxito', 'success');
+        this.toast.showToast('Usuario creado con éxito', 'tertiary');
         this.cerrar();
       } else {
         //mal contraseña

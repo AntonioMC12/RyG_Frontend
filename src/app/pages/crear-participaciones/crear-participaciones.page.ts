@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Boleto } from 'src/app/model/Boleto';
 import { Usuario } from 'src/app/model/Usuario';
@@ -19,7 +19,8 @@ export class CrearParticipacionesPage implements OnInit {
   public usuarios: Usuario[] = [];
   public usuario: Usuario;
   private isDisabled: boolean = false;
-  private _NParticipaciones: number;
+  public _NParticipaciones: number;
+  public number:number = 0;
 
   public boletos: Boleto[] = [];
   public formParticipaciones: FormGroup;
@@ -35,7 +36,7 @@ export class CrearParticipacionesPage implements OnInit {
   ngOnInit() {
     this.modalController.dismiss(); //Cierra el modal anterior
     this.formParticipaciones = this.fb.group({
-      participacion: [''],
+      participacion: ['',Validators.max(this.nBoletos)],
     });
     this._NParticipaciones = this.nBoletos;
   }
@@ -51,7 +52,7 @@ export class CrearParticipacionesPage implements OnInit {
     if (this.nBoletos === 0) {
       result = true;
       await this.setParticipaciones();
-      this.toast.showToast('Participaciones actualizadas', 'success');
+      this.toast.showToast('Participaciones actualizadas', 'tertiary');
       this.cerrar();
     } else {
       result = false;
@@ -86,11 +87,6 @@ export class CrearParticipacionesPage implements OnInit {
     this.loading.hideLoading();
   }
 
-  public sumar() {
-    if (this.nBoletos > 0) {
-      this.nBoletos--;
-    }
-  }
 
   /**
    * Cierra el modal

@@ -3,6 +3,7 @@ import { ModalController, NavController } from '@ionic/angular';
 import { Boleto } from '../model/Boleto';
 import { BoletoDetailsPage } from '../pages/boleto-details/boleto-details.page';
 import { QrPagePage } from '../pages/qr-page/qr-page.page';
+import { AuthService } from '../services/auth.service';
 import { BoletoService } from '../services/boleto.service';
 import { ToastService } from '../services/toast.service';
 
@@ -30,7 +31,7 @@ export class Tab1Page {
    */
   public async generateBoletoQR() {
     const modal = await this.modalController.create({
-      component: QrPagePage,
+      component: QrPagePage, 
       cssClass: 'my-modal',
       componentProps: {},
     });
@@ -82,4 +83,5 @@ export class Tab1Page {
     await modal.present();
     await modal.onDidDismiss();
   }
+
 }

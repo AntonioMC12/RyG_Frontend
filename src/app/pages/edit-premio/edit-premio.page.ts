@@ -53,7 +53,7 @@ export class EditPremioPage implements OnInit {
      
       await this.api.updatePremio(newPremio);
       await this.formPremio.reset();
-      await this.toast.showToast("Premio editado correctamente","success");
+      await this.toast.showToast("Premio editado correctamente","tertiary");
       this.cerrar();
     } catch (err) {
       console.log(err);

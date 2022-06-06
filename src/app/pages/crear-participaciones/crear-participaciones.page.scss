@@ -20,8 +20,22 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
+.label{
+  color: black;
+  font-size: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  align-items: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+}
 .close-btn {
   zoom: 2;
   cursor: pointer;
+}
+.button{
+  align-items: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
 }
