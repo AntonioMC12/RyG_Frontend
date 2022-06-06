@@ -24,6 +24,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { QRCodeModule } from 'angular2-qrcode';
 import { EncryptionService } from './services/encryption.service';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +38,7 @@ import { EncryptionService } from './services/encryption.service';
     ReactiveFormsModule,
     HttpClientModule,
     IonicModule.forRoot(),
+    SweetAlert2Module.forRoot(),
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

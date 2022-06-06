@@ -7,12 +7,14 @@ import {
   CameraSource,
   Photo,
 } from '@capacitor/camera';
+import { NavController } from '@ionic/angular';
 import { Boleto } from 'src/app/model/Boleto';
 import { Ticket } from 'src/app/model/Ticket';
 import { Usuario } from 'src/app/model/Usuario';
 import { BoletoService } from 'src/app/services/boleto.service';
 import { EncryptionService } from 'src/app/services/encryption.service';
 import { TicketService } from 'src/app/services/ticket.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 
@@ -41,7 +43,9 @@ export class CheckTicketPage {
     private ticketService: TicketService,
     private boletoService: BoletoService,
     private encrypter: EncryptionService,
-    private router: Router
+    private router: Router,
+    public navCtrl: NavController,
+    private toastService : ToastService
   ) {
     this.form = this.fb.group({
       multipartFile: [null],
@@ -62,7 +66,7 @@ export class CheckTicketPage {
     this.boleto = await this.boletoService.getBoleto(await this.getURLBoleto());
     console.log(await this.getURLBoleto())
     console.log(this.boleto)
-    
+
   }
 
   public async getUsuarios(id?: any) {
@@ -84,7 +88,7 @@ export class CheckTicketPage {
   };
 
   public async getURLBoleto(): Promise<Number> {
-    
+
     return Number(
      await this.decryptIdBoleto(this.activatedRoute.snapshot.paramMap.get('boleto'))
 
@@ -103,6 +107,11 @@ export class CheckTicketPage {
       boleto: this.boleto,
     };
 
+    if(this.file == null){
+      this.toastService.showToast('Debe tomar una foto del ticket', 'danger');
+      return;
+    }
+
     let multipartFile = await this.urltoFile(
       this.file.dataUrl,
       'foto',
@@ -120,11 +129,16 @@ export class CheckTicketPage {
     formData.append('multipartFile', multipartFile);
     await this.ticketService.createTicket(formData).then((response) => {
       console.log(response);
+    }).catch((error) => {
+      this.toastService.showToast('Error al guardar el ticket', 'danger');
+      this.toastService.showToast('Póngase en contacto con el administrador.', 'danger');
     });
+
     const dato: NavigationExtras = {state: {example: this.boleto}};
-      this.router.navigate(['/movimientos-sua'], dato);
-    
-    this.router.navigate(['/rascaygana'],dato)
+    // this.router.navigate(['/movimientos-sua'], dato);
+    console.log('entro');
+
+    this.router.navigate(['rascaygana'],dato)
   }
 
   public urltoFile(url, filename, mimeType) {

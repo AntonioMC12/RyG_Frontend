@@ -3,6 +3,7 @@ import { Boleto } from 'src/app/model/Boleto';
 import { BoletoService } from 'src/app/services/boleto.service';
 import { EncryptionService } from 'src/app/services/encryption.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-qr-page',
@@ -17,7 +18,8 @@ export class QrPagePage implements OnInit {
   constructor(
     public boletoService: BoletoService,
     public loadingService: LoadingService,
-    private encrypter: EncryptionService
+    private encrypter: EncryptionService,
+    private toastService: ToastService
   ) {}
 
   /**
@@ -31,13 +33,21 @@ export class QrPagePage implements OnInit {
 
   async ionViewDidEnter() {
     this.loadingService.showLoading();
-    let selectedBoleto = await this.setBoletoAsEntregado(
-      await this.pickRandomBoleto()
-    );
+    let selectedBoleto = await this.setBoletoAsEntregado(await this.pickRandomBoleto())
+    .then((boleto) => {
+      this.toastService.showToast('Boleto generado correctamente', 'success');
+      return boleto;
+    }).catch((error) => {
+      this.toastService.showToast('Error al generar el boleto', 'danger');
+      this.loadingService.hideLoading();
+      return null;
+    });
+    if(selectedBoleto != null) {
     this.url = this.url.concat(this.encryptBoletoId(selectedBoleto.id));
     console.log(this.url);
     this.isQRReady = true;
     this.loadingService.hideLoading();
+    }
   }
 
   //funcion para generar el boleto random
